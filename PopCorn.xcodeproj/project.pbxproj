@@ -17,10 +17,32 @@
 		5924E522234A9813007A3D93 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E521234A9813007A3D93 /* Genre.swift */; };
 		5924E526234A990C007A3D93 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E525234A990C007A3D93 /* Company.swift */; };
 		5924E528234A9B07007A3D93 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E527234A9B07007A3D93 /* Country.swift */; };
-		5924E52B234A9C21007A3D93 /* TvShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E52A234A9C21007A3D93 /* TvShow.swift */; };
+		5924E52B234A9C21007A3D93 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E52A234A9C21007A3D93 /* TVShow.swift */; };
 		5924E52D234A9FD3007A3D93 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E52C234A9FD3007A3D93 /* String.swift */; };
 		5924E52F234AA18E007A3D93 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E52E234AA18E007A3D93 /* Season.swift */; };
+		59B0236B23627737007C7367 /* PopCornTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0236A23627737007C7367 /* PopCornTests.swift */; };
+		59B02373236277DB007C7367 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B02372236277DB007C7367 /* Constants.swift */; };
+		59B0237623628427007C7367 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0237523628427007C7367 /* MovieService.swift */; };
+		59B0237823628998007C7367 /* ProdMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0237723628998007C7367 /* ProdMovieService.swift */; };
+		59B0237C23628A0E007C7367 /* TVShowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0237B23628A0E007C7367 /* TVShowService.swift */; };
+		59B0237E23628A33007C7367 /* ProdTVShowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0237D23628A33007C7367 /* ProdTVShowService.swift */; };
+		59B0238223628C31007C7367 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0238123628C31007C7367 /* MovieRepository.swift */; };
+		59B0238423628C58007C7367 /* ProdMovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0238323628C58007C7367 /* ProdMovieRepository.swift */; };
+		59B0238623628F2D007C7367 /* MovieManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0238523628F2D007C7367 /* MovieManagerDelegate.swift */; };
+		59B02388236291EB007C7367 /* TVShowRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B02387236291EB007C7367 /* TVShowRepository.swift */; };
+		59B0238A23629246007C7367 /* ProdTVShowRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0238923629246007C7367 /* ProdTVShowRepository.swift */; };
+		59B0238C2362928D007C7367 /* TVShowManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0238B2362928D007C7367 /* TVShowManagerDelegate.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		59B0236D23627737007C7367 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5924E4F8234A8695007A3D93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5924E4FF234A8695007A3D93;
+			remoteInfo = PopCorn;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5924E500234A8695007A3D93 /* PopCorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopCorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,13 +57,34 @@
 		5924E521234A9813007A3D93 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		5924E525234A990C007A3D93 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		5924E527234A9B07007A3D93 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
-		5924E52A234A9C21007A3D93 /* TvShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShow.swift; sourceTree = "<group>"; };
+		5924E52A234A9C21007A3D93 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
 		5924E52C234A9FD3007A3D93 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		5924E52E234AA18E007A3D93 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
+		59B0236823627737007C7367 /* PopCornTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopCornTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59B0236A23627737007C7367 /* PopCornTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopCornTests.swift; sourceTree = "<group>"; };
+		59B0236C23627737007C7367 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59B02372236277DB007C7367 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		59B0237523628427007C7367 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		59B0237723628998007C7367 /* ProdMovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdMovieService.swift; sourceTree = "<group>"; };
+		59B0237B23628A0E007C7367 /* TVShowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowService.swift; sourceTree = "<group>"; };
+		59B0237D23628A33007C7367 /* ProdTVShowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdTVShowService.swift; sourceTree = "<group>"; };
+		59B0238123628C31007C7367 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
+		59B0238323628C58007C7367 /* ProdMovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdMovieRepository.swift; sourceTree = "<group>"; };
+		59B0238523628F2D007C7367 /* MovieManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieManagerDelegate.swift; sourceTree = "<group>"; };
+		59B02387236291EB007C7367 /* TVShowRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowRepository.swift; sourceTree = "<group>"; };
+		59B0238923629246007C7367 /* ProdTVShowRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdTVShowRepository.swift; sourceTree = "<group>"; };
+		59B0238B2362928D007C7367 /* TVShowManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowManagerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5924E4FD234A8695007A3D93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59B0236523627737007C7367 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -55,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				5924E502234A8695007A3D93 /* PopCorn */,
+				59B0236923627737007C7367 /* PopCornTests */,
 				5924E501234A8695007A3D93 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				5924E500234A8695007A3D93 /* PopCorn.app */,
+				59B0236823627737007C7367 /* PopCornTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,9 +120,10 @@
 				5924E51E234A8DDE007A3D93 /* Application */,
 				5924E51A234A895B007A3D93 /* Controller */,
 				5924E529234A9BAA007A3D93 /* Extension */,
-				5924E51D234A89F6007A3D93 /* Helper */,
 				5924E518234A88D0007A3D93 /* Model */,
+				59B0237423628340007C7367 /* Service */,
 				5924E51B234A89AD007A3D93 /* Repository */,
+				5924E51D234A89F6007A3D93 /* Util */,
 				5924E519234A894E007A3D93 /* View */,
 			);
 			path = PopCorn;
@@ -90,7 +136,7 @@
 				5924E521234A9813007A3D93 /* Genre.swift */,
 				5924E525234A990C007A3D93 /* Company.swift */,
 				5924E527234A9B07007A3D93 /* Country.swift */,
-				5924E52A234A9C21007A3D93 /* TvShow.swift */,
+				5924E52A234A9C21007A3D93 /* TVShow.swift */,
 				5924E52E234AA18E007A3D93 /* Season.swift */,
 			);
 			path = Model;
@@ -116,15 +162,18 @@
 		5924E51B234A89AD007A3D93 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				59B0238023628C08007C7367 /* Movie */,
+				59B0237F23628BFE007C7367 /* TVShow */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
 		};
-		5924E51D234A89F6007A3D93 /* Helper */ = {
+		5924E51D234A89F6007A3D93 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				59B02372236277DB007C7367 /* Constants.swift */,
 			);
-			path = Helper;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		5924E51E234A8DDE007A3D93 /* Application */ = {
@@ -142,6 +191,62 @@
 				5924E52C234A9FD3007A3D93 /* String.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		59B0236923627737007C7367 /* PopCornTests */ = {
+			isa = PBXGroup;
+			children = (
+				59B0236A23627737007C7367 /* PopCornTests.swift */,
+				59B0236C23627737007C7367 /* Info.plist */,
+			);
+			path = PopCornTests;
+			sourceTree = "<group>";
+		};
+		59B0237423628340007C7367 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				59B02379236289D4007C7367 /* Movie */,
+				59B0237A236289E4007C7367 /* TVShow */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		59B02379236289D4007C7367 /* Movie */ = {
+			isa = PBXGroup;
+			children = (
+				59B0237523628427007C7367 /* MovieService.swift */,
+				59B0237723628998007C7367 /* ProdMovieService.swift */,
+			);
+			path = Movie;
+			sourceTree = "<group>";
+		};
+		59B0237A236289E4007C7367 /* TVShow */ = {
+			isa = PBXGroup;
+			children = (
+				59B0237B23628A0E007C7367 /* TVShowService.swift */,
+				59B0237D23628A33007C7367 /* ProdTVShowService.swift */,
+			);
+			path = TVShow;
+			sourceTree = "<group>";
+		};
+		59B0237F23628BFE007C7367 /* TVShow */ = {
+			isa = PBXGroup;
+			children = (
+				59B02387236291EB007C7367 /* TVShowRepository.swift */,
+				59B0238923629246007C7367 /* ProdTVShowRepository.swift */,
+				59B0238B2362928D007C7367 /* TVShowManagerDelegate.swift */,
+			);
+			path = TVShow;
+			sourceTree = "<group>";
+		};
+		59B0238023628C08007C7367 /* Movie */ = {
+			isa = PBXGroup;
+			children = (
+				59B0238123628C31007C7367 /* MovieRepository.swift */,
+				59B0238323628C58007C7367 /* ProdMovieRepository.swift */,
+				59B0238523628F2D007C7367 /* MovieManagerDelegate.swift */,
+			);
+			path = Movie;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,18 +269,40 @@
 			productReference = 5924E500234A8695007A3D93 /* PopCorn.app */;
 			productType = "com.apple.product-type.application";
 		};
+		59B0236723627737007C7367 /* PopCornTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59B0237123627737007C7367 /* Build configuration list for PBXNativeTarget "PopCornTests" */;
+			buildPhases = (
+				59B0236423627737007C7367 /* Sources */,
+				59B0236523627737007C7367 /* Frameworks */,
+				59B0236623627737007C7367 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				59B0236E23627737007C7367 /* PBXTargetDependency */,
+			);
+			name = PopCornTests;
+			productName = PopCornTests;
+			productReference = 59B0236823627737007C7367 /* PopCornTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		5924E4F8234A8695007A3D93 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Valmir Torres";
 				TargetAttributes = {
 					5924E4FF234A8695007A3D93 = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					59B0236723627737007C7367 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 5924E4FF234A8695007A3D93;
 					};
 				};
 			};
@@ -193,6 +320,7 @@
 			projectRoot = "";
 			targets = (
 				5924E4FF234A8695007A3D93 /* PopCorn */,
+				59B0236723627737007C7367 /* PopCornTests */,
 			);
 		};
 /* End PBXProject section */
@@ -208,6 +336,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		59B0236623627737007C7367 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -215,20 +350,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59B0238223628C31007C7367 /* MovieRepository.swift in Sources */,
+				59B0237C23628A0E007C7367 /* TVShowService.swift in Sources */,
 				5924E528234A9B07007A3D93 /* Country.swift in Sources */,
+				59B0237E23628A33007C7367 /* ProdTVShowService.swift in Sources */,
+				59B02373236277DB007C7367 /* Constants.swift in Sources */,
 				5924E508234A8695007A3D93 /* ViewController.swift in Sources */,
 				5924E52F234AA18E007A3D93 /* Season.swift in Sources */,
-				5924E52B234A9C21007A3D93 /* TvShow.swift in Sources */,
+				5924E52B234A9C21007A3D93 /* TVShow.swift in Sources */,
 				5924E52D234A9FD3007A3D93 /* String.swift in Sources */,
+				59B0237623628427007C7367 /* MovieService.swift in Sources */,
 				5924E504234A8695007A3D93 /* AppDelegate.swift in Sources */,
 				5924E520234A8E6B007A3D93 /* Movie.swift in Sources */,
 				5924E506234A8695007A3D93 /* SceneDelegate.swift in Sources */,
+				59B0238623628F2D007C7367 /* MovieManagerDelegate.swift in Sources */,
+				59B0238C2362928D007C7367 /* TVShowManagerDelegate.swift in Sources */,
 				5924E522234A9813007A3D93 /* Genre.swift in Sources */,
+				59B0237823628998007C7367 /* ProdMovieService.swift in Sources */,
+				59B0238423628C58007C7367 /* ProdMovieRepository.swift in Sources */,
+				59B0238A23629246007C7367 /* ProdTVShowRepository.swift in Sources */,
 				5924E526234A990C007A3D93 /* Company.swift in Sources */,
+				59B02388236291EB007C7367 /* TVShowRepository.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59B0236423627737007C7367 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59B0236B23627737007C7367 /* PopCornTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		59B0236E23627737007C7367 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5924E4FF234A8695007A3D93 /* PopCorn */;
+			targetProxy = 59B0236D23627737007C7367 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5924E509234A8695007A3D93 /* Main.storyboard */ = {
@@ -398,6 +560,46 @@
 			};
 			name = Release;
 		};
+		59B0236F23627737007C7367 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PopCornTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.dev.valmirt.PopCornTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PopCorn.app/PopCorn";
+			};
+			name = Debug;
+		};
+		59B0237023627737007C7367 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = PopCornTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.dev.valmirt.PopCornTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PopCorn.app/PopCorn";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -415,6 +617,15 @@
 			buildConfigurations = (
 				5924E515234A8697007A3D93 /* Debug */,
 				5924E516234A8697007A3D93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59B0237123627737007C7367 /* Build configuration list for PBXNativeTarget "PopCornTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59B0236F23627737007C7367 /* Debug */,
+				59B0237023627737007C7367 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

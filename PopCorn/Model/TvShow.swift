@@ -1,5 +1,5 @@
 //
-//  TvShow.swift
+//  TVShow.swift
 //  PopCorn
 //
 //  Created by Valmir Torres on 06/10/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TvShow: Decodable {
+struct TVShow: Decodable {
     let backdropPath: String?
     let episodeRunTime: Array<Int>
     let firstAirDate: String

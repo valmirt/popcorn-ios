@@ -1,14 +1,14 @@
 //
-//  PopCornTests.swift
+//  MovieRepositoryTest.swift
 //  PopCornTests
 //
-//  Created by Valmir Torres on 24/10/19.
+//  Created by Valmir Torres on 25/10/19.
 //  Copyright © 2019 Valmir Torres. All rights reserved.
 //
 
 import XCTest
 
-class PopCornTests: XCTestCase {
+class MovieRepositoryTest: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -25,7 +25,7 @@ class PopCornTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        measure {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

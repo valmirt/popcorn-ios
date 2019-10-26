@@ -11,4 +11,10 @@ import Foundation
 protocol MovieRepository {
     
     var delegate: MovieManagerDelegate? { get set }
+    
+    func updatePopularMovies (_ page: Int)
+    
+    func updateNowPlayingMovies (_ page: Int)
+    
+    func updateTopRatedMovies (_ page: Int)
 }

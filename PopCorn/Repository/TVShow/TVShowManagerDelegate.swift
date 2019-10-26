@@ -11,3 +11,7 @@ import Foundation
 protocol TVShowManagerDelegate {
     
 }
+
+extension TVShowManagerDelegate {
+    
+}

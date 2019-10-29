@@ -20,6 +20,7 @@
 		5924E52B234A9C21007A3D93 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E52A234A9C21007A3D93 /* TVShow.swift */; };
 		5924E52D234A9FD3007A3D93 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E52C234A9FD3007A3D93 /* String.swift */; };
 		5924E52F234AA18E007A3D93 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E52E234AA18E007A3D93 /* Season.swift */; };
+		5928D14C2369013B00305383 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5928D14B2369013B00305383 /* NetworkManagerTest.swift */; };
 		59B02373236277DB007C7367 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B02372236277DB007C7367 /* Constants.swift */; };
 		59B0238223628C31007C7367 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0238123628C31007C7367 /* MovieRepository.swift */; };
 		59B0238423628C58007C7367 /* ProdMovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0238323628C58007C7367 /* ProdMovieRepository.swift */; };
@@ -30,8 +31,9 @@
 		59B0238F2363C678007C7367 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0238E2363C678007C7367 /* NetworkManager.swift */; };
 		59B023912363CB93007C7367 /* ProdNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B023902363CB93007C7367 /* ProdNetworkManager.swift */; };
 		59B023932363D559007C7367 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B023922363D559007C7367 /* NetworkError.swift */; };
-		59B023992363E6CE007C7367 /* FakeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B023982363E6CE007C7367 /* FakeNetworkManager.swift */; };
+		59B023992363E6CE007C7367 /* FakeMovieNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B023982363E6CE007C7367 /* FakeMovieNetworkManager.swift */; };
 		59B0239B2363EBF2007C7367 /* MovieRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0239A2363EBF2007C7367 /* MovieRepositoryTest.swift */; };
+		59B023A12368F21B007C7367 /* ResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B023A02368F21B007C7367 /* ResponseList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,7 @@
 		5924E52A234A9C21007A3D93 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
 		5924E52C234A9FD3007A3D93 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		5924E52E234AA18E007A3D93 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
+		5928D14B2369013B00305383 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		59B0236823627737007C7367 /* PopCornTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopCornTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B0236C23627737007C7367 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59B02372236277DB007C7367 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -72,8 +75,9 @@
 		59B0238E2363C678007C7367 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		59B023902363CB93007C7367 /* ProdNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdNetworkManager.swift; sourceTree = "<group>"; };
 		59B023922363D559007C7367 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		59B023982363E6CE007C7367 /* FakeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkManager.swift; sourceTree = "<group>"; };
+		59B023982363E6CE007C7367 /* FakeMovieNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMovieNetworkManager.swift; sourceTree = "<group>"; };
 		59B0239A2363EBF2007C7367 /* MovieRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryTest.swift; sourceTree = "<group>"; };
+		59B023A02368F21B007C7367 /* ResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 				5924E527234A9B07007A3D93 /* Country.swift */,
 				5924E52A234A9C21007A3D93 /* TVShow.swift */,
 				5924E52E234AA18E007A3D93 /* Season.swift */,
+				59B023A02368F21B007C7367 /* ResponseList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,11 +199,20 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		5928D14A2368FE5000305383 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				5928D14B2369013B00305383 /* NetworkManagerTest.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
 		59B0236923627737007C7367 /* PopCornTests */ = {
 			isa = PBXGroup;
 			children = (
 				59B0236C23627737007C7367 /* Info.plist */,
 				59B023952363E62E007C7367 /* Mock */,
+				5928D14A2368FE5000305383 /* Remote */,
 				59B023962363E64D007C7367 /* Repository */,
 			);
 			path = PopCornTests;
@@ -237,7 +251,7 @@
 		59B023952363E62E007C7367 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				59B023982363E6CE007C7367 /* FakeNetworkManager.swift */,
+				59B023982363E6CE007C7367 /* FakeMovieNetworkManager.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -371,6 +385,7 @@
 				5924E504234A8695007A3D93 /* AppDelegate.swift in Sources */,
 				5924E520234A8E6B007A3D93 /* Movie.swift in Sources */,
 				5924E506234A8695007A3D93 /* SceneDelegate.swift in Sources */,
+				59B023A12368F21B007C7367 /* ResponseList.swift in Sources */,
 				59B0238623628F2D007C7367 /* MovieManagerDelegate.swift in Sources */,
 				59B0238C2362928D007C7367 /* TVShowManagerDelegate.swift in Sources */,
 				5924E522234A9813007A3D93 /* Genre.swift in Sources */,
@@ -385,7 +400,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59B023992363E6CE007C7367 /* FakeNetworkManager.swift in Sources */,
+				5928D14C2369013B00305383 /* NetworkManagerTest.swift in Sources */,
+				59B023992363E6CE007C7367 /* FakeMovieNetworkManager.swift in Sources */,
 				59B0239B2363EBF2007C7367 /* MovieRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,27 +7,57 @@
 //
 
 import XCTest
+@testable import PopCorn
 
-class MovieRepositoryTest: XCTestCase {
+class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
+    let fakeAPI = FakeMovieNetworkManager()
+    var movieRepository: MovieRepository?
+    var result: [Movie]?
+    var error: Error?
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        movieRepository = ProdMovieRepository(fakeAPI)
+        movieRepository?.delegate = self
+        movieRepository?.updatePopularMovies(0)
+        movieRepository?.updateNowPlayingMovies(0)
+        movieRepository?.updateTopRatedMovies(0)
+        fakeAPI.errorCreateURL = true
+        fakeAPI.errorLoad = true
+        movieRepository?.updateTopRatedMovies(0)
+        movieRepository?.updatePopularMovies(0)
+        movieRepository?.updateNowPlayingMovies(0)
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testPositiveListResult () {
+        let movies = result
+        XCTAssert(movies != nil)
+        XCTAssert(movies != nil && movies?[0].title == "Fake Movie 1")
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testErrorResult () {
+        let err = error
+        XCTAssert(err != nil)
+        XCTAssert(err != nil
+            && (err?.localizedDescription == "We are having trouble contacting the server, try again later..."
+                || err?.localizedDescription == "We are having server issues, try again later..."
+                || err?.localizedDescription == "Something is wrong, try again later..."
+            )
+        )
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func movieManager(_ manager: MovieRepository, didUpdatePopularList: [Movie]) {
+        result = didUpdatePopularList
     }
-
+    
+    func movieManager(_ manager: MovieRepository, didUpdateNowPlayingList: [Movie]) {
+        result = didUpdateNowPlayingList
+    }
+    
+    func movieManager(_ manager: MovieRepository, didUpdateTopRatedList: [Movie]) {
+        result = didUpdateTopRatedList
+    }
+    
+    func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
+        error = didUpdateError
+    }
 }

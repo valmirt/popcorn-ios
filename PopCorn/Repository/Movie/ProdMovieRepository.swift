@@ -23,8 +23,8 @@ struct ProdMovieRepository: MovieRepository {
         ]
         
         load ("/movie/popular", queries) { (response, error) in
-            if let movies = response {
-                self.delegate?.movieManager(self, didUpdatePopularList: movies)
+            if let safe = response {
+                self.delegate?.movieManager(self, didUpdatePopularList: safe.results)
             } else {
                 if let err = error {
                     self.delegate?.movieManager(self, didUpdateError: err)
@@ -40,8 +40,8 @@ struct ProdMovieRepository: MovieRepository {
         ]
         
         load ("/movie/now_playing", queries) { (response, error) in
-            if let movies = response {
-                self.delegate?.movieManager(self, didUpdateNowPlayingList: movies)
+            if let safe = response {
+                self.delegate?.movieManager(self, didUpdateNowPlayingList: safe.results)
             } else {
                 if let err = error {
                     self.delegate?.movieManager(self, didUpdateError: err)
@@ -57,8 +57,8 @@ struct ProdMovieRepository: MovieRepository {
         ]
         
         load ("/movie/top_rated", queries) { (response, error) in
-            if let movies = response {
-                self.delegate?.movieManager(self, didUpdateTopRatedList: movies)
+            if let safe = response {
+                self.delegate?.movieManager(self, didUpdateTopRatedList: safe.results)
             } else {
                 if let err = error {
                     self.delegate?.movieManager(self, didUpdateError: err)
@@ -71,7 +71,7 @@ struct ProdMovieRepository: MovieRepository {
     
     private func load (_ path: String,
                       _ queries: [URLQueryItem],
-                      _ handler: @escaping ([Movie]?, Error?) -> Void) {
+                      _ handler: @escaping (ResponseList<Movie>?, Error?) -> Void) {
         
         if let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) {
             api.networkCall(url: url, execute: handler)

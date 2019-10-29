@@ -19,16 +19,16 @@ extension NetworkError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return NSLocalizedString("Description of invalid URL",
+            return NSLocalizedString("We are having trouble contacting the server, try again later...",
                                      comment: "Invalid URL")
         case .invalidDecodeJSON:
-            return NSLocalizedString("Description of invalid JSON",
+            return NSLocalizedString("We are having server issues, try again later...",
                                      comment: "Invalid JSON")
         case .invalidData:
-            return NSLocalizedString("Description of invalid Data",
+            return NSLocalizedString("We are having server issues, try again later...",
                                      comment: "Invalid Data")
         case .defaultError:
-            return NSLocalizedString("Description of invalid default Error",
+            return NSLocalizedString("Something is wrong, try again later...",
                                      comment: "default Error")
         }
     }

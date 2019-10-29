@@ -10,9 +10,9 @@ import Foundation
 
 struct ProdTVShowRepository: TVShowRepository {
     var delegate: TVShowManagerDelegate?
-    let tvShowService: TVShowService
+    let api: NetworkManager
     
-    init (_ tvShowService: TVShowService = ProdTVShowService.shared) {
-        self.tvShowService = tvShowService
+    init(_ api: NetworkManager = ProdNetworkManager.shared) {
+        self.api = api
     }
 }

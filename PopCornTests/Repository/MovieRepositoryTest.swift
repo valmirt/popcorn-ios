@@ -17,25 +17,35 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
 
     override func setUp() {
         movieRepository = ProdMovieRepository(fakeAPI)
-        movieRepository?.delegate = self
-        movieRepository?.updatePopularMovies(0)
-        movieRepository?.updateNowPlayingMovies(0)
-        movieRepository?.updateTopRatedMovies(0)
-        fakeAPI.errorCreateURL = true
-        fakeAPI.errorLoad = true
-        movieRepository?.updateTopRatedMovies(0)
-        movieRepository?.updatePopularMovies(0)
-        movieRepository?.updateNowPlayingMovies(0)
     }
     
     func testPositiveListResult () {
+        error = nil
+        movieRepository?.delegate = self
+        
+        movieRepository?.updatePopularMovies(0)
+        movieRepository?.updateNowPlayingMovies(0)
+        movieRepository?.updateTopRatedMovies(0)
+        
         let movies = result
+        XCTAssertNil(error)
         XCTAssert(movies != nil)
         XCTAssert(movies != nil && movies?[0].title == "Fake Movie 1")
     }
     
     func testErrorResult () {
+        result = nil
+        movieRepository?.delegate = self
+        
+        fakeAPI.errorCreateURL = true
+        fakeAPI.errorLoad = true
+        
+        movieRepository?.updatePopularMovies(0)
+        movieRepository?.updateNowPlayingMovies(0)
+        movieRepository?.updateTopRatedMovies(0)
+        
         let err = error
+        XCTAssertNil(result)
         XCTAssert(err != nil)
         XCTAssert(err != nil
             && (err?.localizedDescription == "We are having trouble contacting the server, try again later..."

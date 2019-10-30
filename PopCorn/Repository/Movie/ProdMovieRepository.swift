@@ -70,8 +70,8 @@ struct ProdMovieRepository: MovieRepository {
     //MARK: - Private helper functions
     
     private func load (_ path: String,
-                      _ queries: [URLQueryItem],
-                      _ handler: @escaping (ResponseList<Movie>?, Error?) -> Void) {
+                       _ queries: [URLQueryItem],
+                       _ handler: @escaping (ResponseList<Movie>?, Error?) -> Void) {
         
         if let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) {
             api.networkCall(url: url, execute: handler)

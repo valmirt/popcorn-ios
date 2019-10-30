@@ -40,7 +40,7 @@ struct ProdNetworkManager: NetworkManager {
         return component?.url
     }
     
-    private func decodeJSON<T: Decodable>(type: T.Type, data: Data) throws -> T? {
+    internal func decodeJSON<T: Decodable>(type: T.Type, data: Data) throws -> T? {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return try decoder.decode(type, from: data)

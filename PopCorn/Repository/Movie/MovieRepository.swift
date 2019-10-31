@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MovieRepository {
+protocol MovieRepository: BaseRepository {
     
     var delegate: MovieManagerDelegate? { get set }
     

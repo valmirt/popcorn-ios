@@ -29,7 +29,9 @@
 		59B023992363E6CE007C7367 /* FakeMovieNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B023982363E6CE007C7367 /* FakeMovieNetworkManager.swift */; };
 		59B0239B2363EBF2007C7367 /* MovieRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0239A2363EBF2007C7367 /* MovieRepositoryTest.swift */; };
 		59B023A12368F21B007C7367 /* ResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B023A02368F21B007C7367 /* ResponseList.swift */; };
-		59D30C24236A7973002D3A41 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30C23236A7973002D3A41 /* UIImage.swift */; };
+		59BE129F236B997E00E27427 /* ProdBaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE129E236B997E00E27427 /* ProdBaseRepository.swift */; };
+		59D30C26236B93D7002D3A41 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30C25236B93D7002D3A41 /* ImageService.swift */; };
+		59D30C28236B97A5002D3A41 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30C27236B97A5002D3A41 /* BaseRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +71,9 @@
 		59B023982363E6CE007C7367 /* FakeMovieNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMovieNetworkManager.swift; sourceTree = "<group>"; };
 		59B0239A2363EBF2007C7367 /* MovieRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryTest.swift; sourceTree = "<group>"; };
 		59B023A02368F21B007C7367 /* ResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseList.swift; sourceTree = "<group>"; };
-		59D30C23236A7973002D3A41 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		59BE129E236B997E00E27427 /* ProdBaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdBaseRepository.swift; sourceTree = "<group>"; };
+		59D30C25236B93D7002D3A41 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		59D30C27236B97A5002D3A41 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,7 @@
 		5924E51B234A89AD007A3D93 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				59D30C29236B97B8002D3A41 /* Base */,
 				59B0238023628C08007C7367 /* Movie */,
 				59B0237F23628BFE007C7367 /* TVShow */,
 			);
@@ -182,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				5924E52C234A9FD3007A3D93 /* String.swift */,
-				59D30C23236A7973002D3A41 /* UIImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -232,6 +236,7 @@
 				59B0238E2363C678007C7367 /* NetworkManager.swift */,
 				59B023902363CB93007C7367 /* ProdNetworkManager.swift */,
 				59B023922363D559007C7367 /* NetworkError.swift */,
+				59D30C25236B93D7002D3A41 /* ImageService.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -257,6 +262,15 @@
 			children = (
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		59D30C29236B97B8002D3A41 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				59D30C27236B97A5002D3A41 /* BaseRepository.swift */,
+				59BE129E236B997E00E27427 /* ProdBaseRepository.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,7 +376,6 @@
 			files = (
 				59B0238223628C31007C7367 /* MovieRepository.swift in Sources */,
 				59B02373236277DB007C7367 /* Constants.swift in Sources */,
-				59D30C24236A7973002D3A41 /* UIImage.swift in Sources */,
 				59B023912363CB93007C7367 /* ProdNetworkManager.swift in Sources */,
 				5924E508234A8695007A3D93 /* HomeViewController.swift in Sources */,
 				59B0238F2363C678007C7367 /* NetworkManager.swift in Sources */,
@@ -373,7 +386,10 @@
 				5924E506234A8695007A3D93 /* SceneDelegate.swift in Sources */,
 				59B023A12368F21B007C7367 /* ResponseList.swift in Sources */,
 				59B0238623628F2D007C7367 /* MovieManagerDelegate.swift in Sources */,
+				59BE129F236B997E00E27427 /* ProdBaseRepository.swift in Sources */,
+				59D30C28236B97A5002D3A41 /* BaseRepository.swift in Sources */,
 				59B0238C2362928D007C7367 /* TVShowManagerDelegate.swift in Sources */,
+				59D30C26236B93D7002D3A41 /* ImageService.swift in Sources */,
 				59B0238423628C58007C7367 /* ProdMovieRepository.swift in Sources */,
 				59B0238A23629246007C7367 /* ProdTVShowRepository.swift in Sources */,
 				59B02388236291EB007C7367 /* TVShowRepository.swift in Sources */,

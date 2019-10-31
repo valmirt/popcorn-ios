@@ -8,13 +8,8 @@
 
 import Foundation
 
-struct ProdMovieRepository: MovieRepository {
+class ProdMovieRepository: ProdBaseRepository, MovieRepository {
     var delegate: MovieManagerDelegate?
-    let api: NetworkManager
-    
-    init(_ api: NetworkManager = ProdNetworkManager.shared) {
-        self.api = api
-    }
     
     func updatePopularMovies (_ page: Int = 0) {
         let queries = [

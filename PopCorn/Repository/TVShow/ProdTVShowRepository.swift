@@ -8,11 +8,7 @@
 
 import Foundation
 
-struct ProdTVShowRepository: TVShowRepository {
+class ProdTVShowRepository: ProdBaseRepository, TVShowRepository {
     var delegate: TVShowManagerDelegate?
-    let api: NetworkManager
     
-    init(_ api: NetworkManager = ProdNetworkManager.shared) {
-        self.api = api
-    }
 }

@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol TVShowRepository {
+protocol TVShowRepository: BaseRepository {
     var delegate: TVShowManagerDelegate? { get set }
 }

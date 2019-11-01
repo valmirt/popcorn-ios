@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fsa-xy-AS8">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -7,20 +7,113 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Settings View Controller-->
+        <scene sceneID="jFG-DQ-9Tx">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController title="Settings View Controller" id="BrP-dw-my1" customClass="SettingsViewController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="en9-gc-PfG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="wPz-tr-typ"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="WV0-Ng-8vI"/>
+                    <navigationItem key="navigationItem" id="jp9-AA-FTC"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T6e-7w-sry" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-57" y="115"/>
+            <point key="canvasLocation" x="-2039" y="353"/>
+        </scene>
+        <!--Home Tab Bar Controller-->
+        <scene sceneID="Bd1-6M-qzI">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L9c-W2-jwG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController id="Fsa-xy-AS8" customClass="HomeTabBarController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1bC-et-FL5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="LbO-Wq-lsE" kind="relationship" relationship="viewControllers" id="NRR-ec-jba"/>
+                        <segue destination="nII-EV-Utv" kind="relationship" relationship="viewControllers" id="HhW-Ea-wdh"/>
+                        <segue destination="BrP-dw-my1" kind="relationship" relationship="viewControllers" id="5z6-0J-LNE"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="-2039" y="-493"/>
+        </scene>
+        <!--Movie Tab Bar-->
+        <scene sceneID="TLL-Pu-YfE">
+            <objects>
+                <tabBarController title="Movie Tab Bar" id="LbO-Wq-lsE" customClass="MovieTabBarController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="fwu-sa-qMh"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CYe-IR-fsL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="FHk-8p-hpO" kind="relationship" relationship="viewControllers" id="9hZ-Jw-iaJ"/>
+                        <segue destination="FHk-8p-hpO" kind="relationship" relationship="viewControllers" id="9FG-wY-1am"/>
+                        <segue destination="FHk-8p-hpO" kind="relationship" relationship="viewControllers" id="h87-1i-SNR"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ihQ-ab-c3Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-245" y="-981"/>
+        </scene>
+        <!--Base Table View-->
+        <scene sceneID="IoR-KR-zHr">
+            <objects>
+                <tableViewController title="Base Table View" id="FHk-8p-hpO" customClass="BaseTableViewController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FGe-x7-EDq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="wJ6-9U-DW0">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wJ6-9U-DW0" id="qVR-fs-7uL">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="FHk-8p-hpO" id="ljk-Rr-qWW"/>
+                            <outlet property="delegate" destination="FHk-8p-hpO" id="93o-CJ-vyI"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="Pqp-Po-MBz"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b3b-xc-9eS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1574" y="-494"/>
+        </scene>
+        <!--TVShow Tab Bar-->
+        <scene sceneID="aSx-FJ-8en">
+            <objects>
+                <tabBarController title="TVShow Tab Bar" id="nII-EV-Utv" customClass="TVShowTabBarController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="AEZ-Jo-qc5"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HZG-gv-ZAq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="FHk-8p-hpO" kind="relationship" relationship="viewControllers" id="Bcy-jV-aOi"/>
+                        <segue destination="FHk-8p-hpO" kind="relationship" relationship="viewControllers" id="4ja-XO-Mcb"/>
+                        <segue destination="FHk-8p-hpO" kind="relationship" relationship="viewControllers" id="1az-p3-PIe"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EGB-mN-rH7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-245" y="-125"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="1az-p3-PIe"/>
+    </inferredMetricsTieBreakers>
 </document>

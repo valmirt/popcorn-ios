@@ -30,13 +30,11 @@
 		59B0239B2363EBF2007C7367 /* MovieRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B0239A2363EBF2007C7367 /* MovieRepositoryTest.swift */; };
 		59B023A12368F21B007C7367 /* ResponseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B023A02368F21B007C7367 /* ResponseList.swift */; };
 		59BE129F236B997E00E27427 /* ProdBaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE129E236B997E00E27427 /* ProdBaseRepository.swift */; };
-		59BE12A1236B9FDF00E27427 /* MovieTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12A0236B9FDF00E27427 /* MovieTabBarController.swift */; };
-		59BE12A3236BA01E00E27427 /* TVShowTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12A2236BA01E00E27427 /* TVShowTabBarController.swift */; };
+		59BE12A1236B9FDF00E27427 /* GenericTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12A0236B9FDF00E27427 /* GenericTabBarController.swift */; };
 		59BE12A5236BA26300E27427 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12A4236BA26300E27427 /* SettingsViewController.swift */; };
 		59BE12A8236BA93B00E27427 /* GenericTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12A7236BA93B00E27427 /* GenericTableViewController.swift */; };
 		59BE12AA236CDE1500E27427 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12A9236CDE1500E27427 /* GenericTableViewCell.swift */; };
 		59BE12AC236CE4F800E27427 /* NavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12AB236CE4F800E27427 /* NavViewController.swift */; };
-		59BE12B2236CF8B400E27427 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12B1236CF8B400E27427 /* BaseTabBarController.swift */; };
 		59D30C26236B93D7002D3A41 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30C25236B93D7002D3A41 /* ImageService.swift */; };
 		59D30C28236B97A5002D3A41 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30C27236B97A5002D3A41 /* BaseRepository.swift */; };
 /* End PBXBuildFile section */
@@ -79,13 +77,11 @@
 		59B0239A2363EBF2007C7367 /* MovieRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryTest.swift; sourceTree = "<group>"; };
 		59B023A02368F21B007C7367 /* ResponseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseList.swift; sourceTree = "<group>"; };
 		59BE129E236B997E00E27427 /* ProdBaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdBaseRepository.swift; sourceTree = "<group>"; };
-		59BE12A0236B9FDF00E27427 /* MovieTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTabBarController.swift; sourceTree = "<group>"; };
-		59BE12A2236BA01E00E27427 /* TVShowTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTabBarController.swift; sourceTree = "<group>"; };
+		59BE12A0236B9FDF00E27427 /* GenericTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTabBarController.swift; sourceTree = "<group>"; };
 		59BE12A4236BA26300E27427 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		59BE12A7236BA93B00E27427 /* GenericTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewController.swift; sourceTree = "<group>"; };
 		59BE12A9236CDE1500E27427 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
 		59BE12AB236CE4F800E27427 /* NavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavViewController.swift; sourceTree = "<group>"; };
-		59BE12B1236CF8B400E27427 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		59D30C25236B93D7002D3A41 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		59D30C27236B97A5002D3A41 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,14 +160,12 @@
 		5924E51A234A895B007A3D93 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				59BE12B1236CF8B400E27427 /* BaseTabBarController.swift */,
 				59BE12A9236CDE1500E27427 /* GenericTableViewCell.swift */,
 				59BE12A7236BA93B00E27427 /* GenericTableViewController.swift */,
 				5924E507234A8695007A3D93 /* HomeTabBarController.swift */,
-				59BE12A0236B9FDF00E27427 /* MovieTabBarController.swift */,
+				59BE12A0236B9FDF00E27427 /* GenericTabBarController.swift */,
 				59BE12AB236CE4F800E27427 /* NavViewController.swift */,
 				59BE12A4236BA26300E27427 /* SettingsViewController.swift */,
-				59BE12A2236BA01E00E27427 /* TVShowTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -398,14 +392,12 @@
 				59B0238223628C31007C7367 /* MovieRepository.swift in Sources */,
 				59B02373236277DB007C7367 /* Constants.swift in Sources */,
 				59B023912363CB93007C7367 /* ProdNetworkManager.swift in Sources */,
-				59BE12A3236BA01E00E27427 /* TVShowTabBarController.swift in Sources */,
-				59BE12A1236B9FDF00E27427 /* MovieTabBarController.swift in Sources */,
+				59BE12A1236B9FDF00E27427 /* GenericTabBarController.swift in Sources */,
 				5924E508234A8695007A3D93 /* HomeTabBarController.swift in Sources */,
 				59B0238F2363C678007C7367 /* NetworkManager.swift in Sources */,
 				59B023932363D559007C7367 /* NetworkError.swift in Sources */,
 				5924E52D234A9FD3007A3D93 /* String.swift in Sources */,
 				5924E504234A8695007A3D93 /* AppDelegate.swift in Sources */,
-				59BE12B2236CF8B400E27427 /* BaseTabBarController.swift in Sources */,
 				5924E520234A8E6B007A3D93 /* Movie.swift in Sources */,
 				59BE12A8236BA93B00E27427 /* GenericTableViewController.swift in Sources */,
 				5924E506234A8695007A3D93 /* SceneDelegate.swift in Sources */,

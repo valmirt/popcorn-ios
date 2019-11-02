@@ -8,23 +8,33 @@
 
 import UIKit
 
-class MovieTabBarController: UITabBarController {
+class MovieTabBarController: BaseTabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        customize(tabBar: self.tabBar)
+        viewControllersParams()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func viewControllersParams() {
+        let popular = self.viewControllers?[0] as? NavViewController
+        if let popular = popular {
+            popular.type = "movie"
+            popular.filter = "popular"
+        }
+        
+        let nowPlaying = self.viewControllers?[1] as? NavViewController
+        if let nowPlaying = nowPlaying {
+            nowPlaying.type = "movie"
+            nowPlaying.filter = "now_playing"
+        }
+        
+        let topRated = self.viewControllers?[2] as? NavViewController
+        if let topRated = topRated {
+            topRated.type = "movie"
+            topRated.filter = "top_rated"
+        }
     }
-    */
 
 }

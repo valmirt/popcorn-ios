@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TVShowTabBarController: UITabBarController {
+class TVShowTabBarController: BaseTabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        customize(tabBar: self.tabBar)
         // Do any additional setup after loading the view.
     }
     

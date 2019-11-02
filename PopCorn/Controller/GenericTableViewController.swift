@@ -1,5 +1,5 @@
 //
-//  BaseTableViewController.swift
+//  GenericTableViewController.swift
 //  PopCorn
 //
 //  Created by Valmir Torres on 31/10/19.
@@ -8,16 +8,33 @@
 
 import UIKit
 
-class BaseTableViewController: UITableViewController {
-
+class GenericTableViewController: UITableViewController {
+    var type: String = "movie"
+    var filter: String = "popular"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setTitle()
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func setTitle() {
+        switch filter {
+        case "popular":
+            title = "Popular"
+        case "now_playing":
+            title = "Now Playing"
+        case "top_rated":
+            title = "Top Rated"
+        default:
+            title = "Popular"
+        }
     }
 
     // MARK: - Table view data source

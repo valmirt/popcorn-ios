@@ -31,7 +31,7 @@ class HomeTabBarController: UITabBarController {
         if let movie = movie {
             movie.type = "movie"
         }
-        let tv = self.viewControllers?[0] as? GenericTabBarController
+        let tv = self.viewControllers?[1] as? GenericTabBarController
         if let tv = tv {
             tv.type = "tv"
         }

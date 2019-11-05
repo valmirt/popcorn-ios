@@ -11,20 +11,27 @@ import UIKit
 class GenericTableViewController: UITableViewController {
     var type: String = "movie"
     var filter: String = "popular"
+    lazy var movieRepo: MovieRepository = ProdMovieRepository()
+    var movies: [Movie]?
+//    lazy var tvRepo: TVShowRepository = ProdTVShowRepository()
+    var tv: [TVShow]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle()
-        
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        initReposiotry()
     }
     
-    func setTitle() {
+    private func initReposiotry() {
+        if type == "movie" {
+            movieRepo.delegate = self
+            movieRepo.updateMovieList(1, path: "/\(Constants.Web.VERSION_API)/\(type)/\(filter)")
+        } else {
+//            tvRepo.delegate = self
+        }
+    }
+    
+    private func setTitle() {
         switch filter {
         case "popular":
             title = "Popular"
@@ -39,69 +46,55 @@ class GenericTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return movies?.count ?? tv?.count ?? 0
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath) as! GenericTableViewCell
+        
+        if movies != nil {
+            let current = movies![indexPath.row]
+            if current.backdropPath != nil {
+                movieRepo.updateImage(baseURL: Constants.Web.BASE_URL_IMAGE, path: "\(Constants.Web.IMAGE_W780)\(current.backdropPath!)") { image in
+                    cell.posterImageView?.image = image
+                }
+            }
+            DispatchQueue.main.async {
+                cell.titleLabel?.text = current.title
+            }
+        } else if tv != nil {
+//            let current = tv![indexPath.row]
+        }
+        
 
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 280
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+
+}
+
+extension GenericTableViewController: MovieManagerDelegate {
+    
+    func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie]) {
+        movies = didUpdateMovieList
+        tableView.reloadData()
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
+        
     }
-    */
+}
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension GenericTableViewController: TVShowManagerDelegate {
+    
 }

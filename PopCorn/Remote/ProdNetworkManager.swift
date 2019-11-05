@@ -17,7 +17,6 @@ struct ProdNetworkManager: NetworkManager {
         let session = URLSession (configuration: URLSessionConfiguration.ephemeral,
                                   delegate: nil,
                                   delegateQueue: OperationQueue.main)
-        
         let task = session.dataTask(with: url) { (data, _, error) in
             if let safeData = data {
                 let response = try? self.decodeJSON(type: T.self, data: safeData)

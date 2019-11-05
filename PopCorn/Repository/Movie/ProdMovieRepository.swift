@@ -11,49 +11,15 @@ import Foundation
 class ProdMovieRepository: ProdBaseRepository, MovieRepository {
     var delegate: MovieManagerDelegate?
     
-    func updatePopularMovies (_ page: Int = 0) {
+    func updateMovieList(_ page: Int = 1, path: String) {
         let queries = [
             URLQueryItem(name: "api_key", value: Constants.Web.API_KEY),
             URLQueryItem(name: "page", value: String(page))
         ]
         
-        load ("/movie/popular", queries) { (response, error) in
+        load (path, queries) { (response, error) in
             if let safe = response {
-                self.delegate?.movieManager(self, didUpdatePopularList: safe.results)
-            } else {
-                if let err = error {
-                    self.delegate?.movieManager(self, didUpdateError: err)
-                }
-            }
-        }
-    }
-    
-    func updateNowPlayingMovies (_ page: Int = 0) {
-        let queries = [
-            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY),
-            URLQueryItem(name: "page", value: String(page))
-        ]
-        
-        load ("/movie/now_playing", queries) { (response, error) in
-            if let safe = response {
-                self.delegate?.movieManager(self, didUpdateNowPlayingList: safe.results)
-            } else {
-                if let err = error {
-                    self.delegate?.movieManager(self, didUpdateError: err)
-                }
-            }
-        }
-    }
-    
-    func updateTopRatedMovies (_ page: Int = 0) {
-        let queries = [
-            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY),
-            URLQueryItem(name: "page", value: String(page))
-        ]
-        
-        load ("/movie/top_rated", queries) { (response, error) in
-            if let safe = response {
-                self.delegate?.movieManager(self, didUpdateTopRatedList: safe.results)
+                self.delegate?.movieManager(self, didUpdateMovieList: safe.results)
             } else {
                 if let err = error {
                     self.delegate?.movieManager(self, didUpdateError: err)

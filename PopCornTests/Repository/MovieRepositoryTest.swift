@@ -23,9 +23,7 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
         error = nil
         movieRepository?.delegate = self
         
-        movieRepository?.updatePopularMovies(0)
-        movieRepository?.updateNowPlayingMovies(0)
-        movieRepository?.updateTopRatedMovies(0)
+        movieRepository?.updateMovieList(1, path: "")
         
         let movies = result
         XCTAssertNil(error)
@@ -40,9 +38,7 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
         fakeAPI.errorCreateURL = true
         fakeAPI.errorLoad = true
         
-        movieRepository?.updatePopularMovies(0)
-        movieRepository?.updateNowPlayingMovies(0)
-        movieRepository?.updateTopRatedMovies(0)
+        movieRepository?.updateMovieList(1, path: "")
         
         let err = error
         XCTAssertNil(result)
@@ -55,16 +51,8 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
         )
     }
     
-    func movieManager(_ manager: MovieRepository, didUpdatePopularList: [Movie]) {
-        result = didUpdatePopularList
-    }
-    
-    func movieManager(_ manager: MovieRepository, didUpdateNowPlayingList: [Movie]) {
-        result = didUpdateNowPlayingList
-    }
-    
-    func movieManager(_ manager: MovieRepository, didUpdateTopRatedList: [Movie]) {
-        result = didUpdateTopRatedList
+    func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie]) {
+        result = didUpdateMovieList
     }
     
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {

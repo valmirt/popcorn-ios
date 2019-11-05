@@ -12,9 +12,5 @@ protocol MovieRepository: BaseRepository {
     
     var delegate: MovieManagerDelegate? { get set }
     
-    func updatePopularMovies (_ page: Int)
-    
-    func updateNowPlayingMovies (_ page: Int)
-    
-    func updateTopRatedMovies (_ page: Int)
+    func updateMovieList (_ page: Int, path: String)
 }

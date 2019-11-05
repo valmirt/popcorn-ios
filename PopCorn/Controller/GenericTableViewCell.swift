@@ -9,6 +9,12 @@
 import UIKit
 
 class GenericTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var posterImageView: UIImageView?
+    @IBOutlet weak var titleLabel: UILabel?
+    @IBOutlet weak var releaseLabel: UILabel?
+    @IBOutlet weak var popularLabel: UILabel?
+    @IBOutlet weak var rateLabel: UILabel?
 
     override func awakeFromNib() {
         super.awakeFromNib()

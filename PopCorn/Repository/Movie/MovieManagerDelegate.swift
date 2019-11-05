@@ -9,11 +9,7 @@
 import Foundation
 
 protocol MovieManagerDelegate {
-    func movieManager (_ manager: MovieRepository, didUpdatePopularList: [Movie])
-    
-    func movieManager (_ manager: MovieRepository, didUpdateNowPlayingList: [Movie])
-    
-    func movieManager (_ manager: MovieRepository, didUpdateTopRatedList: [Movie])
+    func movieManager (_ manager: MovieRepository, didUpdateMovieList: [Movie])
     
     func movieManager (_ manager: MovieRepository, didUpdateError: Error)
 }
@@ -21,15 +17,7 @@ protocol MovieManagerDelegate {
 //MARK: - Default Implementations
 
 extension MovieManagerDelegate {
-    func movieManager (_ manager: MovieRepository, didUpdatePopularList: [Movie]) {
-        //this is a empty implementation to allow this method to be optional
-    }
-    
-    func movieManager (_ manager: MovieRepository, didUpdateNowPlayingList: [Movie]) {
-        //this is a empty implementation to allow this method to be optional
-    }
-    
-    func movieManager (_ manager: MovieRepository, didUpdateTopRatedList: [Movie]) {
+   func movieManager (_ manager: MovieRepository, didUpdateMovieList: [Movie]) {
         //this is a empty implementation to allow this method to be optional
     }
 }

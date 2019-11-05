@@ -21,23 +21,13 @@ class FakeMovieNetworkManager: NetworkManager {
         if errorLoad {
             execute(nil,  NetworkError.defaultError)
         } else {
-            switch typeReturn {
-            case 1:
-                execute(fakeList() as? T, nil)
-            case 2:
-                execute(fakeList() as? T, nil)
-            case 3:
-                execute(fakeList() as? T, nil)
-            default:
-                execute(nil, NetworkError.invalidDecodeJSON)
-            }
+            execute(fakeList() as? T, nil)
         }
     }
     
     func createURL (baseURL: String,
                     path: String,
                     queries: [URLQueryItem]?) -> URL? {
-        defineTypeReturn(by: path)
         
         if errorCreateURL {
             return nil
@@ -47,19 +37,6 @@ class FakeMovieNetworkManager: NetworkManager {
         component?.path = path
         component?.queryItems = queries
         return component?.url
-    }
-    
-    private func defineTypeReturn(by path: String) {
-        switch path {
-        case "/movie/popular":
-            typeReturn = 1
-        case "/movie/now_playing":
-            typeReturn = 2
-        case "/movie/top_rated":
-            typeReturn = 3
-        default:
-            typeReturn = 0
-        }
     }
     
     private func fakeList() -> ResponseList<Movie> {

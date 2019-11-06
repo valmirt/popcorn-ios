@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProdMovieRepository: ProdBaseRepository, MovieRepository {
+class ProdMovieRepository: ProdBaseRepository<Movie>, MovieRepository {
     var delegate: MovieManagerDelegate?
     
     func updateMovieList(_ page: Int = 1, path: String) {
@@ -25,19 +25,6 @@ class ProdMovieRepository: ProdBaseRepository, MovieRepository {
                     self.delegate?.movieManager(self, didUpdateError: err)
                 }
             }
-        }
-    }
-    
-    //MARK: - Private helper functions
-    
-    private func load (_ path: String,
-                       _ queries: [URLQueryItem],
-                       _ handler: @escaping (ResponseList<Movie>?, Error?) -> Void) {
-        
-        if let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) {
-            api.networkCall(url: url, execute: handler)
-        } else {
-            handler(nil, NetworkError.invalidURL)
         }
     }
 }

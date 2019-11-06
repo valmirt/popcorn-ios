@@ -8,6 +8,11 @@
 
 import Foundation
 
-struct TVShow {
-    
+struct TVShow: Decodable {
+    let backdropPath: String?
+    let id: Int
+    let popularity: Double
+    let firstAirDate: String
+    let name: String
+    let voteAverage: Double
 }

@@ -13,7 +13,7 @@ class GenericTableViewController: UITableViewController {
     var filter: String = "popular"
     lazy var movieRepo: MovieRepository = ProdMovieRepository()
     var movies: [Movie]?
-//    lazy var tvRepo: TVShowRepository = ProdTVShowRepository()
+    lazy var tvRepo: TVShowRepository = ProdTVShowRepository()
     var tv: [TVShow]?
     
     override func viewDidLoad() {
@@ -23,11 +23,13 @@ class GenericTableViewController: UITableViewController {
     }
     
     private func initReposiotry() {
+        let path = getPath()
         if type == "movie" {
             movieRepo.delegate = self
-            movieRepo.updateMovieList(1, path: "/\(Constants.Web.VERSION_API)/\(type)/\(filter)")
+            movieRepo.updateMovieList(1, path: path)
         } else {
-//            tvRepo.delegate = self
+            tvRepo.delegate = self
+            tvRepo.updateTVShowList(1, path: path)
         }
     }
     
@@ -52,23 +54,27 @@ class GenericTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath) as! GenericTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath)
+                as! GenericTableViewCell
         
+        let base = Constants.Web.BASE_URL_IMAGE
         if movies != nil {
-            let current = movies![indexPath.row]
-            if current.backdropPath != nil {
-                movieRepo.updateImage(baseURL: Constants.Web.BASE_URL_IMAGE, path: "\(Constants.Web.IMAGE_W780)\(current.backdropPath!)") { image in
-                    cell.posterImageView?.image = image
-                }
+            let path = "\(Constants.Web.IMAGE_W780)\(movies![indexPath.row].backdropPath!)"
+            movieRepo.updateImage(baseURL: base, path: path) { image in
+                cell.setImage(image)
             }
-            DispatchQueue.main.async {
-                cell.titleLabel?.text = current.title
-            }
+            cell.movie = movies?[indexPath.row]
+            cell.tv = nil
         } else if tv != nil {
-//            let current = tv![indexPath.row]
+            let path = "\(Constants.Web.IMAGE_W780)\(tv![indexPath.row].backdropPath!)"
+            tvRepo.updateImage(baseURL: base, path: path) { image in
+                cell.setImage(image)
+            }
+            cell.movie = nil
+            cell.tv = tv?[indexPath.row]
         }
+        cell.setValues()
         
-
         return cell
     }
 
@@ -79,8 +85,22 @@ class GenericTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 280
     }
-
-
+    
+    private func errorAlert(message: String?) {
+        let alert = UIAlertController(title: "Error!",
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func getPath() -> String {
+        if type == "tv" && filter == "now_playing" {
+            return "/\(Constants.Web.VERSION_API)/tv/airing_today"
+        }
+        
+        return "/\(Constants.Web.VERSION_API)/\(type)/\(filter)"
+    }
 }
 
 extension GenericTableViewController: MovieManagerDelegate {
@@ -91,10 +111,18 @@ extension GenericTableViewController: MovieManagerDelegate {
     }
 
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
-        
+        errorAlert(message: didUpdateError.localizedDescription)
     }
 }
 
 extension GenericTableViewController: TVShowManagerDelegate {
     
+    func tvShowManager(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow]) {
+        tv = didUpdateTVShowList
+        tableView.reloadData()
+    }
+    
+    func tvShowManager(_ manager: TVShowRepository, didUpdateError: Error) {
+        errorAlert(message: didUpdateError.localizedDescription)
+    }
 }

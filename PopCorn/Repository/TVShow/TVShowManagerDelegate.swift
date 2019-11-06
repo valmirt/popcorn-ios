@@ -9,9 +9,13 @@
 import Foundation
 
 protocol TVShowManagerDelegate {
+    func tvShowManager (_ manager: TVShowRepository, didUpdateTVShowList: [TVShow])
     
+    func tvShowManager (_ manager: TVShowRepository, didUpdateError: Error)
 }
 
 extension TVShowManagerDelegate {
-    
+    func tvShowManager (_ manager: TVShowRepository, didUpdateTVShowList: [TVShow]) {
+        //this is a empty implementation to allow this method to be optional
+    }
 }

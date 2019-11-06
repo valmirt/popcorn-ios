@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProdBaseRepository: BaseRepository {
+class ProdBaseRepository <T: Decodable>: BaseRepository {
     let api: NetworkManager
     
     init(_ api: NetworkManager = ProdNetworkManager.shared) {
@@ -21,6 +21,18 @@ class ProdBaseRepository: BaseRepository {
                      _ handler: @escaping (UIImage?) -> Void) {
         if let url = api.createURL(baseURL: baseURL, path: path, queries: nil) {
             ImageService.getImage(withUrl: url, handler: handler)
+        }
+    }
+    
+    
+    internal func load (_ path: String,
+                        _ queries: [URLQueryItem],
+                        _ handler: @escaping (ResponseList<T>?, Error?) -> Void) {
+        
+        if let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) {
+            api.networkCall(url: url, execute: handler)
+        } else {
+            handler(nil, NetworkError.invalidURL)
         }
     }
 }

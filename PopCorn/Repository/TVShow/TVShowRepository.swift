@@ -10,4 +10,6 @@ import Foundation
 
 protocol TVShowRepository: BaseRepository {
     var delegate: TVShowManagerDelegate? { get set }
+    
+    func updateTVShowList (_ page: Int, path: String)
 }

@@ -10,6 +10,9 @@ import UIKit
 
 class GenericTableViewCell: UITableViewCell {
     
+    var movie: Movie?
+    var tv: TVShow?
+    
     @IBOutlet weak var posterImageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var releaseLabel: UILabel?
@@ -26,5 +29,25 @@ class GenericTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func setImage(_ image: UIImage?) {
+        posterImageView?.image = image
+    }
+    
+    func setValues() {
+        
+        DispatchQueue.main.async {
+            if let safeMovie = self.movie {
+                self.titleLabel?.text = safeMovie.title
+                self.releaseLabel?.text = String(safeMovie.releaseDate.prefix(4))
+                self.popularLabel?.text = String(format: "%.1f", safeMovie.popularity)
+                self.rateLabel?.text = String(format: "%.1f", safeMovie.voteAverage)
+            } else if let safeTV = self.tv {
+                self.titleLabel?.text = safeTV.name
+                self.releaseLabel?.text = String(safeTV.firstAirDate.prefix(4))
+                self.popularLabel?.text = String(format: "%.1f", safeTV.popularity)
+                self.rateLabel?.text = String(format: "%.1f", safeTV.voteAverage)
+            }
+        }
+    }
 }

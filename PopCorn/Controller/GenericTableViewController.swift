@@ -9,6 +9,8 @@
 import UIKit
 
 class GenericTableViewController: UITableViewController {
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView?
+    
     var type: String = "movie"
     var filter: String = "popular"
     lazy var movieRepo: MovieRepository = ProdMovieRepository()
@@ -20,6 +22,13 @@ class GenericTableViewController: UITableViewController {
         super.viewDidLoad()
         setTitle()
         initReposiotry()
+        setupViews()
+    }
+    
+    private func setupViews() {
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        loadingIndicator?.hidesWhenStopped = true
+        loadingIndicator?.startAnimating()
     }
     
     private func initReposiotry() {
@@ -57,30 +66,49 @@ class GenericTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath)
                 as! GenericTableViewCell
         
-        let base = Constants.Web.BASE_URL_IMAGE
         if movies != nil {
-            let path = "\(Constants.Web.IMAGE_W780)\(movies![indexPath.row].backdropPath!)"
-            movieRepo.updateImage(baseURL: base, path: path) { image in
-                cell.setImage(image)
-            }
-            cell.movie = movies?[indexPath.row]
-            cell.tv = nil
+            setContent(movie: movies![indexPath.row], cell: cell)
         } else if tv != nil {
-            let path = "\(Constants.Web.IMAGE_W780)\(tv![indexPath.row].backdropPath!)"
-            tvRepo.updateImage(baseURL: base, path: path) { image in
-                cell.setImage(image)
-            }
-            cell.movie = nil
-            cell.tv = tv?[indexPath.row]
+            setContent(tv: tv![indexPath.row], cell: cell)
         }
         cell.setValues()
         
         return cell
     }
-
+    
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //
 //    }
+    
+    private func setContent(movie: Movie,
+                            cell: GenericTableViewCell) {
+        if let backdrop = movie.backdropPath {
+            let base = Constants.Web.BASE_URL_IMAGE
+            let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
+            movieRepo.updateImage(baseURL: base, path: path) { image in
+                cell.setImage(image)
+            }
+        } else {
+            cell.setImage(UIImage(systemName: "photo"))
+        }
+        cell.movie = movie
+        cell.tv = nil
+    }
+    
+    private func setContent(tv: TVShow,
+                            cell: GenericTableViewCell) {
+        if let backdrop = tv.backdropPath {
+            let base = Constants.Web.BASE_URL_IMAGE
+            let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
+            tvRepo.updateImage(baseURL: base, path: path) { image in
+                cell.setImage(image)
+            }
+        } else {
+            cell.setImage(UIImage(systemName: "photo"))
+        }
+        cell.movie = nil
+        cell.tv = tv
+    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 280
@@ -107,6 +135,7 @@ extension GenericTableViewController: MovieManagerDelegate {
     
     func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie]) {
         movies = didUpdateMovieList
+        loadingIndicator?.stopAnimating()
         tableView.reloadData()
     }
 
@@ -119,6 +148,7 @@ extension GenericTableViewController: TVShowManagerDelegate {
     
     func tvShowManager(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow]) {
         tv = didUpdateTVShowList
+        loadingIndicator?.stopAnimating()
         tableView.reloadData()
     }
     

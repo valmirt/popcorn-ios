@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		591DAB322374E9B800FF0F48 /* DetailMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591DAB312374E9B800FF0F48 /* DetailMovieViewController.swift */; };
 		591DAB342374E9D400FF0F48 /* DetailTVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591DAB332374E9D400FF0F48 /* DetailTVViewController.swift */; };
+		591DAB362378B47500FF0F48 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591DAB352378B47500FF0F48 /* MovieDetail.swift */; };
+		591DAB382378B4A300FF0F48 /* TVShowDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591DAB372378B4A300FF0F48 /* TVShowDetail.swift */; };
 		5924E504234A8695007A3D93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E503234A8695007A3D93 /* AppDelegate.swift */; };
 		5924E506234A8695007A3D93 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E505234A8695007A3D93 /* SceneDelegate.swift */; };
 		5924E508234A8695007A3D93 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E507234A8695007A3D93 /* HomeTabBarController.swift */; };
@@ -55,6 +57,8 @@
 /* Begin PBXFileReference section */
 		591DAB312374E9B800FF0F48 /* DetailMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
 		591DAB332374E9D400FF0F48 /* DetailTVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTVViewController.swift; sourceTree = "<group>"; };
+		591DAB352378B47500FF0F48 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		591DAB372378B4A300FF0F48 /* TVShowDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetail.swift; sourceTree = "<group>"; };
 		5924E500234A8695007A3D93 /* PopCorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopCorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5924E503234A8695007A3D93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5924E505234A8695007A3D93 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				5924E51F234A8E6B007A3D93 /* Movie.swift */,
 				59B023A02368F21B007C7367 /* ResponseList.swift */,
 				599E10372371076700B08C09 /* TVShow.swift */,
+				591DAB352378B47500FF0F48 /* MovieDetail.swift */,
+				591DAB372378B4A300FF0F48 /* TVShowDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -399,6 +405,7 @@
 				59B0238F2363C678007C7367 /* NetworkManager.swift in Sources */,
 				59B023932363D559007C7367 /* NetworkError.swift in Sources */,
 				591DAB342374E9D400FF0F48 /* DetailTVViewController.swift in Sources */,
+				591DAB382378B4A300FF0F48 /* TVShowDetail.swift in Sources */,
 				5924E52D234A9FD3007A3D93 /* String.swift in Sources */,
 				5924E504234A8695007A3D93 /* AppDelegate.swift in Sources */,
 				5924E520234A8E6B007A3D93 /* Movie.swift in Sources */,
@@ -413,6 +420,7 @@
 				59B0238C2362928D007C7367 /* TVShowManagerDelegate.swift in Sources */,
 				59D30C26236B93D7002D3A41 /* ImageService.swift in Sources */,
 				599E10362370FF2500B08C09 /* ProdBaseRepository.swift in Sources */,
+				591DAB362378B47500FF0F48 /* MovieDetail.swift in Sources */,
 				59BE12AC236CE4F800E27427 /* NavViewController.swift in Sources */,
 				59B0238423628C58007C7367 /* ProdMovieRepository.swift in Sources */,
 				59B0238A23629246007C7367 /* ProdTVShowRepository.swift in Sources */,

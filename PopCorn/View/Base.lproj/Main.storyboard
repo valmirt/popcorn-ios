@@ -7,33 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
-        <scene sceneID="uW5-N5-yZm">
-            <objects>
-                <navigationController id="eg5-zo-JXC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="LAU-2C-FbX"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="JyX-e0-uKg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="2OC-fP-5ph" kind="relationship" relationship="rootViewController" id="2Mn-V6-X3c"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kJP-5p-FzL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-226" y="337"/>
-        </scene>
-        <!--Search-->
-        <scene sceneID="sZS-x8-6S7">
-            <objects>
-                <viewController id="2OC-fP-5ph" customClass="SearchViewController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Search" id="S3d-37-pcf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xgU-uO-Ygu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="674" y="337"/>
-        </scene>
         <!--Cast-->
         <scene sceneID="u6q-1E-q3Y">
             <objects>
@@ -93,7 +66,7 @@
                         <segue destination="LbO-Wq-lsE" kind="relationship" relationship="viewControllers" id="NRR-ec-jba"/>
                         <segue destination="LbO-Wq-lsE" kind="relationship" relationship="viewControllers" id="EVE-Q1-s1z"/>
                         <segue destination="C23-ga-JJ3" kind="relationship" relationship="viewControllers" id="Mqx-cb-j4M"/>
-                        <segue destination="eg5-zo-JXC" kind="relationship" relationship="viewControllers" id="YzC-sb-ptr"/>
+                        <segue destination="Seq-V0-t26" kind="relationship" relationship="viewControllers" id="Kxg-zF-bUG"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L9c-W2-jwG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -119,6 +92,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ihQ-ab-c3Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-225" y="-494"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="gJi-J4-Dhu">
+            <objects>
+                <navigationController id="Seq-V0-t26" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="Ynr-gB-0hV"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LmN-PI-yH9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="HeY-fq-1kw" kind="relationship" relationship="rootViewController" id="Mn0-EP-9Hl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jWx-73-Hyh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-226" y="336"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="hcn-Xf-gD7">
+            <objects>
+                <viewController id="HeY-fq-1kw" customClass="SearchViewController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zld-ta-ZHo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="nK2-y3-bz3"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Search" id="FDr-LE-MvJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7fq-sj-fkD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="673" y="336"/>
         </scene>
         <!--Generic Table View Controller-->
         <scene sceneID="viA-d8-Ebb">

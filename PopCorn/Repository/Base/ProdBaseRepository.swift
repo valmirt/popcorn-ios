@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ProdBaseRepository <T: Decodable>: BaseRepository {
+class ProdBaseRepository: BaseRepository {
     let api: NetworkManager
     
     init(_ api: NetworkManager = ProdNetworkManager.shared) {
@@ -25,9 +25,10 @@ class ProdBaseRepository <T: Decodable>: BaseRepository {
     }
     
     
-    internal func load (_ path: String,
-                        _ queries: [URLQueryItem],
-                        _ handler: @escaping (ResponseList<T>?, Error?) -> Void) {
+    internal func load <T: Decodable> (_ path: String,
+                                       _ queries: [URLQueryItem],
+                                       _ ofType: T.Type,
+                                       _ handler: @escaping (T?, Error?) -> Void) {
         
         if let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) {
             api.networkCall(url: url, execute: handler)

@@ -8,7 +8,8 @@
 
 import Foundation
 
-class ProdMovieRepository: ProdBaseRepository<Movie>, MovieRepository {
+class ProdMovieRepository: ProdBaseRepository, MovieRepository {
+    
     var delegate: MovieManagerDelegate?
     
     func updateMovieList(_ page: Int = 1, path: String) {
@@ -17,9 +18,25 @@ class ProdMovieRepository: ProdBaseRepository<Movie>, MovieRepository {
             URLQueryItem(name: "page", value: String(page))
         ]
         
-        load (path, queries) { (response, error) in
+        load(path, queries, ResponseList<Movie>.self) { (response, error) in
             if let safe = response {
                 self.delegate?.movieManager(self, didUpdateMovieList: safe.results, totalPages: safe.totalPages)
+            } else {
+                if let err = error {
+                    self.delegate?.movieManager(self, didUpdateError: err)
+                }
+            }
+        }
+    }
+    
+    func detailMovie(id: Int) {
+        let queries = [
+            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
+        ]
+        
+        load("/movie/\(id)", queries, MovieDetail.self) { response, error in
+            if let safe = response {
+                self.delegate?.movieManager(self, didUpdateMovieDetail: safe)
             } else {
                 if let err = error {
                     self.delegate?.movieManager(self, didUpdateError: err)

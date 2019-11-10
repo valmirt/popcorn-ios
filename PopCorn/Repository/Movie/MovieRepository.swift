@@ -13,4 +13,6 @@ protocol MovieRepository: BaseRepository {
     var delegate: MovieManagerDelegate? { get set }
     
     func updateMovieList (_ page: Int, path: String)
+    
+    func detailMovie (id: Int)
 }

@@ -15,8 +15,8 @@ class GenericTableViewController: UITableViewController {
     var filter: String = "popular"
     lazy var movieRepo: MovieRepository = ProdMovieRepository()
     lazy var tvRepo: TVShowRepository = ProdTVShowRepository()
-    var movies: [Movie]?
-    var tv: [TVShow]?
+    lazy var movies: [Movie] = []
+    lazy var tv: [TVShow] = []
     private var page = 1
     
     override func viewDidLoad() {
@@ -79,7 +79,11 @@ class GenericTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return movies?.count ?? tv?.count ?? 0
+        if type == "movie" {
+            return movies.count
+        } else {
+            return tv.count
+        }
     }
 
     override func tableView(_ tableView: UITableView,
@@ -87,10 +91,10 @@ class GenericTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath)
                 as! GenericTableViewCell
         
-        if movies != nil {
-            setContent(movie: movies![indexPath.row], cell: cell)
-        } else if tv != nil {
-            setContent(tv: tv![indexPath.row], cell: cell)
+        if type == "movie" {
+            setContent(movie: movies[indexPath.row], cell: cell)
+        } else {
+            setContent(tv: tv[indexPath.row], cell: cell)
         }
         cell.setValues()
         
@@ -105,13 +109,13 @@ class GenericTableViewController: UITableViewController {
     
     private func getMorePage(index: Int) {
         if type == "movie" {
-            let count = movies?.count ?? 0
+            let count = movies.count
             if index == count-4 {
                 page += 1
                 movieRepo.updateMovieList(page, path: getPath())
             }
         } else {
-            let count = tv?.count ?? 0
+            let count = tv.count
             if index == count-4 {
                 page += 1
                 tvRepo.updateTVShowList(page, path: getPath())
@@ -121,11 +125,11 @@ class GenericTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if type == "movie" {
-            let movie = movies?[indexPath.row]
-            performSegue(withIdentifier: "goToDetailMovie", sender: movie?.id)
+            let movie = movies[indexPath.row]
+            performSegue(withIdentifier: "goToDetailMovie", sender: movie.id)
         } else {
-            let dTV = tv?[indexPath.row]
-            performSegue(withIdentifier: "goToDetailTV", sender: dTV?.id)
+            let dTV = tv[indexPath.row]
+            performSegue(withIdentifier: "goToDetailTV", sender: dTV.id)
         }
     }
     
@@ -170,7 +174,7 @@ extension GenericTableViewController: MovieManagerDelegate {
     func movieManager(_ manager: MovieRepository,
                       didUpdateMovieList: [Movie], totalPages: Int) {
         if page < totalPages {
-            movies?.append(contentsOf: didUpdateMovieList)
+            movies.append(contentsOf: didUpdateMovieList)
             tableView.reloadData()
             loadingIndicator?.stopAnimating()
         }
@@ -196,7 +200,7 @@ extension GenericTableViewController: TVShowManagerDelegate {
                        didUpdateTVShowList: [TVShow],
                        totalPages: Int) {
         if page < totalPages {
-            tv?.append(contentsOf: didUpdateTVShowList)
+            tv.append(contentsOf: didUpdateTVShowList)
             tableView.reloadData()
             loadingIndicator?.stopAnimating()
         }

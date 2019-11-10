@@ -13,6 +13,8 @@ protocol TVShowManagerDelegate {
                         didUpdateTVShowList: [TVShow],
                         totalPages: Int)
     
+    func tvShowManager (_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail)
+    
     func tvShowManager (_ manager: TVShowRepository, didUpdateError: Error)
 }
 
@@ -20,6 +22,10 @@ extension TVShowManagerDelegate {
     func tvShowManager (_ manager: TVShowRepository,
                         didUpdateTVShowList: [TVShow],
                         totalPages: Int) {
+        //this is a empty implementation to allow this method to be optional
+    }
+    
+    func tvShowManager (_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail) {
         //this is a empty implementation to allow this method to be optional
     }
 }

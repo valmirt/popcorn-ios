@@ -13,6 +13,8 @@ protocol MovieManagerDelegate {
                        didUpdateMovieList: [Movie],
                        totalPages: Int)
     
+    func movieManager (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail)
+    
     func movieManager (_ manager: MovieRepository, didUpdateError: Error)
 }
 
@@ -22,6 +24,10 @@ extension MovieManagerDelegate {
     func movieManager (_ manager: MovieRepository,
                        didUpdateMovieList: [Movie],
                        totalPAges: Int) {
+        //this is a empty implementation to allow this method to be optional
+    }
+    
+    func movieManager (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
         //this is a empty implementation to allow this method to be optional
     }
 }

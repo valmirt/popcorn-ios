@@ -19,7 +19,7 @@ class ProdTVShowRepository: ProdBaseRepository<TVShow>, TVShowRepository {
         
         load (path, queries) { (response, error) in
             if let safe = response {
-                self.delegate?.tvShowManager(self, didUpdateTVShowList: safe.results)
+                self.delegate?.tvShowManager(self, didUpdateTVShowList: safe.results, totalPages: safe.totalPages)
             } else {
                 if let err = error {
                     self.delegate?.tvShowManager(self, didUpdateError: err)

@@ -1,15 +1,16 @@
 //
-//  SettingsViewController.swift
+//  DetailTVViewController.swift
 //  PopCorn
 //
-//  Created by Valmir Torres on 31/10/19.
+//  Created by Valmir Torres on 07/11/19.
 //  Copyright © 2019 Valmir Torres. All rights reserved.
 //
 
 import UIKit
 
-class SettingsViewController: UIViewController {
-
+class DetailTVViewController: UIViewController {
+    var id = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

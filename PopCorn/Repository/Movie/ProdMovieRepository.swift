@@ -19,7 +19,7 @@ class ProdMovieRepository: ProdBaseRepository<Movie>, MovieRepository {
         
         load (path, queries) { (response, error) in
             if let safe = response {
-                self.delegate?.movieManager(self, didUpdateMovieList: safe.results)
+                self.delegate?.movieManager(self, didUpdateMovieList: safe.results, totalPages: safe.totalPages)
             } else {
                 if let err = error {
                     self.delegate?.movieManager(self, didUpdateError: err)

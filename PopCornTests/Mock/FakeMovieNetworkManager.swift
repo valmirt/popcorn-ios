@@ -16,8 +16,10 @@ class FakeMovieNetworkManager: NetworkManager {
     var errorCreateURL = false
     var errorLoad = false
     
-    func networkCall<T: Decodable>(url: URL,
-                                   execute: @escaping (T?, Error?) -> Void) {
+    func networkCall<T: Decodable>(
+        url: URL,
+        execute: @escaping (T?, Error?) -> Void
+    ) {
         if errorLoad {
             execute(nil,  NetworkError.defaultError)
         } else {
@@ -25,10 +27,11 @@ class FakeMovieNetworkManager: NetworkManager {
         }
     }
     
-    func createURL (baseURL: String,
-                    path: String,
-                    queries: [URLQueryItem]?) -> URL? {
-        
+    func createURL(
+        baseURL: String,
+        path: String,
+        queries: [URLQueryItem]?
+    ) -> URL? {
         if errorCreateURL {
             return nil
         }
@@ -41,48 +44,38 @@ class FakeMovieNetworkManager: NetworkManager {
     
     private func fakeList() -> ResponseList<Movie> {
         let result: [Movie] = [
-            Movie(backdropPath: nil,
-                  genreIds: [1, 2, 3],
-                  id: 0,
-                  originalLanguage: "English",
-                  originalTitle: "Fake Movie 1",
-                  overview: "This is a fake movie",
-                  popularity: 99.9,
-                  posterPath: nil,
-                  releaseDate: "2019/10/25",
-                  title: "Fake Movie 1",
-                  voteAverage: 5,
-                  voteCount: 123),
-            Movie(backdropPath: nil,
-                  genreIds: [1, 2, 3],
-                  id: 1,
-                  originalLanguage: "English",
-                  originalTitle: "Fake Movie 2",
-                  overview: "This is a fake movie",
-                  popularity: 99.9,
-                  posterPath: nil,
-                  releaseDate: "2019/10/25",
-                  title: "Fake Movie 1",
-                  voteAverage: 5,
-                  voteCount: 123),
-            Movie(backdropPath: nil,
-                  genreIds: [1, 2, 3],
-                  id: 2,
-                  originalLanguage: "English",
-                  originalTitle: "Fake Movie 3",
-                  overview: "This is a fake movie",
-                  popularity: 99.9,
-                  posterPath: nil,
-                  releaseDate: "2019/10/25",
-                  title: "Fake Movie 1",
-                  voteAverage: 5,
-                  voteCount: 123),
+            Movie(
+                backdropPath: nil,
+                id: 0,
+                popularity: 99.9,
+                releaseDate: "2019/10/25",
+                title: "Fake Movie 1",
+                voteAverage: 5
+            ),
+            Movie(
+                backdropPath: nil,
+                id: 1,
+                popularity: 99.9,
+                releaseDate: "2019/10/25",
+                title: "Fake Movie 1",
+                voteAverage: 5
+            ),
+            Movie(
+                backdropPath: nil,
+                id: 2,
+                popularity: 99.9,
+                releaseDate: "2019/10/25",
+                title: "Fake Movie 1",
+                voteAverage: 5
+            )
         ]
         
-        let response = ResponseList<Movie>(page: 0,
-                                           totalResults: 3,
-                                           totalPages: 1,
-                                           results: result)
+        let response = ResponseList<Movie>(
+            page: 0,
+            totalResults: 3,
+            totalPages: 1,
+            results: result
+        )
         
         return response
     }

@@ -44,14 +44,15 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
         XCTAssertNil(result)
         XCTAssert(err != nil)
         XCTAssert(err != nil
-            && (err?.localizedDescription == "We are having trouble contacting the server, try again later..."
+            && (
+                err?.localizedDescription == "We are having trouble contacting the server, try again later..."
                 || err?.localizedDescription == "We are having server issues, try again later..."
                 || err?.localizedDescription == "Something is wrong, try again later..."
             )
         )
     }
     
-    func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie]) {
+    func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
         result = didUpdateMovieList
     }
     

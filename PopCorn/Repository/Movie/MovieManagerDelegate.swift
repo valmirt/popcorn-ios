@@ -26,7 +26,7 @@ extension MovieManagerDelegate {
     func movieManager (
         _ manager: MovieRepository,
         didUpdateMovieList: [Movie],
-        totalPAges: Int
+        totalPages: Int
     ) {
         //this is a empty implementation to allow this method to be optional
     }

@@ -16,20 +16,23 @@ class ProdBaseRepository: BaseRepository {
         self.api = api
     }
     
-    func updateImage(baseURL: String,
-                     path: String,
-                     _ handler: @escaping (UIImage?) -> Void) {
+    func updateImage(
+        baseURL: String,
+        path: String,
+        _ handler: @escaping (UIImage?) -> Void
+    ) {
         if let url = api.createURL(baseURL: baseURL, path: path, queries: nil) {
             ImageService.getImage(withUrl: url, handler: handler)
         }
     }
     
     
-    internal func load <T: Decodable> (_ path: String,
-                                       _ queries: [URLQueryItem],
-                                       _ ofType: T.Type,
-                                       _ handler: @escaping (T?, Error?) -> Void) {
-        
+    internal func load <T: Decodable> (
+        _ path: String,
+        _ queries: [URLQueryItem],
+        _ ofType: T.Type,
+        _ handler: @escaping (T?, Error?) -> Void
+    ) {
         if let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) {
             api.networkCall(url: url, execute: handler)
         } else {

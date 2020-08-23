@@ -9,7 +9,8 @@
 import UIKit
 
 class GenericTabBarController: UITabBarController {
-    var type: String = "movie"
+    var type: TypeContent = .movie
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customize()
@@ -21,19 +22,24 @@ class GenericTabBarController: UITabBarController {
         let popular = self.viewControllers?[0] as? NavViewController
         if let popular = popular {
             popular.type = type
-            popular.filter = "popular"
+            popular.filter = .popular
         }
         
         let nowPlaying = self.viewControllers?[1] as? NavViewController
         if let nowPlaying = nowPlaying {
             nowPlaying.type = type
-            nowPlaying.filter = "now_playing"
+            switch type {
+            case .movie:
+                nowPlaying.filter = .nowPlaying
+            case .tvShow:
+                nowPlaying.filter = .airingToday
+            }
         }
         
         let topRated = self.viewControllers?[2] as? NavViewController
         if let topRated = topRated {
             topRated.type = type
-            topRated.filter = "top_rated"
+            topRated.filter = .topRated
         }
     }
     

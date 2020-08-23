@@ -14,9 +14,11 @@ struct ProdNetworkManager: NetworkManager {
     static let shared = ProdNetworkManager()
     
     func networkCall<T: Decodable>(url: URL, execute: @escaping (T?, Error?) -> Void) {
-        let session = URLSession (configuration: URLSessionConfiguration.ephemeral,
-                                  delegate: nil,
-                                  delegateQueue: OperationQueue.main)
+        let session = URLSession (
+            configuration: URLSessionConfiguration.ephemeral,
+            delegate: nil,
+            delegateQueue: OperationQueue.main
+        )
         let task = session.dataTask(with: url) { (data, _, error) in
             if let safeData = data {
                 let response = try? self.decodeJSON(type: T.self, data: safeData)

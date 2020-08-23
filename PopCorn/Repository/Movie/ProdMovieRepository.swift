@@ -18,7 +18,7 @@ class ProdMovieRepository: ProdBaseRepository, MovieRepository {
             URLQueryItem(name: "page", value: String(page))
         ]
         
-        load(path, queries, ResponseList<Movie>.self) { (response, error) in
+        load(path, queries, ResponseList<Movie>.self) { response, error in
             if let safe = response {
                 self.delegate?.movieManager(self, didUpdateMovieList: safe.results, totalPages: safe.totalPages)
             } else {

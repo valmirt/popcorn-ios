@@ -9,8 +9,8 @@
 import UIKit
 
 class NavViewController: UINavigationController {
-    var type: String = "movie"
-    var filter: String = "popular"
+    var type: TypeContent = .movie
+    var filter: FilterContent = .popular
     
     override func viewDidLoad() {
         super.viewDidLoad()

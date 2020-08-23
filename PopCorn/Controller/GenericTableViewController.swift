@@ -11,8 +11,8 @@ import UIKit
 class GenericTableViewController: UITableViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView?
     
-    var type: String = "movie"
-    var filter: String = "popular"
+    var type: TypeContent = .movie
+    var filter: FilterContent = .popular
     lazy var movieRepo: MovieRepository = ProdMovieRepository()
     lazy var tvRepo: TVShowRepository = ProdTVShowRepository()
     lazy var movies: [Movie] = []
@@ -32,32 +32,26 @@ class GenericTableViewController: UITableViewController {
     }
     
     private func initReposiotry() {
-        if type == "movie" {
+        switch type {
+        case .movie:
             movieRepo.delegate = self
             movieRepo.updateMovieList(page, path: getPath())
-        } else {
+        case .tvShow:
             tvRepo.delegate = self
             tvRepo.updateTVShowList(page, path: getPath())
         }
     }
     
     private func setTitle() {
-        switch filter {
-        case "popular":
-            title = "Popular"
-        case "now_playing":
-            title = "Now Playing"
-        case "top_rated":
-            title = "Top Rated"
-        default:
-            title = "Popular"
-        }
+        title = filter.rawValue.name
     }
     
     private func errorAlert(message: String?) {
-        let alert = UIAlertController(title: "Error!",
-                                      message: message,
-                                      preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Error!",
+            message: message,
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -74,47 +68,60 @@ class GenericTableViewController: UITableViewController {
         }
     }
     
+    private func getPath() -> String {
+        return "/\(Constants.Web.VERSION_API)/\(type.rawValue)/\(filter.rawValue.api)"
+    }
+    
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
+    override func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if type == "movie" {
+        switch type {
+        case .movie:
             return movies.count
-        } else {
+        case .tvShow:
             return tv.count
         }
     }
 
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath)
-                as! GenericTableViewCell
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath) as! GenericTableViewCell
         
-        if type == "movie" {
+        switch type {
+        case .movie:
             setContent(movie: movies[indexPath.row], cell: cell)
-        } else {
+        case .tvShow:
             setContent(tv: tv[indexPath.row], cell: cell)
         }
-        cell.setValues()
         
+        cell.setValues()
         return cell
     }
     
-    override func tableView(_ tableView: UITableView,
-                            willDisplay cell: UITableViewCell,
-                            forRowAt indexPath: IndexPath) {
+    override func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
         getMorePage(index: indexPath.row)
     }
     
     private func getMorePage(index: Int) {
-        if type == "movie" {
+        switch type {
+        case .movie:
             let count = movies.count
             if index == count-4 {
                 page += 1
                 movieRepo.updateMovieList(page, path: getPath())
             }
-        } else {
+        case .tvShow:
             let count = tv.count
             if index == count-4 {
                 page += 1
@@ -124,17 +131,20 @@ class GenericTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if type == "movie" {
+        switch type {
+        case .movie:
             let movie = movies[indexPath.row]
             performSegue(withIdentifier: "goToDetailMovie", sender: movie.id)
-        } else {
+        case .tvShow:
             let dTV = tv[indexPath.row]
             performSegue(withIdentifier: "goToDetailTV", sender: dTV.id)
         }
     }
     
-    private func setContent(movie: Movie,
-                            cell: GenericTableViewCell) {
+    private func setContent(
+        movie: Movie,
+        cell: GenericTableViewCell
+    ) {
         if let backdrop = movie.backdropPath {
             let base = Constants.Web.BASE_URL_IMAGE
             let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
@@ -148,8 +158,10 @@ class GenericTableViewController: UITableViewController {
         cell.tv = nil
     }
     
-    private func setContent(tv: TVShow,
-                            cell: GenericTableViewCell) {
+    private func setContent(
+        tv: TVShow,
+        cell: GenericTableViewCell
+    ) {
         if let backdrop = tv.backdropPath {
             let base = Constants.Web.BASE_URL_IMAGE
             let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
@@ -163,16 +175,20 @@ class GenericTableViewController: UITableViewController {
         cell.tv = tv
     }
     
-    override func tableView(_ tableView: UITableView,
-                            heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         return 280
     }
 }
 
 extension GenericTableViewController: MovieManagerDelegate {
     
-    func movieManager(_ manager: MovieRepository,
-                      didUpdateMovieList: [Movie], totalPages: Int) {
+    func movieManager(
+        _ manager: MovieRepository,
+        didUpdateMovieList: [Movie], totalPages: Int
+    ) {
         if page < totalPages {
             movies.append(contentsOf: didUpdateMovieList)
             tableView.reloadData()
@@ -183,14 +199,6 @@ extension GenericTableViewController: MovieManagerDelegate {
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
         errorAlert(message: didUpdateError.localizedDescription)
         loadingIndicator?.stopAnimating()
-    }
-    
-    private func getPath() -> String {
-        if type == "tv" && filter == "now_playing" {
-            return "/\(Constants.Web.VERSION_API)/tv/airing_today"
-        }
-        
-        return "/\(Constants.Web.VERSION_API)/\(type)/\(filter)"
     }
 }
 

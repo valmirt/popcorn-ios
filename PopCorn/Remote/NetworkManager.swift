@@ -10,10 +10,14 @@ import Foundation
 
 protocol NetworkManager {
     
-    func networkCall <T: Decodable> (url: URL,
-                                     execute: @escaping (T?, Error?) -> Void)
+    func networkCall <T: Decodable> (
+        url: URL,
+        execute: @escaping (T?, Error?) -> Void
+    )
     
-    func createURL (baseURL: String,
-                    path: String,
-                    queries: [URLQueryItem]?) -> URL?
+    func createURL (
+        baseURL: String,
+        path: String,
+        queries: [URLQueryItem]?
+    ) -> URL?
 }

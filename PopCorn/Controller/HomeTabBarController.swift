@@ -29,11 +29,11 @@ class HomeTabBarController: UITabBarController {
     func viewControllersParams() {
         let movie = self.viewControllers?[0] as? GenericTabBarController
         if let movie = movie {
-            movie.type = "movie"
+            movie.type = .movie
         }
         let tv = self.viewControllers?[1] as? GenericTabBarController
         if let tv = tv {
-            tv.type = "tv"
+            tv.type = .tvShow
         }
     }
 }

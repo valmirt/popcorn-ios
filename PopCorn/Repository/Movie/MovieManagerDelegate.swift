@@ -9,9 +9,11 @@
 import Foundation
 
 protocol MovieManagerDelegate {
-    func movieManager (_ manager: MovieRepository,
-                       didUpdateMovieList: [Movie],
-                       totalPages: Int)
+    func movieManager (
+        _ manager: MovieRepository,
+        didUpdateMovieList: [Movie],
+        totalPages: Int
+    )
     
     func movieManager (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail)
     
@@ -21,9 +23,11 @@ protocol MovieManagerDelegate {
 //MARK: - Default Implementations
 
 extension MovieManagerDelegate {
-    func movieManager (_ manager: MovieRepository,
-                       didUpdateMovieList: [Movie],
-                       totalPAges: Int) {
+    func movieManager (
+        _ manager: MovieRepository,
+        didUpdateMovieList: [Movie],
+        totalPAges: Int
+    ) {
         //this is a empty implementation to allow this method to be optional
     }
     

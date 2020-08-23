@@ -12,8 +12,10 @@ import UIKit
 struct ImageService {
     private static let cache = NSCache<NSString, UIImage>()
     
-    private static func downloadImage(withUrl url: URL,
-                                      handler: @escaping (UIImage?) -> Void) {
+    private static func downloadImage(
+        withUrl url: URL,
+        handler: @escaping (UIImage?) -> Void
+    ) {
         let dataTask = URLSession.shared.dataTask(with: url) {data ,_ ,_ in
             var downloadedImage: UIImage?
             
@@ -32,8 +34,11 @@ struct ImageService {
         dataTask.resume()
     }
     
-    static func getImage(withUrl url: URL,
-                         handler: @escaping (UIImage?) -> Void) {
+    static func getImage(
+        withUrl url: URL,
+        handler: @escaping (UIImage?
+        ) -> Void
+    ) {
         if let image = cache.object(forKey: url.absoluteString as NSString) {
             handler(image)
         } else {

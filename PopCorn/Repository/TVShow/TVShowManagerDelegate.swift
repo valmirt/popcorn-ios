@@ -26,10 +26,10 @@ extension TVShowManagerDelegate {
         didUpdateTVShowList: [TVShow],
         totalPages: Int
     ) {
-        //this is a empty implementation to allow this method to be optional
+        //this is an empty implementation to allow this method to be optional
     }
     
     func tvShowManager (_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail) {
-        //this is a empty implementation to allow this method to be optional
+        //this is an empty implementation to allow this method to be optional
     }
 }

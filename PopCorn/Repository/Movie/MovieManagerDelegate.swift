@@ -28,10 +28,10 @@ extension MovieManagerDelegate {
         didUpdateMovieList: [Movie],
         totalPages: Int
     ) {
-        //this is a empty implementation to allow this method to be optional
+        //this is an empty implementation to allow this method to be optional
     }
     
     func movieManager (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
-        //this is a empty implementation to allow this method to be optional
+        //this is an empty implementation to allow this method to be optional
     }
 }

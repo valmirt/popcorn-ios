@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -63,6 +64,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="Main"/>
                     </tabBar>
                     <connections>
                         <segue destination="LbO-Wq-lsE" kind="relationship" relationship="viewControllers" id="NRR-ec-jba"/>
@@ -103,6 +105,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LmN-PI-yH9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="Main"/>
                     </navigationBar>
                     <connections>
                         <segue destination="HeY-fq-1kw" kind="relationship" relationship="rootViewController" id="Mn0-EP-9Hl"/>
@@ -121,6 +124,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="nK2-y3-bz3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" name="Main"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="FDr-LE-MvJ"/>
                 </viewController>
@@ -217,6 +221,7 @@
                                         <constraint firstItem="yfa-E8-mqv" firstAttribute="leading" secondItem="J1F-2o-UlY" secondAttribute="leading" id="xhr-hW-lPW"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="tintColor" name="Main"/>
                                 <connections>
                                     <outlet property="popularLabel" destination="5Jp-Ac-hsp" id="uYZ-mB-90u"/>
                                     <outlet property="posterImageView" destination="yfa-E8-mqv" id="cmt-nT-Dyv"/>
@@ -277,6 +282,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9b0-sT-sib"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" name="Main"/>
                         <constraints>
                             <constraint firstItem="0B7-OS-V5s" firstAttribute="bottom" secondItem="9b0-sT-sib" secondAttribute="bottom" id="aoc-tg-Wnw"/>
                             <constraint firstItem="0B7-OS-V5s" firstAttribute="trailing" secondItem="9b0-sT-sib" secondAttribute="trailing" id="gnp-F9-JO1"/>
@@ -306,6 +312,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TLY-rG-QGT" userLabel="Container View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" name="Main"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="800" id="npm-iV-jB8"/>
                                         </constraints>
@@ -358,7 +365,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="fXR-gL-F8l"/>
-        <segue reference="EVE-Q1-s1z"/>
+        <segue reference="NRR-ec-jba"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
@@ -366,6 +373,9 @@
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <namedColor name="Main">
+            <color red="1" green="0.76470588235294112" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

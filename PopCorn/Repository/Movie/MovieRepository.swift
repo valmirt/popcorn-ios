@@ -14,5 +14,5 @@ protocol MovieRepository: BaseRepository {
     
     func updateMovieList (_ page: Int, path: String)
     
-    func detailMovie (id: Int)
+    func detailMovie (with id: Int)
 }

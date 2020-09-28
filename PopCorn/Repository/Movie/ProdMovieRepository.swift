@@ -29,12 +29,12 @@ class ProdMovieRepository: ProdBaseRepository, MovieRepository {
         }
     }
     
-    func detailMovie(id: Int) {
+    func detailMovie(with id: Int) {
         let queries = [
             URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
         ]
         
-        load("/movie/\(id)", queries, MovieDetail.self) { response, error in
+        load("/\(Constants.Web.VERSION_API)/movie/\(id)", queries, MovieDetail.self) { response, error in
             if let safe = response {
                 self.delegate?.movieManager(self, didUpdateMovieDetail: safe)
             } else {

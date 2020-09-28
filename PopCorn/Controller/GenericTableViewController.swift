@@ -137,7 +137,7 @@ class GenericTableViewController: UITableViewController {
             performSegue(withIdentifier: "goToDetailMovie", sender: movie.id)
         case .tvShow:
             let dTV = tv[indexPath.row]
-            performSegue(withIdentifier: "goToDetailTV", sender: dTV.id)
+//            performSegue(withIdentifier: "goToDetailTV", sender: dTV.id)
         }
     }
     
@@ -204,9 +204,7 @@ extension GenericTableViewController: MovieManagerDelegate {
 
 extension GenericTableViewController: TVShowManagerDelegate {
     
-    func tvShowManager(_ manager: TVShowRepository,
-                       didUpdateTVShowList: [TVShow],
-                       totalPages: Int) {
+    func tvShowManager(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {
         if page < totalPages {
             tv.append(contentsOf: didUpdateTVShowList)
             tableView.reloadData()

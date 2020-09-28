@@ -73,7 +73,10 @@ final class DetailMovieViewController: UIViewController {
             message: message,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
+            self.navigationController?.popViewController(animated: true)
+        })
+        
         present(alert, animated: true, completion: nil)
     }
     
@@ -94,7 +97,6 @@ final class DetailMovieViewController: UIViewController {
 extension DetailMovieViewController: MovieManagerDelegate {
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
         errorAlert(message: didUpdateError.localizedDescription)
-        performLoading(with: false)
     }
     
     func movieManager(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {

@@ -13,6 +13,8 @@ protocol MovieManagerDelegate {
     
     func movieManager (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail)
     
+    func movieManager (_ managet: MovieRepository, didUpdateCreditMovie: Credit)
+    
     func movieManager (_ manager: MovieRepository, didUpdateError: Error)
 }
 
@@ -24,6 +26,10 @@ extension MovieManagerDelegate {
     }
     
     func movieManager (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
+        //this is an empty implementation to allow this method to be optional
+    }
+    
+    func movieManager (_ manager: MovieRepository, didUpdateCreditMovie: Credit) {
         //this is an empty implementation to allow this method to be optional
     }
 }

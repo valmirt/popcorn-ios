@@ -44,4 +44,20 @@ class ProdMovieRepository: ProdBaseRepository, MovieRepository {
             }
         }
     }
+    
+    func creditMovie(with id: Int) {
+        let queries = [
+            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
+        ]
+        
+        load("/\(Constants.Web.VERSION_API)/movie/\(id)/credits", queries, Credit.self) { response, error in
+            if let safe = response {
+                self.delegate?.movieManager(self, didUpdateCreditMovie: safe)
+            } else {
+                if let error = error  {
+                    self.delegate?.movieManager(self, didUpdateError: error)
+                }
+            }
+        }
+    }
 }

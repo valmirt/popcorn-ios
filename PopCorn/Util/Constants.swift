@@ -14,6 +14,8 @@ struct Constants {
         static let BASE_URL = "https://api.themoviedb.org"
         static let BASE_URL_IMAGE = "http://image.tmdb.org"
         static let IMAGE_W185 = "/t/p/w185"
+        static let IMAGE_W45 = "/t/p/w45"
+        static let IMAGE_W342 = "/t/p/w342"
         static let IMAGE_W780 = "/t/p/w780"
         static let API_KEY = "ebf3f29bcec9455240223a565fb2a81d"
         static let VERSION_API = "3"

@@ -12,7 +12,8 @@ final class DetailMovieViewController: UIViewController {
     
     // MARK: - Properties
     var id = 0
-    lazy var movieRepo: MovieRepository = ProdMovieRepository()
+    private lazy var movieRepo: MovieRepository = ProdMovieRepository()
+    private var credit: Credit? = nil
     
     // MARK: - IBOutlets
     @IBOutlet weak var ivPoster: UIImageView!
@@ -26,6 +27,7 @@ final class DetailMovieViewController: UIViewController {
     @IBOutlet weak var tvOverview: UITextView!
     @IBOutlet weak var viewLoading: UIView!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var cvCastingAndCrew: UICollectionView!
     
     // MARK: - Super Methods
     override func viewDidLoad() {
@@ -39,12 +41,13 @@ final class DetailMovieViewController: UIViewController {
         movieRepo.delegate = self
         
         movieRepo.detailMovie(with: id)
-        performLoading(with: true)
+        movieRepo.creditMovie(with: id)
+        performLoading(status: true)
     }
     
     private func setImage(with poster: String) {
         let base = Constants.Web.BASE_URL_IMAGE
-        let path = "\(Constants.Web.IMAGE_W185)\(poster)"
+        let path = "\(Constants.Web.IMAGE_W342)\(poster)"
         movieRepo.updateImage(baseURL: base, path: path) { image in
             self.ivPoster.image = image
         }
@@ -80,7 +83,7 @@ final class DetailMovieViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func performLoading(with status: Bool) {
+    private func performLoading(status: Bool) {
         if status {
             viewLoading.isHidden = false
             loadingSpinner.startAnimating()
@@ -101,7 +104,38 @@ extension DetailMovieViewController: MovieManagerDelegate {
     
     func movieManager(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
         fillData(with: didUpdateMovieDetail)
-        performLoading(with: false)
+        performLoading(status: false)
+    }
+    
+    func movieManager(_ managet: MovieRepository, didUpdateCreditMovie: Credit) {
+        self.credit = didUpdateCreditMovie
+        cvCastingAndCrew.reloadData()
+        performLoading(status: false)
+    }
+}
+
+extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let credit = credit {
+            return credit.cast.count + credit.crew.count
+        }
+        
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = cvCastingAndCrew.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CreditCollectionViewCell
+        
+        if let credit = credit {
+            if indexPath.row < credit.cast.count {
+                cell.fillCell(with: credit.cast[indexPath.row])
+            } else {
+                let index = indexPath.row - credit.cast.count
+                cell.fillCell(with: credit.crew[index])
+            }
+        }
+        
+        return cell
     }
 }
 

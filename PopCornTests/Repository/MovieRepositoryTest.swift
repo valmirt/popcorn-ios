@@ -13,34 +13,54 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
     let fakeAPI = FakeMovieNetworkManager()
     var movieRepository: MovieRepository?
     var result: [Movie]?
+    var detail: MovieDetail?
     var error: Error?
 
     override func setUp() {
         movieRepository = ProdMovieRepository(fakeAPI)
+        
+        movieRepository?.delegate = self
     }
     
-    func testPositiveListResult () {
+    func testPositiveListResult() {
+        //Gven
         error = nil
-        movieRepository?.delegate = self
-        
+       
+        //When
         movieRepository?.updateMovieList(1, path: "")
-        
         let movies = result
+        
+        //Then
         XCTAssertNil(error)
         XCTAssert(movies != nil)
         XCTAssert(movies != nil && movies?[0].title == "Fake Movie 1")
     }
     
-    func testErrorResult () {
-        result = nil
-        movieRepository?.delegate = self
+    func testPositiveDetailResult() {
+        //Given
+        error = nil
         
+        //When
+        movieRepository?.detailMovie(with: FakeMovieNetworkManager.ID)
+        let movie = detail
+        
+        //Then
+        XCTAssertNil(error)
+        XCTAssert(movie != nil)
+        XCTAssert(movie?.title == "Fake Movie")
+    }
+    
+    func testErrorResult() {
+        //Given
+        result = nil
         fakeAPI.errorCreateURL = true
         fakeAPI.errorLoad = true
         
+        //When
         movieRepository?.updateMovieList(1, path: "")
-        
         let err = error
+        
+        //Then
         XCTAssertNil(result)
         XCTAssert(err != nil)
         XCTAssert(err != nil
@@ -58,5 +78,9 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
     
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
         error = didUpdateError
+    }
+    
+    func movieManager(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
+        detail = didUpdateMovieDetail
     }
 }

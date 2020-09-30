@@ -15,23 +15,21 @@ class FakeMovieNetworkManager: NetworkManager {
     private var typeReturn: Int = 0
     var errorCreateURL = false
     var errorLoad = false
+    static let ID = 1
     
-    func networkCall<T: Decodable>(
-        url: URL,
-        execute: @escaping (T?, Error?) -> Void
-    ) {
+    func networkCall<T: Decodable>(url: URL, execute: @escaping (Result<T, NetworkError>) -> Void) {
         if errorLoad {
-            execute(nil,  NetworkError.defaultError)
+            execute(.failure(.defaultError))
         } else {
-            execute(fakeList() as? T, nil)
+            if url.absoluteString.contains("movie/\(FakeMovieNetworkManager.ID)") {
+                execute(.success(fakeDetail() as! T))
+            } else {
+                execute(.success(fakeList() as! T))
+            }
         }
     }
     
-    func createURL(
-        baseURL: String,
-        path: String,
-        queries: [URLQueryItem]?
-    ) -> URL? {
+    func createURL(baseURL: String, path: String, queries: [URLQueryItem]?) -> URL? {
         if errorCreateURL {
             return nil
         }
@@ -40,6 +38,27 @@ class FakeMovieNetworkManager: NetworkManager {
         component?.path = path
         component?.queryItems = queries
         return component?.url
+    }
+    
+    private func fakeDetail() -> MovieDetail {
+        let result = MovieDetail(
+            id: FakeMovieNetworkManager.ID,
+            genres: [],
+            originalTitle: "Fake Movie",
+            overview: "Fake Overview",
+            popularity: 0.0,
+            posterPath: nil,
+            productionCompanies: [],
+            productionCountries: [],
+            releaseDate: "2020-09-30",
+            revenue: 0,
+            runtime: 203,
+            status: "released",
+            title: "Fake Movie",
+            voteAverage: 0.0
+        )
+        
+        return result
     }
     
     private func fakeList() -> ResponseList<Movie> {

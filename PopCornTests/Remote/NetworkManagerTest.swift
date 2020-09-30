@@ -15,30 +15,32 @@ class NetworkManagerTest: XCTestCase {
     override func setUp() {
         api = ProdNetworkManager.shared
     }
-
-    func testSuccessfulNetworkCall() {
-        let url = URL(string: "https://www.github.com/valmirt")!
-        api?.networkCall(url: url, execute: { (response: ResponseList<Movie>?, error) in })
-    }
     
     func testSuccessfulCreateURL() {
+        //Given
         let urlString = "https://www.github.com"
         
+        //When
         let url = api?.createURL(baseURL: urlString, path: "/valmirt", queries: nil)
         
+        //Then
         XCTAssert(url != nil)
         XCTAssertEqual(url?.absoluteString, "\(urlString)/valmirt")
     }
     
     func testErrorCreateURL() {
+        //Given
         let errorURLString = "askjflaskjf /dfk123,.fadlcçç"
         
+        //When
         let url = api?.createURL(baseURL: errorURLString, path: "", queries: nil)
         
+        //Then
         XCTAssertNil(url)
     }
     
     func testSuccessfulDecodeJSON() {
+        //Given
         var movie: ResponseList<Movie>?
         let json = """
         {
@@ -69,7 +71,11 @@ class NetworkManagerTest: XCTestCase {
             ]
         }
         """.data(using: .utf8)!
+        
+        //When
         movie = try! api?.decodeJSON(type: ResponseList<Movie>.self, data: json)
+        
+        //Then
         XCTAssert(movie != nil)
         XCTAssertEqual(movie?.results[0].title, "Joker")
         XCTAssertEqual(movie?.results[0].backdropPath, "/n6bUvigpRFqSwmPp1m2YADdbRBc.jpg")

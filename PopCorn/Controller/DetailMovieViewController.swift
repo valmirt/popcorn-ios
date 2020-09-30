@@ -13,7 +13,7 @@ final class DetailMovieViewController: UIViewController {
     // MARK: - Properties
     var id = 0
     private lazy var movieRepo: MovieRepository = ProdMovieRepository()
-    private var credit: Credit? = nil
+    private var credit: Credit?
     
     // MARK: - IBOutlets
     @IBOutlet weak var ivPoster: UIImageView!
@@ -99,18 +99,24 @@ final class DetailMovieViewController: UIViewController {
 
 extension DetailMovieViewController: MovieManagerDelegate {
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
-        errorAlert(message: didUpdateError.localizedDescription)
+        DispatchQueue.main.async {
+            self.errorAlert(message: didUpdateError.localizedDescription)
+        }
     }
     
     func movieManager(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
-        fillData(with: didUpdateMovieDetail)
-        performLoading(status: false)
+        DispatchQueue.main.async {
+            self.fillData(with: didUpdateMovieDetail)
+            self.performLoading(status: false)
+        }
     }
     
     func movieManager(_ managet: MovieRepository, didUpdateCreditMovie: Credit) {
-        self.credit = didUpdateCreditMovie
-        cvCastingAndCrew.reloadData()
-        performLoading(status: false)
+        DispatchQueue.main.async {
+            self.credit = didUpdateCreditMovie
+            self.cvCastingAndCrew.reloadData()
+            self.performLoading(status: false)
+        }
     }
 }
 
@@ -119,7 +125,6 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
         if let credit = credit {
             return credit.cast.count + credit.crew.count
         }
-        
         return 0
     }
     

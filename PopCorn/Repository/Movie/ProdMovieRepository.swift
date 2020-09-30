@@ -10,7 +10,7 @@ import Foundation
 
 class ProdMovieRepository: ProdBaseRepository, MovieRepository {
     
-    var delegate: MovieManagerDelegate?
+    weak var delegate: MovieManagerDelegate?
     
     func updateMovieList(_ page: Int = 1, path: String) {
         let queries = [
@@ -18,13 +18,14 @@ class ProdMovieRepository: ProdBaseRepository, MovieRepository {
             URLQueryItem(name: "page", value: String(page))
         ]
         
-        load(path, queries, ResponseList<Movie>.self) { response, error in
-            if let safe = response {
-                self.delegate?.movieManager(self, didUpdateMovieList: safe.results, totalPages: safe.totalPages)
-            } else {
-                if let err = error {
-                    self.delegate?.movieManager(self, didUpdateError: err)
-                }
+        load(path, queries, ResponseList<Movie>.self) { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.delegate?.movieManager(self, didUpdateMovieList: data.results, totalPages: data.totalPages)
+            case .failure(let error):
+                self.delegate?.movieManager(self, didUpdateError: error)
             }
         }
     }
@@ -34,13 +35,14 @@ class ProdMovieRepository: ProdBaseRepository, MovieRepository {
             URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
         ]
         
-        load("/\(Constants.Web.VERSION_API)/movie/\(id)", queries, MovieDetail.self) { response, error in
-            if let safe = response {
-                self.delegate?.movieManager(self, didUpdateMovieDetail: safe)
-            } else {
-                if let err = error {
-                    self.delegate?.movieManager(self, didUpdateError: err)
-                }
+        load("/\(Constants.Web.VERSION_API)/movie/\(id)", queries, MovieDetail.self) { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.delegate?.movieManager(self, didUpdateMovieDetail: data)
+            case .failure(let error):
+                self.delegate?.movieManager(self, didUpdateError: error)
             }
         }
     }
@@ -50,13 +52,14 @@ class ProdMovieRepository: ProdBaseRepository, MovieRepository {
             URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
         ]
         
-        load("/\(Constants.Web.VERSION_API)/movie/\(id)/credits", queries, Credit.self) { response, error in
-            if let safe = response {
-                self.delegate?.movieManager(self, didUpdateCreditMovie: safe)
-            } else {
-                if let error = error  {
-                    self.delegate?.movieManager(self, didUpdateError: error)
-                }
+        load("/\(Constants.Web.VERSION_API)/movie/\(id)/credits", queries, Credit.self) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.delegate?.movieManager(self, didUpdateCreditMovie: data)
+            case .failure(let error):
+                self.delegate?.movieManager(self, didUpdateError: error)
             }
         }
     }

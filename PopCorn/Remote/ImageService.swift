@@ -34,11 +34,7 @@ struct ImageService {
         dataTask.resume()
     }
     
-    static func getImage(
-        withUrl url: URL,
-        handler: @escaping (UIImage?
-        ) -> Void
-    ) {
+    static func getImage(withUrl url: URL, handler: @escaping (UIImage?) -> Void) {
         if let image = cache.object(forKey: url.absoluteString as NSString) {
             handler(image)
         } else {

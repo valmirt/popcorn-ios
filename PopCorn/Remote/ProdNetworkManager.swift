@@ -8,30 +8,45 @@
 
 import Foundation
 
-struct ProdNetworkManager: NetworkManager {
+final class ProdNetworkManager: NetworkManager {
     
-    private init () {}
     static let shared = ProdNetworkManager()
     
-    func networkCall<T: Decodable>(url: URL, execute: @escaping (T?, Error?) -> Void) {
-        let session = URLSession (
-            configuration: URLSessionConfiguration.ephemeral,
-            delegate: nil,
-            delegateQueue: OperationQueue.main
-        )
-        let task = session.dataTask(with: url) { (data, _, error) in
-            if let safeData = data {
-                let response = try? self.decodeJSON(type: T.self, data: safeData)
-                if let resp = response {
-                    execute(resp, error)
-                } else {
-                    execute(nil, NetworkError.invalidDecodeJSON)
-                }
-            } else {
-                execute(nil, NetworkError.invalidData)
+    private let config: URLSessionConfiguration = {
+        let configuration = URLSessionConfiguration.default
+        configuration.allowsCellularAccess = true //Signal 3G/4G
+        configuration.timeoutIntervalForRequest = 60
+        configuration.httpAdditionalHeaders = ["Content-Type": "application/json"]
+        configuration.httpMaximumConnectionsPerHost = 5
+        
+        return configuration
+    }()
+    private lazy var session = URLSession(configuration: config)
+    
+    func networkCall<T: Decodable>(url: URL, execute: @escaping (Result<T, NetworkError>) -> Void) {
+        session.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                execute(.failure(.invalidData))
+                return
             }
-        }
-        task.resume()
+            
+            guard let response = response as? HTTPURLResponse else {
+                execute(.failure(.defaultError))
+                return
+            }
+            
+            if !(200...299 ~= response.statusCode) {
+                execute(.failure(.statusCode(response.statusCode)))
+                return
+            }
+            
+            guard let result = try? self.decodeJSON(type: T.self, data: data) else {
+                execute(.failure(.invalidDecodeJSON))
+                return
+            }
+            
+            execute(.success(result))
+        }.resume()
     }
     
     func createURL(baseURL: String, path: String, queries: [URLQueryItem]? = nil) -> URL? {

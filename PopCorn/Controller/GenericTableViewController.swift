@@ -73,10 +73,7 @@ class GenericTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    override func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch type {
         case .movie:
@@ -86,12 +83,8 @@ class GenericTableViewController: UITableViewController {
         }
     }
 
-    override func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        let cell =
-            tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath) as! GenericTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath) as! GenericTableViewCell
         
         switch type {
         case .movie:
@@ -104,11 +97,7 @@ class GenericTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(
-        _ tableView: UITableView,
-        willDisplay cell: UITableViewCell,
-        forRowAt indexPath: IndexPath
-    ) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         getMorePage(index: indexPath.row)
     }
     
@@ -140,10 +129,7 @@ class GenericTableViewController: UITableViewController {
         }
     }
     
-    private func setContent(
-        movie: Movie,
-        cell: GenericTableViewCell
-    ) {
+    private func setContent(movie: Movie, cell: GenericTableViewCell) {
         if let backdrop = movie.backdropPath {
             let base = Constants.Web.BASE_URL_IMAGE
             let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
@@ -157,10 +143,7 @@ class GenericTableViewController: UITableViewController {
         cell.tv = nil
     }
     
-    private func setContent(
-        tv: TVShow,
-        cell: GenericTableViewCell
-    ) {
+    private func setContent(tv: TVShow, cell: GenericTableViewCell) {
         if let backdrop = tv.backdropPath {
             let base = Constants.Web.BASE_URL_IMAGE
             let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
@@ -174,30 +157,28 @@ class GenericTableViewController: UITableViewController {
         cell.tv = tv
     }
     
-    override func tableView(
-        _ tableView: UITableView,
-        heightForRowAt indexPath: IndexPath
-    ) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 280
     }
 }
 
 extension GenericTableViewController: MovieManagerDelegate {
     
-    func movieManager(
-        _ manager: MovieRepository,
-        didUpdateMovieList: [Movie], totalPages: Int
-    ) {
+    func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
         if page < totalPages {
             movies.append(contentsOf: didUpdateMovieList)
-            tableView.reloadData()
-            loadingIndicator?.stopAnimating()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.loadingIndicator?.stopAnimating()
+            }
         }
     }
 
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
-        errorAlert(message: didUpdateError.localizedDescription)
-        loadingIndicator?.stopAnimating()
+        DispatchQueue.main.async {
+            self.errorAlert(message: didUpdateError.localizedDescription)
+            self.loadingIndicator?.stopAnimating()
+        }
     }
 }
 
@@ -206,13 +187,17 @@ extension GenericTableViewController: TVShowManagerDelegate {
     func tvShowManager(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {
         if page < totalPages {
             tv.append(contentsOf: didUpdateTVShowList)
-            tableView.reloadData()
-            loadingIndicator?.stopAnimating()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.loadingIndicator?.stopAnimating()
+            }
         }
     }
     
     func tvShowManager(_ manager: TVShowRepository, didUpdateError: Error) {
-        errorAlert(message: didUpdateError.localizedDescription)
-        loadingIndicator?.stopAnimating()
+        DispatchQueue.main.async {
+            self.errorAlert(message: didUpdateError.localizedDescription)
+            self.loadingIndicator?.stopAnimating()
+        }
     }
 }

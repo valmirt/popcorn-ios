@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MovieManagerDelegate {
+protocol MovieManagerDelegate: class {
     func movieManager (_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int)
     
     func movieManager (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail)

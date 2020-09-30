@@ -9,7 +9,7 @@
 import Foundation
 
 class ProdTVShowRepository: ProdBaseRepository, TVShowRepository {
-    var delegate: TVShowManagerDelegate?
+    weak var delegate: TVShowManagerDelegate?
     
     func updateTVShowList(_ page: Int, path: String) {
         let queries = [
@@ -17,13 +17,14 @@ class ProdTVShowRepository: ProdBaseRepository, TVShowRepository {
             URLQueryItem(name: "page", value: String(page))
         ]
         
-        load (path, queries, ResponseList<TVShow>.self) { (response, error) in
-            if let safe = response {
-                self.delegate?.tvShowManager(self, didUpdateTVShowList: safe.results, totalPages: safe.totalPages)
-            } else {
-                if let err = error {
-                    self.delegate?.tvShowManager(self, didUpdateError: err)
-                }
+        load (path, queries, ResponseList<TVShow>.self) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.delegate?.tvShowManager(self, didUpdateTVShowList: data.results, totalPages: data.totalPages)
+            case .failure(let error):
+                self.delegate?.tvShowManager(self, didUpdateError: error)
             }
         }
     }
@@ -33,13 +34,14 @@ class ProdTVShowRepository: ProdBaseRepository, TVShowRepository {
             URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
         ]
         
-        load("/tv/\(id)", queries, TVShowDetail.self) { response, error in
-            if let safe = response {
-                self.delegate?.tvShowManager(self, didUpdateTVShowDetail: safe)
-            } else {
-                if let err = error {
-                    self.delegate?.tvShowManager(self, didUpdateError: err)
-                }
+        load("/tv/\(id)", queries, TVShowDetail.self) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.delegate?.tvShowManager(self, didUpdateTVShowDetail: data)
+            case .failure(let error):
+                self.delegate?.tvShowManager(self, didUpdateError: error)
             }
         }
     }

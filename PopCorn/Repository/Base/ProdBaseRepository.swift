@@ -31,12 +31,13 @@ class ProdBaseRepository: BaseRepository {
         _ path: String,
         _ queries: [URLQueryItem],
         _ ofType: T.Type,
-        _ handler: @escaping (T?, Error?) -> Void
+        _ handler: @escaping (Result<T, NetworkError>) -> Void
     ) {
-        if let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) {
-            api.networkCall(url: url, execute: handler)
-        } else {
-            handler(nil, NetworkError.invalidURL)
+        guard let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) else {
+            handler(.failure(.invalidURL))
+            return
         }
+        
+        api.networkCall(url: url, execute: handler)
     }
 }

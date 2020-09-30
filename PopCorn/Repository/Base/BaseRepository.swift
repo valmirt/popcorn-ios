@@ -11,11 +11,7 @@ import UIKit
 
 protocol BaseRepository {
     
-    func updateImage(
-        baseURL: String,
-        path: String,
-        _ handler: @escaping (UIImage?) -> Void
-    )
+    func updateImage(baseURL: String, path: String, _ handler: @escaping (UIImage?) -> Void)
 }
 
 

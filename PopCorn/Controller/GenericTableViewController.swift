@@ -17,7 +17,8 @@ class GenericTableViewController: UITableViewController {
     lazy var tvRepo: TVShowRepository = ProdTVShowRepository()
     lazy var movies: [Movie] = []
     lazy var tv: [TVShow] = []
-    private var page = 1
+    private var page = Constants.General.FIRST
+    private var reloadData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +30,27 @@ class GenericTableViewController: UITableViewController {
     private func setupViews() {
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         loadingIndicator?.startAnimating()
+        refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
     }
     
     private func initReposiotry() {
         switch type {
         case .movie:
             movieRepo.delegate = self
-            movieRepo.updateMovieList(page, path: getPath())
         case .tvShow:
             tvRepo.delegate = self
+        }
+        loadData()
+    }
+    
+    @objc
+    private func loadData() {
+        page = Constants.General.FIRST
+        reloadData = true
+        switch type {
+        case .movie:
+            movieRepo.updateMovieList(page, path: getPath())
+        case .tvShow:
             tvRepo.updateTVShowList(page, path: getPath())
         }
     }
@@ -105,13 +118,13 @@ class GenericTableViewController: UITableViewController {
         switch type {
         case .movie:
             let count = movies.count
-            if index == count-4 {
+            if index == count - Constants.General.OFFSET {
                 page += 1
                 movieRepo.updateMovieList(page, path: getPath())
             }
         case .tvShow:
             let count = tv.count
-            if index == count-4 {
+            if index == count - Constants.General.OFFSET {
                 page += 1
                 tvRepo.updateTVShowList(page, path: getPath())
             }
@@ -166,10 +179,16 @@ extension GenericTableViewController: MovieManagerDelegate {
     
     func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
         if page < totalPages {
+            if reloadData {
+                movies.removeAll()
+                reloadData = false
+            }
+            
             movies.append(contentsOf: didUpdateMovieList)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.loadingIndicator?.stopAnimating()
+                self.refreshControl?.endRefreshing()
             }
         }
     }
@@ -178,6 +197,7 @@ extension GenericTableViewController: MovieManagerDelegate {
         DispatchQueue.main.async {
             self.errorAlert(message: didUpdateError.localizedDescription)
             self.loadingIndicator?.stopAnimating()
+            self.refreshControl?.endRefreshing()
         }
     }
 }
@@ -186,10 +206,16 @@ extension GenericTableViewController: TVShowManagerDelegate {
     
     func tvShowManager(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {
         if page < totalPages {
+            if reloadData {
+                tv.removeAll()
+                reloadData = false
+            }
+            
             tv.append(contentsOf: didUpdateTVShowList)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.loadingIndicator?.stopAnimating()
+                self.refreshControl?.endRefreshing()
             }
         }
     }
@@ -198,6 +224,7 @@ extension GenericTableViewController: TVShowManagerDelegate {
         DispatchQueue.main.async {
             self.errorAlert(message: didUpdateError.localizedDescription)
             self.loadingIndicator?.stopAnimating()
+            self.refreshControl?.endRefreshing()
         }
     }
 }

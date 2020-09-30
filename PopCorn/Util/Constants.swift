@@ -20,4 +20,9 @@ struct Constants {
         static let API_KEY = "ebf3f29bcec9455240223a565fb2a81d"
         static let VERSION_API = "3"
     }
+    
+    struct General {
+        static let FIRST = 1
+        static let OFFSET = 5
+    }
 }

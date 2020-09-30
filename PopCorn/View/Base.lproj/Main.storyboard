@@ -240,6 +240,9 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="t6v-UK-tKb">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Von-x6-Nz7"/>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="iTb-p6-nM2">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="loadingIndicator" destination="Nz7-MK-Zo2" id="5jq-p2-MXf"/>
                         <segue destination="aJ6-bj-nPZ" kind="show" identifier="goToDetailMovie" id="iYL-Ue-l9K"/>
@@ -534,7 +537,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fXR-gL-F8l"/>
+        <segue reference="baC-YF-XHY"/>
         <segue reference="NRR-ec-jba"/>
     </inferredMetricsTieBreakers>
     <resources>

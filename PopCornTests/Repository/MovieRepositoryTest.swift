@@ -47,6 +47,7 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
         //Then
         XCTAssertNil(error)
         XCTAssert(movie != nil)
+        XCTAssert(movie?.id == FakeMovieNetworkManager.ID)
         XCTAssert(movie?.title == "Fake Movie")
     }
     

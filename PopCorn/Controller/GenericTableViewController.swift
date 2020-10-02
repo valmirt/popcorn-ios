@@ -169,10 +169,6 @@ class GenericTableViewController: UITableViewController {
         cell.movie = nil
         cell.tv = tv
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 280
-    }
 }
 
 extension GenericTableViewController: MovieManagerDelegate {

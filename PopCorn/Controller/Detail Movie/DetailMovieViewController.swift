@@ -12,8 +12,10 @@ final class DetailMovieViewController: UIViewController {
     
     // MARK: - Properties
     var id = 0
+    private var page = Constants.General.FIRST
     private lazy var movieRepo: MovieRepository = ProdMovieRepository()
     private var credit: Credit?
+    private var similarMovies: [Movie] = []
     
     // MARK: - IBOutlets
     @IBOutlet weak var ivPoster: UIImageView!
@@ -28,6 +30,7 @@ final class DetailMovieViewController: UIViewController {
     @IBOutlet weak var viewLoading: UIView!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var cvCastingAndCrew: UICollectionView!
+    @IBOutlet weak var cvSimilarMovies: UICollectionView!
     
     // MARK: - Super Methods
     override func viewDidLoad() {
@@ -42,6 +45,7 @@ final class DetailMovieViewController: UIViewController {
         
         movieRepo.detailMovie(with: id)
         movieRepo.creditMovie(with: id)
+        movieRepo.updateSimilarMovies(with: id, page)
         performLoading(status: true)
     }
     
@@ -97,6 +101,7 @@ final class DetailMovieViewController: UIViewController {
     
 }
 
+//MARK: - Movie Manager
 extension DetailMovieViewController: MovieManagerDelegate {
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
         DispatchQueue.main.async {
@@ -118,29 +123,79 @@ extension DetailMovieViewController: MovieManagerDelegate {
             self.performLoading(status: false)
         }
     }
+    
+    func movieManager(_ manager: MovieRepository, didUpdateSimilarMovies: [Movie], totalPages: Int) {
+        if page < totalPages {
+            similarMovies.append(contentsOf: didUpdateSimilarMovies)
+            DispatchQueue.main.async {
+                self.cvSimilarMovies.reloadData()
+                self.performLoading(status: false)
+            }
+        }
+    }
 }
 
+//MARK: - Collection view
 extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let credit = credit {
-            return credit.cast.count + credit.crew.count
+        if collectionView == self.cvCastingAndCrew {
+            if let credit = credit {
+                return credit.cast.count + credit.crew.count
+            }
+            return 0
+        } else {
+            return similarMovies.count
         }
-        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.cvCastingAndCrew {
+            return defineCreditCell(for: indexPath)
+        } else {
+            return defineSimilarMoviesCell(for: indexPath)
+        }
+    }
+    
+    private func defineCreditCell(for indexPath: IndexPath) -> UICollectionViewCell {
         let cell = cvCastingAndCrew.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CreditCollectionViewCell
         
         if let credit = credit {
-            if indexPath.row < credit.cast.count {
-                cell.fillCell(with: credit.cast[indexPath.row])
+            if indexPath.item < credit.cast.count {
+                cell.fillCell(with: credit.cast[indexPath.item])
             } else {
-                let index = indexPath.row - credit.cast.count
+                let index = indexPath.item - credit.cast.count
                 cell.fillCell(with: credit.crew[index])
             }
         }
         
         return cell
+    }
+    
+    private func defineSimilarMoviesCell(for indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = cvSimilarMovies.dequeueReusableCell(withReuseIdentifier: "similarCell", for: indexPath) as! SimilarMovieCollectionViewCell
+        
+        let movie = similarMovies[indexPath.item]
+        cell.fillCell(with: movie)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.cvSimilarMovies {
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "detailMovie"),
+                  let detailVC = vc as? DetailMovieViewController else { return }
+            
+            detailVC.id = similarMovies[indexPath.item].id
+            show(vc, sender: nil)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let count = similarMovies.count
+        if indexPath.item == count - Constants.General.OFFSET {
+            page += 1
+            movieRepo.updateSimilarMovies(with: id, page)
+            print(page)
+        }
     }
 }
 

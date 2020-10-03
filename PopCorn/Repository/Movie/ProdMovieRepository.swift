@@ -63,4 +63,23 @@ class ProdMovieRepository: ProdBaseRepository, MovieRepository {
             }
         }
     }
+    
+    func updateSimilarMovies(with id: Int, _ page: Int) {
+        let queries = [
+            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY),
+            URLQueryItem(name: "page", value: String(page))
+        ]
+        
+        load("/\(Constants.Web.VERSION_API)/movie/\(id)/similar", queries, ResponseList<Movie>.self) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.delegate?.movieManager(self, didUpdateSimilarMovies: data.results, totalPages: data.totalPages)
+            break
+            case .failure(let error):
+                self.delegate?.movieManager(self, didUpdateError: error)
+            }
+        }
+    }
 }

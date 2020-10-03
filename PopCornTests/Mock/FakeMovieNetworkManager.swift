@@ -69,7 +69,8 @@ class FakeMovieNetworkManager: NetworkManager {
                 popularity: 99.9,
                 releaseDate: "2019/10/25",
                 title: "Fake Movie 1",
-                voteAverage: 5
+                voteAverage: 5,
+                posterPath: nil
             ),
             Movie(
                 backdropPath: nil,
@@ -77,7 +78,8 @@ class FakeMovieNetworkManager: NetworkManager {
                 popularity: 99.9,
                 releaseDate: "2019/10/25",
                 title: "Fake Movie 1",
-                voteAverage: 5
+                voteAverage: 5,
+                posterPath: nil
             ),
             Movie(
                 backdropPath: nil,
@@ -85,7 +87,8 @@ class FakeMovieNetworkManager: NetworkManager {
                 popularity: 99.9,
                 releaseDate: "2019/10/25",
                 title: "Fake Movie 1",
-                voteAverage: 5
+                voteAverage: 5,
+                posterPath: nil
             )
         ]
         

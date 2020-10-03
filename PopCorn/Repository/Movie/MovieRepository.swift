@@ -12,9 +12,11 @@ protocol MovieRepository: BaseRepository {
     
     var delegate: MovieManagerDelegate? { get set }
     
-    func updateMovieList (_ page: Int, path: String)
+    func updateMovieList(_ page: Int, path: String)
     
-    func detailMovie (with id: Int)
+    func detailMovie(with id: Int)
     
-    func creditMovie (with id: Int)
+    func creditMovie(with id: Int)
+    
+    func updateSimilarMovies(with id: Int, _ page: Int)
 }

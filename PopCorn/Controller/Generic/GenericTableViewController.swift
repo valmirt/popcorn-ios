@@ -8,9 +8,8 @@
 
 import UIKit
 
-class GenericTableViewController: UITableViewController {
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView?
-    
+final class GenericTableViewController: UITableViewController {
+    // MARK: - Properties
     var type: TypeContent = .movie
     var filter: FilterContent = .popular
     lazy var movieRepo: MovieRepository = ProdMovieRepository()
@@ -19,7 +18,11 @@ class GenericTableViewController: UITableViewController {
     lazy var tv: [TVShow] = []
     private var page = Constants.General.FIRST
     private var reloadData = false
-    
+        
+    //MARK: - IBOutlets
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+
+    //MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -27,6 +30,19 @@ class GenericTableViewController: UITableViewController {
         initReposiotry()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToDetailMovie" {
+            if let detail = segue.destination as? DetailMovieViewController {
+                detail.id = sender as? Int ?? 0
+            }
+        } else if segue.identifier == "goToDetailTV" {
+            if let detail = segue.destination as? DetailTVViewController {
+                detail.id = sender as? Int ?? 0
+            }
+        }
+    }
+    
+    //MARK: - Methods
     private func setupViews() {
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         loadingIndicator?.startAnimating()
@@ -69,20 +85,53 @@ class GenericTableViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToDetailMovie" {
-            if let detail = segue.destination as? DetailMovieViewController {
-                detail.id = sender as? Int ?? 0
+    private func getPath() -> String {
+        return "/\(Constants.Web.VERSION_API)/\(type.rawValue)/\(filter.rawValue.api)"
+    }
+    
+    private func getMorePage(index: Int) {
+        switch type {
+        case .movie:
+            let count = movies.count
+            if index == count - Constants.General.OFFSET {
+                page += 1
+                movieRepo.updateMovieList(page, path: getPath())
             }
-        } else if segue.identifier == "goToDetailTV" {
-            if let detail = segue.destination as? DetailTVViewController {
-                detail.id = sender as? Int ?? 0
+        case .tvShow:
+            let count = tv.count
+            if index == count - Constants.General.OFFSET {
+                page += 1
+                tvRepo.updateTVShowList(page, path: getPath())
             }
         }
     }
     
-    private func getPath() -> String {
-        return "/\(Constants.Web.VERSION_API)/\(type.rawValue)/\(filter.rawValue.api)"
+    private func setContent(movie: Movie, cell: GenericTableViewCell) {
+        if let backdrop = movie.backdropPath {
+            let base = Constants.Web.BASE_URL_IMAGE
+            let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
+            movieRepo.updateImage(baseURL: base, path: path) { image in
+                cell.setImage(image)
+            }
+        } else {
+            cell.setImage(UIImage(systemName: "photo"))
+        }
+        cell.movie = movie
+        cell.tv = nil
+    }
+    
+    private func setContent(tv: TVShow, cell: GenericTableViewCell) {
+        if let backdrop = tv.backdropPath {
+            let base = Constants.Web.BASE_URL_IMAGE
+            let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
+            tvRepo.updateImage(baseURL: base, path: path) { image in
+                cell.setImage(image)
+            }
+        } else {
+            cell.setImage(UIImage(systemName: "photo"))
+        }
+        cell.movie = nil
+        cell.tv = tv
     }
     
     // MARK: - Table view data source
@@ -114,23 +163,6 @@ class GenericTableViewController: UITableViewController {
         getMorePage(index: indexPath.row)
     }
     
-    private func getMorePage(index: Int) {
-        switch type {
-        case .movie:
-            let count = movies.count
-            if index == count - Constants.General.OFFSET {
-                page += 1
-                movieRepo.updateMovieList(page, path: getPath())
-            }
-        case .tvShow:
-            let count = tv.count
-            if index == count - Constants.General.OFFSET {
-                page += 1
-                tvRepo.updateTVShowList(page, path: getPath())
-            }
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch type {
         case .movie:
@@ -138,39 +170,12 @@ class GenericTableViewController: UITableViewController {
             performSegue(withIdentifier: "goToDetailMovie", sender: movie.id)
         case .tvShow:
             let dTV = tv[indexPath.row]
-//            performSegue(withIdentifier: "goToDetailTV", sender: dTV.id)
+            performSegue(withIdentifier: "goToDetailTV", sender: dTV.id)
         }
-    }
-    
-    private func setContent(movie: Movie, cell: GenericTableViewCell) {
-        if let backdrop = movie.backdropPath {
-            let base = Constants.Web.BASE_URL_IMAGE
-            let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
-            movieRepo.updateImage(baseURL: base, path: path) { image in
-                cell.setImage(image)
-            }
-        } else {
-            cell.setImage(UIImage(systemName: "photo"))
-        }
-        cell.movie = movie
-        cell.tv = nil
-    }
-    
-    private func setContent(tv: TVShow, cell: GenericTableViewCell) {
-        if let backdrop = tv.backdropPath {
-            let base = Constants.Web.BASE_URL_IMAGE
-            let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
-            tvRepo.updateImage(baseURL: base, path: path) { image in
-                cell.setImage(image)
-            }
-        } else {
-            cell.setImage(UIImage(systemName: "photo"))
-        }
-        cell.movie = nil
-        cell.tv = tv
     }
 }
 
+//MARK: - Movie manager delegate
 extension GenericTableViewController: MovieManagerDelegate {
     
     func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
@@ -198,6 +203,7 @@ extension GenericTableViewController: MovieManagerDelegate {
     }
 }
 
+//MARK: - Tv Show manager delegate
 extension GenericTableViewController: TVShowManagerDelegate {
     
     func tvShowManager(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {

@@ -8,10 +8,12 @@
 
 import UIKit
 
-class NavViewController: UINavigationController {
+final class NavViewController: UINavigationController {
+    //MARK: - Properties
     var type: TypeContent = .movie
     var filter: FilterContent = .popular
     
+    //MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         let dest = self.viewControllers[0] as? GenericTableViewController

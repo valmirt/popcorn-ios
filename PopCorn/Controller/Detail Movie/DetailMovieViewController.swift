@@ -101,7 +101,7 @@ final class DetailMovieViewController: UIViewController {
     
 }
 
-//MARK: - Movie Manager
+//MARK: - Movie Manager delegate
 extension DetailMovieViewController: MovieManagerDelegate {
     func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
         DispatchQueue.main.async {

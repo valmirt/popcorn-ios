@@ -8,34 +8,25 @@
 
 import UIKit
 
-class GenericTableViewCell: UITableViewCell {
+final class GenericTableViewCell: UITableViewCell {
     
+    //MARK: - Properties
     var movie: Movie?
     var tv: TVShow?
     
+    //MARK: - IBOutlets
     @IBOutlet weak var posterImageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var releaseLabel: UILabel?
     @IBOutlet weak var popularLabel: UILabel?
     @IBOutlet weak var rateLabel: UILabel?
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+    //MARK: - Methods
     func setImage(_ image: UIImage?) {
         posterImageView?.image = image
     }
     
     func setValues() {
-        
         DispatchQueue.main.async {
             if let safeMovie = self.movie {
                 self.titleLabel?.text = safeMovie.title

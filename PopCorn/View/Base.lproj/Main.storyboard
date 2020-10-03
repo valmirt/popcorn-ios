@@ -238,11 +238,30 @@
                     <connections>
                         <outlet property="loadingIndicator" destination="Nz7-MK-Zo2" id="5jq-p2-MXf"/>
                         <segue destination="aJ6-bj-nPZ" kind="show" identifier="goToDetailMovie" id="iYL-Ue-l9K"/>
+                        <segue destination="gra-bm-afa" kind="show" identifier="goToDetailTV" id="IUU-nY-W4v"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lz-4d-E8Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1610.144927536232" y="-495.53571428571428"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="juJ-Wh-IGT">
+            <objects>
+                <viewController id="gra-bm-afa" customClass="DetailTVViewController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ycB-Gk-1ep">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Y6L-AR-b0b"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detail" id="b74-zX-RlW">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="YBd-JF-8UK"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T28-WH-iga" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2694" y="-924"/>
         </scene>
         <!--Detail-->
         <scene sceneID="jLQ-8z-uar">
@@ -256,21 +275,8 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="592"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abh-sC-27e" userLabel="Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1064"/>
                                         <subviews>
-                                            <view hidden="YES" autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEq-u4-D4J" userLabel="Loading container">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
-                                                <subviews>
-                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="jff-RB-Epe">
-                                                        <rect key="frame" x="177.66666666666666" y="90" width="20" height="20"/>
-                                                    </activityIndicatorView>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstItem="jff-RB-Epe" firstAttribute="top" secondItem="pEq-u4-D4J" secondAttribute="top" constant="90" id="pc3-7b-YlW"/>
-                                                    <constraint firstItem="jff-RB-Epe" firstAttribute="centerX" secondItem="pEq-u4-D4J" secondAttribute="centerX" id="sTO-SU-HHb"/>
-                                                </constraints>
-                                            </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ax8-Sd-uVl">
                                                 <rect key="frame" x="8" y="9.6666666666666572" width="187.66666666666666" height="275"/>
                                                 <color key="tintColor" systemColor="opaqueSeparatorColor"/>
@@ -477,6 +483,19 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <view hidden="YES" autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEq-u4-D4J" userLabel="Loading container">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1064"/>
+                                                <subviews>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="jff-RB-Epe">
+                                                        <rect key="frame" x="177.66666666666666" y="90" width="20" height="20"/>
+                                                    </activityIndicatorView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="jff-RB-Epe" firstAttribute="top" secondItem="pEq-u4-D4J" secondAttribute="top" constant="90" id="pc3-7b-YlW"/>
+                                                    <constraint firstItem="jff-RB-Epe" firstAttribute="centerX" secondItem="pEq-u4-D4J" secondAttribute="centerX" id="sTO-SU-HHb"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -514,13 +533,13 @@
                                             <constraint firstItem="Ax8-Sd-uVl" firstAttribute="top" secondItem="Abh-sC-27e" secondAttribute="top" constant="8" id="Yd9-v0-QnM"/>
                                             <constraint firstItem="pEq-u4-D4J" firstAttribute="top" secondItem="Abh-sC-27e" secondAttribute="top" id="Zbw-1w-VsS"/>
                                             <constraint firstAttribute="trailing" secondItem="3dt-ub-17L" secondAttribute="trailing" constant="8" id="aqi-QP-Bie"/>
-                                            <constraint firstAttribute="height" constant="1200" id="bCy-TR-b6K"/>
                                             <constraint firstItem="Bds-kN-0cV" firstAttribute="trailing" secondItem="fVW-U7-hgD" secondAttribute="trailing" id="bre-Cq-CJZ"/>
                                             <constraint firstItem="Tp4-h6-eZJ" firstAttribute="leading" secondItem="Abh-sC-27e" secondAttribute="leading" id="c8w-MH-Ywj"/>
                                             <constraint firstItem="tr5-gw-Mew" firstAttribute="top" secondItem="qGC-KI-w4n" secondAttribute="bottom" constant="28" id="ffd-94-lqt"/>
                                             <constraint firstItem="qEm-wz-cNj" firstAttribute="top" secondItem="nbl-QG-P4n" secondAttribute="bottom" constant="12" id="fyr-dV-NGB"/>
                                             <constraint firstItem="fVW-U7-hgD" firstAttribute="leading" secondItem="qEm-wz-cNj" secondAttribute="leading" id="jy6-To-wlH"/>
                                             <constraint firstItem="djn-58-eZV" firstAttribute="leading" secondItem="Abh-sC-27e" secondAttribute="leading" id="kNj-Bn-kCC"/>
+                                            <constraint firstAttribute="bottom" secondItem="Tp4-h6-eZJ" secondAttribute="bottom" constant="24" id="nz8-0h-lmo"/>
                                             <constraint firstItem="CNG-hF-s1J" firstAttribute="trailing" secondItem="aSJ-as-y2Q" secondAttribute="trailing" id="p35-4j-dBc"/>
                                             <constraint firstAttribute="trailing" secondItem="nbl-QG-P4n" secondAttribute="trailing" constant="8" id="q8V-IH-gbX"/>
                                             <constraint firstAttribute="trailing" secondItem="qGC-KI-w4n" secondAttribute="trailing" constant="8" id="r3P-d3-aPe"/>

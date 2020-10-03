@@ -8,16 +8,18 @@
 
 import UIKit
 
-class GenericTabBarController: UITabBarController {
+final class GenericTabBarController: UITabBarController {
+    //MARK: - Properties
     var type: TypeContent = .movie
     
+    //MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         customize()
         viewControllersParams()
     }
     
-    
+    //MARK: - Methods
     func viewControllersParams() {
         let popular = self.viewControllers?[0] as? NavViewController
         if let popular = popular {

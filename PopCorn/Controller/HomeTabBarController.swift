@@ -8,14 +8,16 @@
 
 import UIKit
 
-class HomeTabBarController: UITabBarController {
+final class HomeTabBarController: UITabBarController {
     
+    //MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         customize()
         viewControllersParams()
     }
     
+    //MARK: - Methods
     func customize() {
         let tabBarItemOne = tabBar.items?[0]
         tabBarItemOne?.title = "Movies"

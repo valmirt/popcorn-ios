@@ -58,19 +58,17 @@ final class DetailMovieViewController: UIViewController {
     }
     
     private func fillData(with movie: MovieDetail) {
-        DispatchQueue.main.async {
-            self.labelTitle.text = movie.title
-            self.labelGenres.text = movie.genresFormatted
-            self.labelCountries.text = movie.countriesFormatted
-            self.labelStatus.text = movie.status
-            self.labelReleaseDate.text = movie.yearDate
-            self.labelRuntime.text = "\(String(movie.runtime ?? 0)) min"
-            self.labelCompanies.text = String(movie.revenue)
-            self.tvOverview.text = movie.overview
-            self.labelCompanies.text = movie.companiesFormatted
-            if let poster = movie.posterPath {
-                self.setImage(with: poster)
-            }
+        labelTitle.text = movie.title
+        labelGenres.text = movie.genresFormatted
+        labelCountries.text = movie.countriesFormatted
+        labelStatus.text = movie.status
+        labelReleaseDate.text = movie.yearDate
+        labelRuntime.text = "\(String(movie.runtime ?? 0)) min"
+        labelCompanies.text = String(movie.revenue)
+        tvOverview.text = movie.overview
+        labelCompanies.text = movie.companiesFormatted
+        if let poster = movie.posterPath {
+            setImage(with: poster)
         }
     }
     
@@ -96,9 +94,6 @@ final class DetailMovieViewController: UIViewController {
             loadingSpinner.stopAnimating()
         }
     }
-    
-    // MARK: - IBActions
-    
 }
 
 //MARK: - Movie Manager delegate

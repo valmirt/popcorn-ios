@@ -33,6 +33,12 @@ final class CreditCollectionViewCell: UICollectionViewCell {
         setImage(with: crew.profilePath)
     }
     
+    func fillCell(with creator: Creator) {
+        labelName.text = creator.name
+        labelChar.isHidden = true
+        setImage(with: creator.profilePath)
+    }
+    
     func setImage(with path: String?) {
         if let path = path {
             let base = Constants.Web.BASE_URL_IMAGE
@@ -42,7 +48,4 @@ final class CreditCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-    
-    // MARK: - IBActions
-    
 }

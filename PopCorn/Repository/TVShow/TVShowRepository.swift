@@ -13,5 +13,5 @@ protocol TVShowRepository: BaseRepository {
     
     func updateTVShowList (_ page: Int, path: String)
     
-    func detailTVShow (id: Int)
+    func detailTVShow (with id: Int)
 }

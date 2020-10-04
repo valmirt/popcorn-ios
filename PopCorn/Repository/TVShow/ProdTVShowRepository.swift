@@ -29,12 +29,12 @@ class ProdTVShowRepository: ProdBaseRepository, TVShowRepository {
         }
     }
     
-    func detailTVShow(id: Int) {
+    func detailTVShow(with id: Int) {
         let queries = [
             URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
         ]
         
-        load("/tv/\(id)", queries, TVShowDetail.self) { [weak self] result in
+        load("/\(Constants.Web.VERSION_API)/tv/\(id)", queries, TVShowDetail.self) { [weak self] result in
             guard let self = self else { return }
             
             switch result {

@@ -148,6 +148,7 @@
 				C3B01F89253B77520026BAF7 /* Shared */,
 				5924E511234A8697007A3D93 /* Info.plist */,
 				5924E50C234A8697007A3D93 /* Assets.xcassets */,
+				5924E50E234A8697007A3D93 /* LaunchScreen.storyboard */,
 				5924E51A234A895B007A3D93 /* Controller */,
 				5924E518234A88D0007A3D93 /* Model */,
 				5924E51B234A89AD007A3D93 /* Repository */,
@@ -172,7 +173,6 @@
 		5924E519234A894E007A3D93 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5924E50E234A8697007A3D93 /* LaunchScreen.storyboard */,
 				5924E509234A8695007A3D93 /* Main.storyboard */,
 			);
 			path = View;

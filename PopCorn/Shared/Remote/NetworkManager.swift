@@ -17,7 +17,7 @@ protocol NetworkManagerProtocol {
 
 final class NetworkManager: NetworkManagerProtocol {
     
-    static let shared: NetworkManagerProtocol = NetworkManager()
+    static let shared = NetworkManager()
     
     private let config: URLSessionConfiguration = {
         let configuration = URLSessionConfiguration.default

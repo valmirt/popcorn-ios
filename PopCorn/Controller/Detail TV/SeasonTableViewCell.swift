@@ -13,7 +13,7 @@ import UIKit
 final class SeasonTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    private lazy var tvRepository: TVShowRepository = ProdTVShowRepository()
+    private lazy var tvRepository: TVShowRepositoryProtocol = TVShowRepository()
     
     // MARK: - IBOutlets
     @IBOutlet weak var lbTitle: UILabel!

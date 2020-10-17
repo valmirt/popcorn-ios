@@ -12,8 +12,8 @@ final class GenericTableViewController: UITableViewController {
     // MARK: - Properties
     var type: TypeContent = .movie
     var filter: FilterContent = .popular
-    lazy var movieRepo: MovieRepository = ProdMovieRepository()
-    lazy var tvRepo: TVShowRepository = ProdTVShowRepository()
+    lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
+    lazy var tvRepo: TVShowRepositoryProtocol = TVShowRepository()
     lazy var movies: [Movie] = []
     lazy var tv: [TVShow] = []
     private var page = Constants.General.FIRST
@@ -176,9 +176,9 @@ final class GenericTableViewController: UITableViewController {
 }
 
 //MARK: - Movie manager delegate
-extension GenericTableViewController: MovieManagerDelegate {
+extension GenericTableViewController: MovieRepositoryDelegate {
     
-    func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
+    func movieRepository(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
         if page < totalPages {
             if reloadData {
                 movies.removeAll()
@@ -194,7 +194,7 @@ extension GenericTableViewController: MovieManagerDelegate {
         }
     }
 
-    func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
+    func movieRepository(_ manager: MovieRepository, didUpdateError: Error) {
         DispatchQueue.main.async {
             self.errorAlert(message: didUpdateError.localizedDescription)
             self.loadingIndicator?.stopAnimating()
@@ -204,9 +204,9 @@ extension GenericTableViewController: MovieManagerDelegate {
 }
 
 //MARK: - Tv Show manager delegate
-extension GenericTableViewController: TVShowManagerDelegate {
+extension GenericTableViewController: TVShowRepositoryDelegate {
     
-    func tvShowManager(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {
+    func tvShowRepository(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {
         if page < totalPages {
             if reloadData {
                 tv.removeAll()
@@ -222,7 +222,7 @@ extension GenericTableViewController: TVShowManagerDelegate {
         }
     }
     
-    func tvShowManager(_ manager: TVShowRepository, didUpdateError: Error) {
+    func tvShowRepository(_ manager: TVShowRepository, didUpdateError: Error) {
         DispatchQueue.main.async {
             self.errorAlert(message: didUpdateError.localizedDescription)
             self.loadingIndicator?.stopAnimating()

@@ -12,7 +12,7 @@ final class DetailTVViewController: UIViewController {
     
     // MARK: - Properties
     var id = 0
-    private lazy var tvRepository: TVShowRepository = ProdTVShowRepository()
+    private lazy var tvRepository: TVShowRepositoryProtocol = TVShowRepository()
     private var tvShow: TVShowDetail?
     
     // MARK: - IBOutlets
@@ -133,15 +133,15 @@ extension DetailTVViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: - TV show delegate
-extension DetailTVViewController: TVShowManagerDelegate {
-    func tvShowManager(_ manager: TVShowRepository, didUpdateError: Error) {
+extension DetailTVViewController: TVShowRepositoryDelegate {
+    func tvShowRepository(_ manager: TVShowRepository, didUpdateError: Error) {
         DispatchQueue.main.async {
             self.errorAlert(message: didUpdateError.localizedDescription)
             self.performLoading(status: false)
         }
     }
     
-    func tvShowManager(_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail) {
+    func tvShowRepository(_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail) {
         DispatchQueue.main.async {
             self.fillData(with: didUpdateTVShowDetail)
             self.cvCreators.reloadData()

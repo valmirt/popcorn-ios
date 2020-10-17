@@ -9,15 +9,15 @@
 import XCTest
 @testable import PopCorn
 
-class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
+class MovieRepositoryTest: XCTestCase, MovieRepositoryDelegate {
     let fakeAPI = FakeMovieNetworkManager()
-    var movieRepository: MovieRepository?
+    var movieRepository: MovieRepositoryProtocol?
     var result: [Movie]?
     var detail: MovieDetail?
     var error: Error?
 
     override func setUp() {
-        movieRepository = ProdMovieRepository(fakeAPI)
+        movieRepository = MovieRepository(fakeAPI)
         
         movieRepository?.delegate = self
     }
@@ -73,15 +73,15 @@ class MovieRepositoryTest: XCTestCase, MovieManagerDelegate {
         )
     }
     
-    func movieManager(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
+    func movieRepository(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
         result = didUpdateMovieList
     }
     
-    func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
+    func movieRepository(_ manager: MovieRepository, didUpdateError: Error) {
         error = didUpdateError
     }
     
-    func movieManager(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
+    func movieRepository(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
         detail = didUpdateMovieDetail
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 final class SimilarMovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
-    private lazy var movieRepository: MovieRepository = ProdMovieRepository()
+    private lazy var movieRepository: MovieRepositoryProtocol = MovieRepository()
     
     // MARK: - IBOutlets
     @IBOutlet weak var ivPoster: UIImageView!

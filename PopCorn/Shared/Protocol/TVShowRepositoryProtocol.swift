@@ -1,5 +1,5 @@
 //
-//  TVShowRepository.swift
+//  TVShowRepositoryProtocol.swift
 //  PopCorn
 //
 //  Created by Valmir Torres on 24/10/19.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol TVShowRepository: BaseRepository {
-    var delegate: TVShowManagerDelegate? { get set }
+protocol TVShowRepositoryProtocol: BaseRepositoryProtocol {
+    var delegate: TVShowRepositoryDelegate? { get set }
     
     func updateTVShowList (_ page: Int, path: String)
     

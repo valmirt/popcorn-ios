@@ -11,7 +11,7 @@ import XCTest
 @testable import PopCorn
 
 
-class FakeMovieNetworkManager: NetworkManager {
+class FakeMovieNetworkManager: NetworkManagerProtocol {
     private var typeReturn: Int = 0
     var errorCreateURL = false
     var errorLoad = false

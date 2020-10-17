@@ -10,10 +10,10 @@ import XCTest
 @testable import PopCorn
 
 class NetworkManagerTest: XCTestCase {
-    var api: ProdNetworkManager?
+    var api: NetworkManager?
     
     override func setUp() {
-        api = ProdNetworkManager.shared
+        api = NetworkManager.shared
     }
     
     func testSuccessfulCreateURL() {

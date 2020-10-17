@@ -13,7 +13,7 @@ final class DetailMovieViewController: UIViewController {
     // MARK: - Properties
     var id = 0
     private var page = Constants.General.FIRST
-    private lazy var movieRepo: MovieRepository = ProdMovieRepository()
+    private lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
     private var credit: Credit?
     private var similarMovies: [Movie] = []
     
@@ -97,21 +97,21 @@ final class DetailMovieViewController: UIViewController {
 }
 
 //MARK: - Movie Manager delegate
-extension DetailMovieViewController: MovieManagerDelegate {
-    func movieManager(_ manager: MovieRepository, didUpdateError: Error) {
+extension DetailMovieViewController: MovieRepositoryDelegate {
+    func movieRepository(_ manager: MovieRepository, didUpdateError: Error) {
         DispatchQueue.main.async {
             self.errorAlert(message: didUpdateError.localizedDescription)
         }
     }
     
-    func movieManager(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
+    func movieRepository(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
         DispatchQueue.main.async {
             self.fillData(with: didUpdateMovieDetail)
             self.performLoading(status: false)
         }
     }
     
-    func movieManager(_ managet: MovieRepository, didUpdateCreditMovie: Credit) {
+    func movieRepository(_ manager: MovieRepository, didUpdateCreditMovie: Credit) {
         DispatchQueue.main.async {
             self.credit = didUpdateCreditMovie
             self.cvCastingAndCrew.reloadData()
@@ -119,7 +119,7 @@ extension DetailMovieViewController: MovieManagerDelegate {
         }
     }
     
-    func movieManager(_ manager: MovieRepository, didUpdateSimilarMovies: [Movie], totalPages: Int) {
+    func movieRepository(_ manager: MovieRepository, didUpdateSimilarMovies: [Movie], totalPages: Int) {
         if page < totalPages {
             similarMovies.append(contentsOf: didUpdateSimilarMovies)
             DispatchQueue.main.async {

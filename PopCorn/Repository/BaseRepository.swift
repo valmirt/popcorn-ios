@@ -1,5 +1,5 @@
 //
-//  ProdBaseRepository.swift
+//  BaseRepository.swift
 //  PopCorn
 //
 //  Created by Valmir Torres on 31/10/19.
@@ -9,10 +9,14 @@
 import Foundation
 import UIKit
 
-class ProdBaseRepository: BaseRepository {
-    let api: NetworkManager
+protocol BaseRepositoryProtocol {
+    func updateImage(baseURL: String, path: String, _ handler: @escaping (UIImage?) -> Void)
+}
+
+class BaseRepository: BaseRepositoryProtocol {
+    let api: NetworkManagerProtocol
     
-    init(_ api: NetworkManager = ProdNetworkManager.shared) {
+    init(_ api: NetworkManagerProtocol = NetworkManager.shared) {
         self.api = api
     }
     
@@ -41,3 +45,5 @@ class ProdBaseRepository: BaseRepository {
         api.networkCall(url: url, execute: handler)
     }
 }
+
+

@@ -1,5 +1,5 @@
 //
-//  MovieRepository.swift
+//  MovieRepositoryProtocol.swift
 //  PopCorn
 //
 //  Created by Valmir Torres on 24/10/19.
@@ -8,9 +8,8 @@
 
 import Foundation
 
-protocol MovieRepository: BaseRepository {
-    
-    var delegate: MovieManagerDelegate? { get set }
+protocol MovieRepositoryProtocol: BaseRepositoryProtocol {
+    var delegate: MovieRepositoryDelegate? { get set }
     
     func updateMovieList(_ page: Int, path: String)
     

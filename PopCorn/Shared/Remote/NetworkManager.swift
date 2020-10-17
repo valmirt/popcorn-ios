@@ -1,5 +1,5 @@
 //
-//  ProdNetworkManager.swift
+//  NetworkManager.swift
 //  PopCorn
 //
 //  Created by Valmir Torres on 25/10/19.
@@ -8,9 +8,16 @@
 
 import Foundation
 
-final class ProdNetworkManager: NetworkManager {
+protocol NetworkManagerProtocol {
     
-    static let shared = ProdNetworkManager()
+    func networkCall <T: Decodable> (url: URL, execute: @escaping (Result<T, NetworkError>) -> Void)
+    
+    func createURL (baseURL: String, path: String, queries: [URLQueryItem]?) -> URL?
+}
+
+final class NetworkManager: NetworkManagerProtocol {
+    
+    static let shared: NetworkManagerProtocol = NetworkManager()
     
     private let config: URLSessionConfiguration = {
         let configuration = URLSessionConfiguration.default

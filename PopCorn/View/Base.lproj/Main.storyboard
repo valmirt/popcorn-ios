@@ -96,7 +96,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ihQ-ab-c3Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-225" y="-494"/>
+            <point key="canvasLocation" x="-226" y="-496"/>
         </scene>
         <!--Search-->
         <scene sceneID="gJi-J4-Dhu">
@@ -563,11 +563,27 @@
                         <outlet property="lbTitle" destination="moP-Ef-x1b" id="ukI-Qj-Ioa"/>
                         <outlet property="loadingSpinner" destination="6jH-32-SOf" id="U9D-Yg-4OA"/>
                         <outlet property="tvSeasons" destination="PMt-HK-DcK" id="2nm-TN-BIk"/>
+                        <segue destination="r1S-lH-nKV" kind="showDetail" identifier="goToSeason" id="4QD-24-MiV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T28-WH-iga" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2693.5999999999999" y="-924.38423645320199"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="iJv-75-Djv">
+            <objects>
+                <viewController id="r1S-lH-nKV" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8a5-WF-aiV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="F5d-Rl-692"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TqG-Hp-GiX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3734" y="-924"/>
         </scene>
         <!--Detail-->
         <scene sceneID="jLQ-8z-uar">
@@ -928,8 +944,8 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="baC-YF-XHY"/>
-        <segue reference="NRR-ec-jba"/>
+        <segue reference="1it-dm-cYX"/>
+        <segue reference="EVE-Q1-s1z"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart.fill" catalog="system" width="128" height="109"/>

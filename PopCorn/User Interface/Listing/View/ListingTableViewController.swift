@@ -86,6 +86,14 @@ final class ListingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         viewModel?.getMorePage(index: indexPath.row)
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if viewModel?.isMovie ?? true {
+            performSegue(withIdentifier: "goToDetailMovie", sender: viewModel?.getSender(at: indexPath))
+        } else {
+            performSegue(withIdentifier: "goToDetailTV", sender: viewModel?.getSender(at: indexPath))
+        }
+    }
 }
 
 //MARK: - Listing ViewModel delegate

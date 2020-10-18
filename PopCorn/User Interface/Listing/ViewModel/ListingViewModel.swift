@@ -39,6 +39,10 @@ final class ListingViewModel {
         }
     }
     
+    var isMovie: Bool {
+        typeMedia == .movie
+    }
+    
     init(typeMedia: TypeContent, filter: FilterContent) {
         self.typeMedia = typeMedia
         self.filter = filter
@@ -116,6 +120,15 @@ final class ListingViewModel {
             return MediaViewModel(movie: movies[indexPath.row])
         default:
             return MediaViewModel(tvShow: tv[indexPath.row])
+        }
+    }
+    
+    func getSender(at indexPath: IndexPath) -> Int {
+        switch typeMedia {
+        case .movie:
+            return movies[indexPath.row].id
+        default:
+            return tv[indexPath.row].id
         }
     }
 }

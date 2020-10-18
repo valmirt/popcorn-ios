@@ -12,6 +12,7 @@ final class DetailTVViewController: UIViewController {
     
     // MARK: - Properties
     var id = 0
+    var viewModel: DetailTVShowViewModel?
     private lazy var tvRepository: TVShowRepositoryProtocol = TVShowRepository()
     private var tvShow: TVShowDetail?
     

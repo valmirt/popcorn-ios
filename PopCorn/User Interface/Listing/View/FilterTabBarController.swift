@@ -1,5 +1,5 @@
 //
-//  GenericTabBarController.swift
+//  FilterTabBarController.swift
 //  PopCorn
 //
 //  Created by Valmir Torres on 31/10/19.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-final class GenericTabBarController: UITabBarController {
-    //MARK: - Properties
-    var type: TypeContent = .movie
+final class FilterTabBarController: UITabBarController {
+    //MARK: - Propertiesb
+    var viewModel: FilterViewModel?
     
     //MARK: - Super Methods
     override func viewDidLoad() {
@@ -21,31 +21,23 @@ final class GenericTabBarController: UITabBarController {
     
     //MARK: - Methods
     func viewControllersParams() {
-        let popular = self.viewControllers?[0] as? NavViewController
+        let popular = (viewControllers?[0] as? UINavigationController)?.viewControllers[0] as? ListingTableViewController
         if let popular = popular {
-            popular.type = type
-            popular.filter = .popular
+            popular.viewModel = viewModel?.getListingViewModel(by: 0)
         }
         
-        let nowPlaying = self.viewControllers?[1] as? NavViewController
+        let nowPlaying = (viewControllers?[1] as? UINavigationController)?.viewControllers[0] as? ListingTableViewController
         if let nowPlaying = nowPlaying {
-            nowPlaying.type = type
-            switch type {
-            case .movie:
-                nowPlaying.filter = .nowPlaying
-            case .tvShow:
-                nowPlaying.filter = .airingToday
-            }
+            nowPlaying.viewModel = viewModel?.getListingViewModel(by: 1)
         }
         
-        let topRated = self.viewControllers?[2] as? NavViewController
+        let topRated = (viewControllers?[2] as? UINavigationController)?.viewControllers[0] as? ListingTableViewController
         if let topRated = topRated {
-            topRated.type = type
-            topRated.filter = .topRated
+            topRated.viewModel = viewModel?.getListingViewModel(by: 2)
         }
     }
     
-    internal func customize() {
+    func customize() {
         let tabBarItemOne = tabBar.items?[0]
         tabBarItemOne?.title = "Popular"
         tabBarItemOne?.image = UIImage(systemName: "heart.fill")

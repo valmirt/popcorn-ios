@@ -6,7 +6,6 @@
 //  Copyright © 2019 Valmir Torres. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 protocol BaseRepositoryProtocol {

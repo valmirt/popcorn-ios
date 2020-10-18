@@ -16,6 +16,7 @@ final class DetailMovieViewController: UIViewController {
     private lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
     private var credit: Credit?
     private var similarMovies: [Movie] = []
+    var viewModel: DetailMovieViewModel?
     
     // MARK: - IBOutlets
     @IBOutlet weak var ivPoster: UIImageView!

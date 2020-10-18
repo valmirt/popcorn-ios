@@ -10,6 +10,8 @@ import UIKit
 
 final class HomeTabBarController: UITabBarController {
     
+    let viewModel = HomeViewModel()
+    
     //MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +31,13 @@ final class HomeTabBarController: UITabBarController {
     }
     
     func viewControllersParams() {
-        let movie = self.viewControllers?[0] as? GenericTabBarController
-        if let movie = movie {
-            movie.type = .movie
+        let firstTabBarController = viewControllers?[0] as? FilterTabBarController
+        if let firstTabBarController = firstTabBarController {
+            firstTabBarController.viewModel = viewModel.getFilterViewModel(isMovie: true)
         }
-        let tv = self.viewControllers?[1] as? GenericTabBarController
-        if let tv = tv {
-            tv.type = .tvShow
+        let secondTabBarController = viewControllers?[1] as? FilterTabBarController
+        if let secondTabBarController = secondTabBarController {
+            secondTabBarController.viewModel = viewModel.getFilterViewModel(isMovie: false)
         }
     }
 }

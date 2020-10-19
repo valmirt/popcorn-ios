@@ -37,6 +37,8 @@
 		59BE12AA236CDE1500E27427 /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BE12A9236CDE1500E27427 /* MediaTableViewCell.swift */; };
 		59D30C26236B93D7002D3A41 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30C25236B93D7002D3A41 /* ImageService.swift */; };
 		59D30C28236B97A5002D3A41 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30C27236B97A5002D3A41 /* BaseRepository.swift */; };
+		C326FBAD253E4F9F0052AF7E /* CreditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C326FBAC253E4F9F0052AF7E /* CreditViewModel.swift */; };
+		C326FBB1253E54360052AF7E /* SimilarMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C326FBB0253E54360052AF7E /* SimilarMovieViewModel.swift */; };
 		C327BD9A252A657F0076000D /* SeasonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327BD99252A657F0076000D /* SeasonTableViewCell.swift */; };
 		C327BD9E252A6A250076000D /* TVShowDetailExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327BD9D252A6A250076000D /* TVShowDetailExtensions.swift */; };
 		C36729F72534F5940061BEDE /* SeasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36729F62534F5940061BEDE /* SeasonViewController.swift */; };
@@ -98,6 +100,8 @@
 		59BE12A9236CDE1500E27427 /* MediaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		59D30C25236B93D7002D3A41 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		59D30C27236B97A5002D3A41 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
+		C326FBAC253E4F9F0052AF7E /* CreditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewModel.swift; sourceTree = "<group>"; };
+		C326FBB0253E54360052AF7E /* SimilarMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarMovieViewModel.swift; sourceTree = "<group>"; };
 		C327BD99252A657F0076000D /* SeasonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTableViewCell.swift; sourceTree = "<group>"; };
 		C327BD9D252A6A250076000D /* TVShowDetailExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowDetailExtensions.swift; sourceTree = "<group>"; };
 		C36729F62534F5940061BEDE /* SeasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewController.swift; sourceTree = "<group>"; };
@@ -362,6 +366,8 @@
 			isa = PBXGroup;
 			children = (
 				C3E76C1C253BD264000BA0DA /* DetailMovieViewModel.swift */,
+				C326FBAC253E4F9F0052AF7E /* CreditViewModel.swift */,
+				C326FBB0253E54360052AF7E /* SimilarMovieViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -582,6 +588,7 @@
 				59BE12A1236B9FDF00E27427 /* FilterTabBarController.swift in Sources */,
 				59A8BDB024F2C99600D3C85C /* TypeContent.swift in Sources */,
 				59A8BDB224F2CA4D00D3C85C /* FilterContent.swift in Sources */,
+				C326FBAD253E4F9F0052AF7E /* CreditViewModel.swift in Sources */,
 				591DAB322374E9B800FF0F48 /* DetailMovieViewController.swift in Sources */,
 				5924E508234A8695007A3D93 /* HomeTabBarController.swift in Sources */,
 				59B0238F2363C678007C7367 /* NetworkManager.swift in Sources */,
@@ -593,6 +600,7 @@
 				5924E504234A8695007A3D93 /* AppDelegate.swift in Sources */,
 				5924E520234A8E6B007A3D93 /* Movie.swift in Sources */,
 				59BE12A8236BA93B00E27427 /* ListingTableViewController.swift in Sources */,
+				C326FBB1253E54360052AF7E /* SimilarMovieViewModel.swift in Sources */,
 				C3E2B8A5253BC3E500D52646 /* HomeViewModel.swift in Sources */,
 				59B023A12368F21B007C7367 /* ResponseList.swift in Sources */,
 				C327BD9A252A657F0076000D /* SeasonTableViewCell.swift in Sources */,

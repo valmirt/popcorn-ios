@@ -105,7 +105,7 @@ extension DetailTVViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = cvCreators.dequeueReusableCell(withReuseIdentifier: "creatorCell", for: indexPath) as! CreditCollectionViewCell
         
         if let tv = tvShow, let creator = tv.createdBy?[indexPath.item] {
-            cell.fillCell(with: creator)
+//            cell.fillCell(with: creator)
         }
         
         return cell

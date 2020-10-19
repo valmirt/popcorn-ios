@@ -10,24 +10,13 @@ import UIKit
 
 final class SimilarMovieCollectionViewCell: UICollectionViewCell {
     
-    // MARK: - Properties
-    private lazy var movieRepository: MovieRepositoryProtocol = MovieRepository()
-    
     // MARK: - IBOutlets
     @IBOutlet weak var ivPoster: UIImageView!
     
     // MARK: - Methods
-    func fillCell(with data: Movie) {
-        setImage(with: data.posterPath)
-    }
-    
-    func setImage(with path: String?) {
-        if let path = path {
-            let base = Constants.Web.BASE_URL_IMAGE
-            let completePath = "\(Constants.Web.IMAGE_W185)\(path)"
-            movieRepository.updateImage(baseURL: base, path: completePath) { image in
-                self.ivPoster.image = image
-            }
+    func configure(with viewModel: SimilarMovieViewModel?) {
+        viewModel?.getImage { (image) in
+            self.ivPoster.image = image
         }
     }
     

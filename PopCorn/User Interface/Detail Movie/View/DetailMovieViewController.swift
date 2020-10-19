@@ -11,11 +11,6 @@ import UIKit
 final class DetailMovieViewController: UIViewController {
     
     // MARK: - Properties
-    var id = 0
-    private var page = Constants.General.FIRST
-    private lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
-    private var credit: Credit?
-    private var similarMovies: [Movie] = []
     var viewModel: DetailMovieViewModel?
     
     // MARK: - IBOutlets
@@ -37,39 +32,27 @@ final class DetailMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupRepository()
+        setupView()
     }
     
     // MARK: - Methods
-    private func setupRepository() {
-        movieRepo.delegate = self
-        
-        movieRepo.detailMovie(with: id)
-        movieRepo.creditMovie(with: id)
-        movieRepo.updateSimilarMovies(with: id, page)
+    private func setupView() {
         performLoading(status: true)
+        viewModel?.delegate = self
+        viewModel?.loadData()
     }
     
-    private func setImage(with poster: String) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        let path = "\(Constants.Web.IMAGE_W342)\(poster)"
-        movieRepo.updateImage(baseURL: base, path: path) { image in
+    private func fillData() {
+        labelTitle.text = viewModel?.title
+        labelGenres.text = viewModel?.genres
+        labelCountries.text = viewModel?.countries
+        labelStatus.text = viewModel?.status
+        labelReleaseDate.text = viewModel?.date
+        labelRuntime.text = viewModel?.runtime
+        tvOverview.text = viewModel?.overview
+        labelCompanies.text = viewModel?.companies
+        viewModel?.getImage { image in
             self.ivPoster.image = image
-        }
-    }
-    
-    private func fillData(with movie: MovieDetail) {
-        labelTitle.text = movie.title
-        labelGenres.text = movie.genresFormatted
-        labelCountries.text = movie.countriesFormatted
-        labelStatus.text = movie.status
-        labelReleaseDate.text = movie.yearDate
-        labelRuntime.text = "\(String(movie.runtime ?? 0)) min"
-        labelCompanies.text = String(movie.revenue)
-        tvOverview.text = movie.overview
-        labelCompanies.text = movie.companiesFormatted
-        if let poster = movie.posterPath {
-            setImage(with: poster)
         }
     }
     
@@ -97,50 +80,13 @@ final class DetailMovieViewController: UIViewController {
     }
 }
 
-//MARK: - Movie Manager delegate
-extension DetailMovieViewController: MovieRepositoryDelegate {
-    func movieRepository(_ manager: MovieRepository, didUpdateError: Error) {
-        DispatchQueue.main.async {
-            self.errorAlert(message: didUpdateError.localizedDescription)
-        }
-    }
-    
-    func movieRepository(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
-        DispatchQueue.main.async {
-            self.fillData(with: didUpdateMovieDetail)
-            self.performLoading(status: false)
-        }
-    }
-    
-    func movieRepository(_ manager: MovieRepository, didUpdateCreditMovie: Credit) {
-        DispatchQueue.main.async {
-            self.credit = didUpdateCreditMovie
-            self.cvCastingAndCrew.reloadData()
-            self.performLoading(status: false)
-        }
-    }
-    
-    func movieRepository(_ manager: MovieRepository, didUpdateSimilarMovies: [Movie], totalPages: Int) {
-        if page < totalPages {
-            similarMovies.append(contentsOf: didUpdateSimilarMovies)
-            DispatchQueue.main.async {
-                self.cvSimilarMovies.reloadData()
-                self.performLoading(status: false)
-            }
-        }
-    }
-}
-
 //MARK: - Collection view
 extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.cvCastingAndCrew {
-            if let credit = credit {
-                return credit.cast.count + credit.crew.count
-            }
-            return 0
+            return viewModel?.creditCount ?? 0
         } else {
-            return similarMovies.count
+            return viewModel?.similarMoviesCount ?? 0
         }
     }
     
@@ -154,24 +100,13 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
     
     private func defineCreditCell(for indexPath: IndexPath) -> UICollectionViewCell {
         let cell = cvCastingAndCrew.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CreditCollectionViewCell
-        
-        if let credit = credit {
-            if indexPath.item < credit.cast.count {
-                cell.fillCell(with: credit.cast[indexPath.item])
-            } else {
-                let index = indexPath.item - credit.cast.count
-                cell.fillCell(with: credit.crew[index])
-            }
-        }
-        
+        cell.configure(with: viewModel?.getCreditCellViewModel(at: indexPath))
         return cell
     }
     
     private func defineSimilarMoviesCell(for indexPath: IndexPath) -> UICollectionViewCell {
         let cell = cvSimilarMovies.dequeueReusableCell(withReuseIdentifier: "similarCell", for: indexPath) as! SimilarMovieCollectionViewCell
-        
-        let movie = similarMovies[indexPath.item]
-        cell.fillCell(with: movie)
+        cell.configure(with: viewModel?.getSimilarMovieViewModel(at: indexPath))
         return cell
     }
     
@@ -180,17 +115,42 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
             guard let vc = storyboard?.instantiateViewController(withIdentifier: "detailMovie"),
                   let detailVC = vc as? DetailMovieViewController else { return }
             
-            detailVC.id = similarMovies[indexPath.item].id
+            detailVC.viewModel = viewModel?.getDetailViewModel(at: indexPath)
             show(vc, sender: nil)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let count = similarMovies.count
-        if indexPath.item == count - Constants.General.OFFSET {
-            page += 1
-            movieRepo.updateSimilarMovies(with: id, page)
-            print(page)
+        viewModel?.getMorePages(at: indexPath)
+    }
+}
+
+//MARK: - Detail Movie delegate
+extension DetailMovieViewController: DetailMovieViewModelDelegate {
+    func onListenerError(with errorMessage: String) {
+        DispatchQueue.main.async {
+            self.errorAlert(message: errorMessage)
+        }
+    }
+    
+    func onListenerDetailMovie() {
+        DispatchQueue.main.async {
+            self.fillData()
+            self.performLoading(status: false)
+        }
+    }
+    
+    func onListenerCredit() {
+        DispatchQueue.main.async {
+            self.cvCastingAndCrew.reloadData()
+            self.performLoading(status: false)
+        }
+    }
+    
+    func onListenerSimilarMovies() {
+        DispatchQueue.main.async {
+            self.cvSimilarMovies.reloadData()
+            self.performLoading(status: false)
         }
     }
 }

@@ -10,9 +10,6 @@ import UIKit
 
 final class CreditCollectionViewCell: UICollectionViewCell {
     
-    // MARK: - Properties
-    private lazy var movieRepository: MovieRepositoryProtocol = MovieRepository()
-    
     // MARK: - IBOutlets
     @IBOutlet weak var ivProfilePicture: UIImageView!
     @IBOutlet weak var labelName: UILabel!
@@ -21,31 +18,18 @@ final class CreditCollectionViewCell: UICollectionViewCell {
     // MARK: - Super Methods
     
     // MARK: - Methods
-    func fillCell(with cast: Cast) {
-        labelName.text = cast.name
-        labelChar.text = cast.character
-        setImage(with: cast.profilePath)
-    }
-    
-    func fillCell(with crew: Crew) {
-        labelName.text = crew.name
-        labelChar.text = crew.job
-        setImage(with: crew.profilePath)
-    }
-    
-    func fillCell(with creator: Creator) {
-        labelName.text = creator.name
-        labelChar.isHidden = true
-        setImage(with: creator.profilePath)
-    }
-    
-    func setImage(with path: String?) {
-        if let path = path {
-            let base = Constants.Web.BASE_URL_IMAGE
-            let completePath = "\(Constants.Web.IMAGE_W185)\(path)"
-            movieRepository.updateImage(baseURL: base, path: completePath) { image in
-                self.ivProfilePicture.image = image
-            }
+    func configure(with viewModel: CreditViewModel?) {
+        labelName.text = viewModel?.name
+        if viewModel?.charOrJob.isEmpty ?? true {
+            labelChar.isHidden = true
         }
+        labelChar.text = viewModel?.charOrJob
+        viewModel?.getImage(onComplete: { (image) in
+            if let image = image {
+                self.ivProfilePicture.image = image
+            } else {
+                self.ivProfilePicture.image = UIImage(systemName: "person.fill")
+            }
+        })
     }
 }

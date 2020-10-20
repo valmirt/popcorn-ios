@@ -9,13 +9,13 @@
 import UIKit
 
 protocol ListingViewModelDelegate: class {
-    func onListing(didUpdatedMovies: Bool, error: String)
-    
-    func onListing(didUpdatedTvShows: Bool, error: String)
+    func onListenerError(with errorMessage: String)
+    func onListenerMediaList()
 }
 
 final class ListingViewModel {
     
+    //MARK: - Properties
     var typeMedia: TypeContent
     var filter: FilterContent
     lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
@@ -48,6 +48,7 @@ final class ListingViewModel {
         self.filter = filter
     }
     
+    //MARK: - Methods
     func loadData() {
         page = Constants.General.FIRST
         reloadData = true
@@ -90,30 +91,6 @@ final class ListingViewModel {
         }
     }
     
-    func setContent(at indexPath: IndexPath, onComplete: @escaping (UIImage?) -> Void) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        switch typeMedia {
-        case .movie:
-            if let backdrop = movies[indexPath.row].backdropPath {
-                let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
-                movieRepo.updateImage(baseURL: base, path: path) { image in
-                    onComplete(image)
-                }
-            } else {
-                onComplete(UIImage(systemName: "photo"))
-            }
-        case .tvShow:
-            if let backdrop = tv[indexPath.row].backdropPath {
-                let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
-                tvRepo.updateImage(baseURL: base, path: path) { image in
-                    onComplete(image)
-                }
-            } else {
-                onComplete(UIImage(systemName: "photo"))
-            }
-        }
-    }
-    
     func getMediaViewModel(at indexPath: IndexPath) -> MediaViewModel {
         switch typeMedia {
         case .movie:
@@ -144,12 +121,12 @@ extension ListingViewModel: MovieRepositoryDelegate {
             }
             
             movies.append(contentsOf: didUpdateMovieList)
-            delegate?.onListing(didUpdatedMovies: true, error: "")
+            delegate?.onListenerMediaList()
         }
     }
 
     func movieRepository(_ manager: MovieRepository, didUpdateError: Error) {
-        delegate?.onListing(didUpdatedMovies: false, error: didUpdateError.localizedDescription)
+        delegate?.onListenerError(with: didUpdateError.localizedDescription)
     }
 }
 
@@ -164,11 +141,11 @@ extension ListingViewModel: TVShowRepositoryDelegate {
             }
             
             tv.append(contentsOf: didUpdateTVShowList)
-            delegate?.onListing(didUpdatedTvShows: true, error: "")
+            delegate?.onListenerMediaList()
         }
     }
     
     func tvShowRepository(_ manager: TVShowRepository, didUpdateError: Error) {
-        delegate?.onListing(didUpdatedTvShows: false, error: didUpdateError.localizedDescription)
+        delegate?.onListenerError(with: didUpdateError.localizedDescription)
     }
 }

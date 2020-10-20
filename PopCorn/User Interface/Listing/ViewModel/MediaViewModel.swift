@@ -6,9 +6,11 @@
 //  Copyright © 2020 Valmir Torres. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class MediaViewModel {
+    lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
+    lazy var tvRepo: TVShowRepositoryProtocol = TVShowRepository()
     var movie: Movie?
     var tvShow: TVShow?
     
@@ -31,5 +33,29 @@ final class MediaViewModel {
     
     var rate: String {
         String(format: "%.1f", movie?.voteAverage ?? tvShow?.voteAverage ?? 0)
+    }
+    
+    func getImage(onComplete: @escaping (UIImage?) -> Void) {
+        let base = Constants.Web.BASE_URL_IMAGE
+        if let movie = movie {
+            if let backdrop = movie.backdropPath {
+                let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
+                movieRepo.updateImage(baseURL: base, path: path) { image in
+                    onComplete(image)
+                }
+            } else {
+                onComplete(UIImage(systemName: "photo"))
+            }
+        }
+        if let tvShow = tvShow {
+            if let backdrop = tvShow.backdropPath {
+                let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
+                tvRepo.updateImage(baseURL: base, path: path) { image in
+                    onComplete(image)
+                }
+            } else {
+                onComplete(UIImage(systemName: "photo"))
+            }
+        }
     }
 }

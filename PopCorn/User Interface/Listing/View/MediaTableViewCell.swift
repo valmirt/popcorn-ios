@@ -18,14 +18,15 @@ final class MediaTableViewCell: UITableViewCell {
     @IBOutlet weak var rateLabel: UILabel?
 
     //MARK: - Methods
-    func setImage(_ image: UIImage?) {
-        posterImageView?.image = image
-    }
     
     func configure(with viewModel: MediaViewModel?) {
         titleLabel?.text = viewModel?.title
         releaseLabel?.text = viewModel?.releaseDate
         popularLabel?.text = viewModel?.popular
         rateLabel?.text = viewModel?.rate
+        
+        viewModel?.getImage(onComplete: { (image) in
+            self.posterImageView?.image = image
+        })
     }
 }

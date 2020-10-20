@@ -74,12 +74,7 @@ final class ListingTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "movieAndTVCell", for: indexPath) as? MediaTableViewCell else {
             return UITableViewCell()
         }
-        viewModel?.setContent(at: indexPath, onComplete: { (image) in
-            cell.setImage(image)
-        })
-        
         cell.configure(with: viewModel?.getMediaViewModel(at: indexPath))
-        
         return cell
     }
     
@@ -98,23 +93,16 @@ final class ListingTableViewController: UITableViewController {
 
 //MARK: - Listing ViewModel delegate
 extension ListingTableViewController: ListingViewModelDelegate {
-    func onListing(didUpdatedMovies: Bool, error: String) {
+    func onListenerError(with errorMessage: String) {
         DispatchQueue.main.async {
-            if !didUpdatedMovies {
-                self.errorAlert(message: error)
-            }
-            
-            self.tableView.reloadData()
+            self.errorAlert(message: errorMessage)
             self.loadingIndicator?.stopAnimating()
             self.refreshControl?.endRefreshing()
         }
     }
     
-    func onListing(didUpdatedTvShows: Bool, error: String) {
+    func onListenerMediaList() {
         DispatchQueue.main.async {
-            if !didUpdatedTvShows {
-                self.errorAlert(message: error)
-            }
             self.tableView.reloadData()
             self.loadingIndicator?.stopAnimating()
             self.refreshControl?.endRefreshing()

@@ -13,7 +13,7 @@
 		591DAB382378B4A300FF0F48 /* TVShowDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591DAB372378B4A300FF0F48 /* TVShowDetail.swift */; };
 		5924E504234A8695007A3D93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E503234A8695007A3D93 /* AppDelegate.swift */; };
 		5924E508234A8695007A3D93 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E507234A8695007A3D93 /* HomeTabBarController.swift */; };
-		5924E50B234A8695007A3D93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5924E509234A8695007A3D93 /* Main.storyboard */; };
+		5924E50B234A8695007A3D93 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5924E509234A8695007A3D93 /* Home.storyboard */; };
 		5924E50D234A8697007A3D93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5924E50C234A8697007A3D93 /* Assets.xcassets */; };
 		5924E510234A8697007A3D93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5924E50E234A8697007A3D93 /* LaunchScreen.storyboard */; };
 		5924E520234A8E6B007A3D93 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E51F234A8E6B007A3D93 /* Movie.swift */; };
@@ -80,7 +80,7 @@
 		5924E500234A8695007A3D93 /* PopCorn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopCorn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5924E503234A8695007A3D93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5924E507234A8695007A3D93 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
-		5924E50A234A8695007A3D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5924E50A234A8695007A3D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		5924E50C234A8697007A3D93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5924E50F234A8697007A3D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5924E511234A8697007A3D93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -174,7 +174,6 @@
 				5924E511234A8697007A3D93 /* Info.plist */,
 				5924E50C234A8697007A3D93 /* Assets.xcassets */,
 				5924E50E234A8697007A3D93 /* LaunchScreen.storyboard */,
-				5924E509234A8695007A3D93 /* Main.storyboard */,
 				5924E51E234A8DDE007A3D93 /* Application */,
 				5924E518234A88D0007A3D93 /* Model */,
 				5924E51B234A89AD007A3D93 /* Repository */,
@@ -553,6 +552,7 @@
 		C3E2B8A0253BC38A00D52646 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5924E509234A8695007A3D93 /* Home.storyboard */,
 				5924E507234A8695007A3D93 /* HomeTabBarController.swift */,
 			);
 			path = View;
@@ -651,7 +651,7 @@
 				C326FBDB253FAC0C0052AF7E /* Listing.storyboard in Resources */,
 				5924E50D234A8697007A3D93 /* Assets.xcassets in Resources */,
 				C326FBBF253F9EA60052AF7E /* Profile.storyboard in Resources */,
-				5924E50B234A8695007A3D93 /* Main.storyboard in Resources */,
+				5924E50B234A8695007A3D93 /* Home.storyboard in Resources */,
 				C326FBC5253F9EF70052AF7E /* Search.storyboard in Resources */,
 				C326FBCD253FA00D0052AF7E /* DetailTVShow.storyboard in Resources */,
 				C326FBC9253F9F860052AF7E /* Filter.storyboard in Resources */,
@@ -737,12 +737,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5924E509234A8695007A3D93 /* Main.storyboard */ = {
+		5924E509234A8695007A3D93 /* Home.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5924E50A234A8695007A3D93 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Home.storyboard;
 			sourceTree = "<group>";
 		};
 		5924E50E234A8697007A3D93 /* LaunchScreen.storyboard */ = {

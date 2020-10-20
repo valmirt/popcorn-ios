@@ -15,29 +15,20 @@ final class HomeTabBarController: UITabBarController {
     //MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        customize()
-        viewControllersParams()
+        setupView()
     }
     
     //MARK: - Methods
-    func customize() {
-        let tabBarItemOne = tabBar.items?[0]
-        tabBarItemOne?.title = "Movies"
-        tabBarItemOne?.image = UIImage(systemName: "film")
-        
-        let tabBarItemTwo = tabBar.items?[1]
-        tabBarItemTwo?.title = "Tv Shows"
-        tabBarItemTwo?.image = UIImage(systemName: "tv")
-    }
-    
-    func viewControllersParams() {
+    private func setupView() {
         let firstTabBarController = viewControllers?[0] as? FilterTabBarController
         if let firstTabBarController = firstTabBarController {
             firstTabBarController.viewModel = viewModel.getFilterViewModel(isMovie: true)
+            firstTabBarController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "film"), selectedImage: UIImage(systemName: "film"))
         }
         let secondTabBarController = viewControllers?[1] as? FilterTabBarController
         if let secondTabBarController = secondTabBarController {
             secondTabBarController.viewModel = viewModel.getFilterViewModel(isMovie: false)
+            secondTabBarController.tabBarItem = UITabBarItem(title: "TV Shows", image: UIImage(systemName: "tv"), selectedImage: UIImage(systemName: "tv"))
         }
     }
 }

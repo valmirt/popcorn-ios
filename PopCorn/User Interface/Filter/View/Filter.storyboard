@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LbO-Wq-lsE">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Movie Tab Bar-->
+        <scene sceneID="TLL-Pu-YfE">
+            <objects>
+                <tabBarController storyboardIdentifier="UITabBarController-LbO-Wq-lsE" title="Movie Tab Bar" id="LbO-Wq-lsE" customClass="FilterTabBarController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" id="fwu-sa-qMh"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CYe-IR-fsL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Jy7-59-UtA" kind="relationship" relationship="viewControllers" id="fXR-gL-F8l"/>
+                        <segue destination="Jy7-59-UtA" kind="relationship" relationship="viewControllers" id="1it-dm-cYX"/>
+                        <segue destination="Jy7-59-UtA" kind="relationship" relationship="viewControllers" id="baC-YF-XHY"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ihQ-ab-c3Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-879" y="-497"/>
+        </scene>
+        <!--detailMovie-->
+        <scene sceneID="Mdj-sd-DZo">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="detailMovie" storyboardName="DetailMovie" referencedIdentifier="detailMovie" id="T0j-E6-jnl" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="8s6-X2-m8h"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ob1-0x-tfF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1874" y="-309"/>
+        </scene>
+        <!--Listing-->
+        <scene sceneID="5x5-wa-hDL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Listing" id="Jy7-59-UtA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="5DO-w8-kZl"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ERB-EL-ZLE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-146" y="-498"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fXR-gL-F8l"/>
+    </inferredMetricsTieBreakers>
+</document>

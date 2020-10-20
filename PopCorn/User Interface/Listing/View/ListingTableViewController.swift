@@ -29,7 +29,7 @@ final class ListingTableViewController: UITableViewController {
                 detail.viewModel = viewModel?.getDetailMovieViewModel(at: indexPath)
             }
         } else if segue.identifier == "goToDetailTV" {
-            if let detail = segue.destination as? DetailTVViewController, let indexPath = tableView.indexPathForSelectedRow {
+            if let detail = segue.destination as? DetailTVShowViewController, let indexPath = tableView.indexPathForSelectedRow {
                 detail.viewModel = viewModel?.getDetailTVShowViewModel(at: indexPath)
             }
         }

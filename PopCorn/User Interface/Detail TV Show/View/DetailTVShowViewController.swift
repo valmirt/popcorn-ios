@@ -1,5 +1,5 @@
 //
-//  DetailTVViewController.swift
+//  DetailTVShowViewController.swift
 //  PopCorn
 //
 //  Created by Valmir Torres on 07/11/19.
@@ -8,13 +8,10 @@
 
 import UIKit
 
-final class DetailTVViewController: UIViewController {
+final class DetailTVShowViewController: UIViewController {
     
     // MARK: - Properties
-    var id = 0
     var viewModel: DetailTVShowViewModel?
-    private lazy var tvRepository: TVShowRepositoryProtocol = TVShowRepository()
-    private var tvShow: TVShowDetail?
     
     // MARK: - IBOutlets
     @IBOutlet weak var lbTitle: UILabel!
@@ -34,14 +31,13 @@ final class DetailTVViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupRepository()
+        setupView()
     }
     
     // MARK: - Methods
-    private func setupRepository() {
-        tvRepository.delegate = self
-        
-        tvRepository.detailTVShow(with: id)
+    private func setupView() {
+        viewModel?.delegate = self
+        viewModel?.loadData()
         performLoading(status: true)
     }
     
@@ -58,26 +54,17 @@ final class DetailTVViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func fillData(with tv: TVShowDetail) {
-        tvShow = tv
-        lbTitle.text = tvShow?.name
-        lbGenres.text = tvShow?.genresFormatted
-        lbCountry.text = tvShow?.countriesFormatted
-        lbInProduction.text = "In Production: \(tvShow?.inProduction ?? false ? "Yes" : "No")"
-        lbRuntime.text = "Runtime: \(tvShow?.runTimeFormatted ?? "~") min"
-        lbNumberSeason.text = "Seasons: \(tvShow?.numberOfSeasons ?? 0)"
-        lbNumberEpisodes.text = "Episodes: \(tvShow?.numberOfEpisodes ?? 0)"
-        if let tvShow = tvShow, let poster = tvShow.posterPath {
-            setImage(with: poster)
-        }
-    }
-    
-    private func setImage(with poster: String) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        let path = "\(Constants.Web.IMAGE_W342)\(poster)"
-        tvRepository.updateImage(baseURL: base, path: path) { image in
+    private func fillData() {
+        lbTitle.text = viewModel?.title
+        lbGenres.text = viewModel?.genres
+        lbCountry.text = viewModel?.countries
+        lbInProduction.text = viewModel?.inProduction
+        lbRuntime.text = viewModel?.runtime
+        lbNumberSeason.text = viewModel?.numberSeasons
+        lbNumberEpisodes.text = viewModel?.numberEpisodes
+        viewModel?.getImage(onComplete: { (image) in
             self.ivPoster.image = image
-        }
+        })
     }
     
     private func performLoading(status: Bool) {
@@ -92,59 +79,43 @@ final class DetailTVViewController: UIViewController {
 }
 
 // MARK: - Collection view datasource
-extension DetailTVViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension DetailTVShowViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let tv = tvShow {
-            return tv.createdBy?.count ?? 0
-        }
-        
-        return 0
+        return viewModel?.creatorsCount ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = cvCreators.dequeueReusableCell(withReuseIdentifier: "creatorCell", for: indexPath) as! CreditCollectionViewCell
-        
-        if let tv = tvShow, let creator = tv.createdBy?[indexPath.item] {
-//            cell.fillCell(with: creator)
-        }
-        
+        cell.configure(with: viewModel?.getCreditViewModel(at: indexPath))
         return cell
     }
 }
 
 // MARK: - Table view datasource
-extension DetailTVViewController: UITableViewDelegate, UITableViewDataSource {
+extension DetailTVShowViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let tv = tvShow {
-            return tv.seasons?.count ?? 0
-        }
-        
-        return 0
+        return viewModel?.seasonsCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tvSeasons.dequeueReusableCell(withIdentifier: "seasonCell", for: indexPath) as! SeasonTableViewCell
-        
-        if let tv = tvShow, let season = tv.seasons?[indexPath.row] {
-            cell.fillCell(with: season)
-        }
-        
+        cell.configure(with: viewModel?.getSeasonViewModel(at: indexPath))
         return cell
     }
 }
 
-// MARK: - TV show delegate
-extension DetailTVViewController: TVShowRepositoryDelegate {
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateError: Error) {
+//MARK: - Detail TV Show viewModel delgate
+extension DetailTVShowViewController: DetailTVShowViewModelDelegate {
+    func onListenerError(with errorMessage: String) {
         DispatchQueue.main.async {
-            self.errorAlert(message: didUpdateError.localizedDescription)
+            self.errorAlert(message: errorMessage)
             self.performLoading(status: false)
         }
     }
     
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail) {
+    func onListenerTVShowDetail() {
         DispatchQueue.main.async {
-            self.fillData(with: didUpdateTVShowDetail)
+            self.fillData()
             self.cvCreators.reloadData()
             self.tvSeasons.reloadData()
             self.performLoading(status: false)

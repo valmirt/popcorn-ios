@@ -12,29 +12,18 @@ import UIKit
 
 final class SeasonTableViewCell: UITableViewCell {
     
-    // MARK: - Properties
-    private lazy var tvRepository: TVShowRepositoryProtocol = TVShowRepository()
-    
     // MARK: - IBOutlets
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbOverview: UILabel!
     @IBOutlet weak var ivPoster: CircleImageView!
     
     // MARK: - Methods
-    func fillCell(with data: Season) {
-        lbTitle.text = data.name
-        lbOverview.text = data.overview
-        if let poster = data.posterPath {
-            setImage(with: poster)
-        }
-    }
-    
-    private func setImage(with poster: String) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        let path = "\(Constants.Web.IMAGE_W342)\(poster)"
-        tvRepository.updateImage(baseURL: base, path: path) { image in
+    func configure(with viewModel: SeasonViewModel?) {
+        lbTitle.text = viewModel?.title
+        lbOverview.text = viewModel?.overview
+        viewModel?.getImage(onComplete: { (image) in
             self.ivPoster.image = image
-        }
+        })
     }
 }
 

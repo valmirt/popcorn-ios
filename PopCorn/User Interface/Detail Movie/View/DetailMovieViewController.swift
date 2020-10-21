@@ -112,10 +112,8 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.cvSimilarMovies {
-            guard let vc = storyboard?.instantiateViewController(withIdentifier: "detailMovie"),
-                  let detailVC = vc as? DetailMovieViewController else { return }
-            
-            detailVC.viewModel = viewModel?.getDetailViewModel(at: indexPath)
+            let vc = DetailMovieViewController.instatiate(from: .detailMovie)
+            vc.viewModel = viewModel?.getDetailViewModel(at: indexPath)
             show(vc, sender: nil)
         }
     }

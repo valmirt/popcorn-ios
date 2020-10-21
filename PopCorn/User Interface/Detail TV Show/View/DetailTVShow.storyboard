@@ -14,7 +14,7 @@
         <!--Detail-->
         <scene sceneID="juJ-Wh-IGT">
             <objects>
-                <viewController id="gra-bm-afa" customClass="DetailTVShowViewController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailTVShowViewController" id="gra-bm-afa" customClass="DetailTVShowViewController" customModule="PopCorn" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ycB-Gk-1ep">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,27 +329,20 @@
                         <outlet property="lbTitle" destination="moP-Ef-x1b" id="ukI-Qj-Ioa"/>
                         <outlet property="loadingSpinner" destination="6jH-32-SOf" id="U9D-Yg-4OA"/>
                         <outlet property="tvSeasons" destination="PMt-HK-DcK" id="2nm-TN-BIk"/>
-                        <segue destination="r1S-lH-nKV" kind="showDetail" identifier="goToSeason" id="4QD-24-MiV"/>
+                        <segue destination="ze1-eZ-H1E" kind="showDetail" identifier="goToSeason" id="4QD-24-MiV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T28-WH-iga" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2693.5999999999999" y="-924.38423645320199"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="iJv-75-Djv">
+        <!--SeasonDetailViewController-->
+        <scene sceneID="xbd-1I-bBH">
             <objects>
-                <viewController id="r1S-lH-nKV" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8a5-WF-aiV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="F5d-Rl-692"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TqG-Hp-GiX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="SeasonDetailViewController" storyboardName="SeasonDetail" referencedIdentifier="SeasonDetailViewController" id="ze1-eZ-H1E" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rs0-i2-kmc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3734" y="-924"/>
+            <point key="canvasLocation" x="3426" y="-925"/>
         </scene>
     </scenes>
     <designables>

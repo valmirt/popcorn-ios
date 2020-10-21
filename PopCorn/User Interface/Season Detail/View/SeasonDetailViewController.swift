@@ -1,5 +1,5 @@
 //
-//  SeasonViewController.swift
+//  SeasonDetailViewController.swift
 //  PopCorn
 //
 //  Created by Valmir Junior on 12/10/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SeasonViewController: UIViewController {
+final class SeasonDetailViewController: UIViewController {
     
     // MARK: - Properties
     

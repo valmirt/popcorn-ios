@@ -11,6 +11,7 @@ import UIKit
 final class ListingTableViewController: UITableViewController {
     // MARK: - Properties
     var viewModel: ListingViewModel?
+    var coordinator: Coordinator?
         
     //MARK: - IBOutlets
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!

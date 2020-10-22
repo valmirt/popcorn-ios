@@ -24,7 +24,7 @@ final class AppCoordinator: Coordinator {
         let homeBarItems: [HomeTabBar] = [.movies, .tvShow, .profile, .search].sorted(by: { $0.order < $1.order })
         let navControllers = homeBarItems.map { prepareHomeNavigationController(with: $0) }
         homeTabBarController.setViewControllers(navControllers, animated: true)
-        navigationController.viewControllers = [homeTabBarController]
+        navigationController.pushViewController(homeTabBarController, animated: false)
     }
     
     private func prepareHomeNavigationController(with homeTabBar: HomeTabBar) -> UINavigationController {
@@ -39,13 +39,13 @@ final class AppCoordinator: Coordinator {
             let barItems: [FilterTabBar] = [.popular(.movie), .nowPlaying(.movie), .topRated(.movie)].sorted(by: { $0.order < $1.order })
             let filterNavControllers = barItems.map { prepareFilterNavigationController(with: $0) }
             vc.setViewControllers(filterNavControllers, animated: true)
-            navigationController.viewControllers = [vc]
+            navigationController.pushViewController(vc, animated: true)
         case .tvShow:
             let vc = UITabBarController()
             let barItems: [FilterTabBar] = [.popular(.tvShow), .nowPlaying(.tvShow), .topRated(.tvShow)].sorted(by: { $0.order < $1.order })
             let filterNavControllers = barItems.map { prepareFilterNavigationController(with: $0) }
             vc.setViewControllers(filterNavControllers, animated: true)
-            navigationController.viewControllers = [vc]
+            navigationController.pushViewController(vc, animated: true)
         case .profile:
             let vc = ProfileViewController.instatiate(from: .profile)
             let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
@@ -63,7 +63,6 @@ final class AppCoordinator: Coordinator {
             vc.viewModel = SearchViewModel()
             navigationController.pushViewController(vc, animated: true)
         }
-        
         return navigationController
     }
     

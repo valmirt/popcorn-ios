@@ -33,7 +33,10 @@ extension Coordinator {
     }
     
     func didFinish(child coordinator: Coordinator?) {
-        guard let coordinator = coordinator else {return}
-        remove(childCoordinator: coordinator)
+        if let coordinator = coordinator {
+            remove(childCoordinator: coordinator)
+        } else {
+            parentCoordinator?.didFinish(child: self)
+        }
     }
 }

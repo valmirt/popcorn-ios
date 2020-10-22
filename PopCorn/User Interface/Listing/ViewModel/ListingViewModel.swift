@@ -99,15 +99,6 @@ final class ListingViewModel {
             return MediaViewModel(tvShow: tv[indexPath.row])
         }
     }
-    
-    func getSender(at indexPath: IndexPath) -> Int {
-        switch typeMedia {
-        case .movie:
-            return movies[indexPath.row].id
-        default:
-            return tv[indexPath.row].id
-        }
-    }
 }
 
 //MARK: - Movie repository delegate

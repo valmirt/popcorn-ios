@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -114,33 +114,11 @@
                     </refreshControl>
                     <connections>
                         <outlet property="loadingIndicator" destination="Nz7-MK-Zo2" id="5jq-p2-MXf"/>
-                        <segue destination="T0j-E6-jnl" kind="show" identifier="goToDetailMovie" id="iYL-Ue-l9K"/>
-                        <segue destination="8O9-9y-usg" kind="show" identifier="goToDetailTV" id="IUU-nY-W4v"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lz-4d-E8Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1116" y="-498"/>
-        </scene>
-        <!--DetailTVShow-->
-        <scene sceneID="ClJ-xh-ajU">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DetailTVShow" id="8O9-9y-usg" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="pad-FZ-yo9"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CwM-lt-xYl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1875" y="-708"/>
-        </scene>
-        <!--DetailMovie-->
-        <scene sceneID="Mdj-sd-DZo">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DetailMovie" id="T0j-E6-jnl" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="8s6-X2-m8h"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ob1-0x-tfF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1874" y="-309"/>
         </scene>
     </scenes>
     <resources>

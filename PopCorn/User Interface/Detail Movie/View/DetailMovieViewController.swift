@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol DetailMoviePresenter {
+    func showDetailMovie(with viewModel: DetailMovieViewModel?)
+}
+
+typealias DetailMoviePresenterCoordinator = DetailMoviePresenter & Coordinator
+
 final class DetailMovieViewController: UIViewController {
     
     // MARK: - Properties
     var viewModel: DetailMovieViewModel?
+    var coordinator: DetailMoviePresenterCoordinator?
     
     // MARK: - IBOutlets
     @IBOutlet weak var ivPoster: UIImageView!
@@ -78,6 +85,11 @@ final class DetailMovieViewController: UIViewController {
             loadingSpinner.stopAnimating()
         }
     }
+    
+    deinit {
+        coordinator?.didFinish(child: nil)
+        print("DetailMovieViewController free")
+    }
 }
 
 //MARK: - Collection view
@@ -112,9 +124,7 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.cvSimilarMovies {
-            let vc = DetailMovieViewController.instatiate(from: .detailMovie)
-            vc.viewModel = viewModel?.getDetailViewModel(at: indexPath)
-            show(vc, sender: nil)
+            coordinator?.showDetailMovie(with: viewModel?.getDetailViewModel(at: indexPath))
         }
     }
     
@@ -152,5 +162,3 @@ extension DetailMovieViewController: DetailMovieViewModelDelegate {
         }
     }
 }
-
-

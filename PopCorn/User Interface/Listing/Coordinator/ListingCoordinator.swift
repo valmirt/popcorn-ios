@@ -20,4 +20,24 @@ final class ListingCoordinator: Coordinator {
     func start() {
         
     }
+    
+    deinit {
+        print("ListingCoordinator free.")
+    }
+}
+
+extension ListingCoordinator: DetailMediaPresenter {
+    func showDetailMovie(with viewModel: DetailMovieViewModel?) {
+        let coordinator = DetailMovieCoordinator(navigationController: navigationController, viewModel: viewModel)
+        coordinator.parentCoordinator = self
+        add(childCoordinator: coordinator)
+        coordinator.start()
+    }
+    
+    func showDetailTVShow(with viewModel: DetailTVShowViewModel?) {
+        let coordinator = DetailTVShowCoordinator(navigationController: navigationController, viewModel: viewModel)
+        coordinator.parentCoordinator = self
+        add(childCoordinator: coordinator)
+        coordinator.start()
+    }
 }

@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator = AppCoordinator()
         window?.rootViewController = appCoordinator?.navigationController
         window?.makeKeyAndVisible()
-        window?.tintColor = UIColor(named: "main")
         appCoordinator?.start()
         
         return true

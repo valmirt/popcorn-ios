@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol DetailMediaPresenter {
+    func showDetailMovie(with viewModel: DetailMovieViewModel?)
+    func showDetailTVShow(with viewModel: DetailTVShowViewModel?)
+}
+
+typealias DetailMediaPresenterCoordinator = DetailMediaPresenter & Coordinator
+
 final class ListingTableViewController: UITableViewController {
     // MARK: - Properties
     var viewModel: ListingViewModel?
-    var coordinator: Coordinator?
+    var coordinator: DetailMediaPresenterCoordinator?
         
     //MARK: - IBOutlets
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -22,18 +29,6 @@ final class ListingTableViewController: UITableViewController {
         setupData()
         setupView()
         setTitle()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToDetailMovie" {
-            if let detail = segue.destination as? DetailMovieViewController, let indexPath = tableView.indexPathForSelectedRow {
-                detail.viewModel = viewModel?.getDetailMovieViewModel(at: indexPath)
-            }
-        } else if segue.identifier == "goToDetailTV" {
-            if let detail = segue.destination as? DetailTVShowViewController, let indexPath = tableView.indexPathForSelectedRow {
-                detail.viewModel = viewModel?.getDetailTVShowViewModel(at: indexPath)
-            }
-        }
     }
     
     //MARK: - Methods
@@ -85,10 +80,15 @@ final class ListingTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if viewModel?.isMovie ?? true {
-            performSegue(withIdentifier: "goToDetailMovie", sender: viewModel?.getSender(at: indexPath))
+            coordinator?.showDetailMovie(with: viewModel?.getDetailMovieViewModel(at: indexPath))
         } else {
-            performSegue(withIdentifier: "goToDetailTV", sender: viewModel?.getSender(at: indexPath))
+            coordinator?.showDetailTVShow(with: viewModel?.getDetailTVShowViewModel(at: indexPath))
         }
+    }
+    
+    deinit {
+        coordinator?.didFinish(child: nil)
+        print("ListingTableViewController free")
     }
 }
 

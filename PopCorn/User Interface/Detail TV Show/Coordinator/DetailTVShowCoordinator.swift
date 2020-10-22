@@ -12,12 +12,25 @@ final class DetailTVShowCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var parentCoordinator: Coordinator?
+    let viewModel: DetailTVShowViewModel?
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, viewModel: DetailTVShowViewModel?) {
         self.navigationController = navigationController
+        self.viewModel = viewModel
     }
     
     func start() {
-        
+        let detailVC = DetailTVShowViewController.instatiate(from: .detailTVShow)
+        detailVC.viewModel = viewModel
+        detailVC.coordinator = self
+        navigationController.pushViewController(detailVC, animated: true)
     }
+    
+    deinit {
+        print("DetailTVShowCoordinator free")
+    }
+}
+
+extension DetailTVShowCoordinator: DetailTVShowPresenter {
+    
 }

@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol DetailTVShowPresenter {
+    //TODO
+}
+
+typealias DetailTVShowPresenterCoordinator = DetailTVShowPresenter & Coordinator
+
 final class DetailTVShowViewController: UIViewController {
     
     // MARK: - Properties
     var viewModel: DetailTVShowViewModel?
+    var coordinator: DetailTVShowPresenterCoordinator?
     
     // MARK: - IBOutlets
     @IBOutlet weak var lbTitle: UILabel!
@@ -75,6 +82,11 @@ final class DetailTVShowViewController: UIViewController {
             containerLoading.isHidden = true
             loadingSpinner.stopAnimating()
         }
+    }
+    
+    deinit {
+        coordinator?.didFinish(child: nil)
+        print("DetailTVShowViewController free")
     }
 }
 

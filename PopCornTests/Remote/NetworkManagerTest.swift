@@ -10,10 +10,18 @@ import XCTest
 @testable import PopCorn
 
 class NetworkManagerTest: XCTestCase {
-    var api: NetworkManager?
+    
+    //System Under Test
+    var sut: NetworkManager?
     
     override func setUp() {
-        api = NetworkManager.shared
+        super.setUp()
+        sut = NetworkManager.shared
+    }
+    
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
     }
     
     func testSuccessfulCreateURL() {
@@ -21,7 +29,7 @@ class NetworkManagerTest: XCTestCase {
         let urlString = "https://www.github.com"
         
         //When
-        let url = api?.createURL(baseURL: urlString, path: "/valmirt", queries: nil)
+        let url = sut?.createURL(baseURL: urlString, path: "/valmirt", queries: nil)
         
         //Then
         XCTAssert(url != nil)
@@ -33,7 +41,7 @@ class NetworkManagerTest: XCTestCase {
         let errorURLString = "askjflaskjf /dfk123,.fadlcçç"
         
         //When
-        let url = api?.createURL(baseURL: errorURLString, path: "", queries: nil)
+        let url = sut?.createURL(baseURL: errorURLString, path: "", queries: nil)
         
         //Then
         XCTAssertNil(url)
@@ -42,42 +50,76 @@ class NetworkManagerTest: XCTestCase {
     func testSuccessfulDecodeJSON() {
         //Given
         var movie: ResponseList<Movie>?
-        let json = """
-        {
-            "page": 1,
-            "total_results": 10000,
-            "total_pages": 500,
-            "results": [
-                {
-                    "popularity": 432.456,
-                    "vote_count": 4373,
-                    "video": false,
-                    "poster_path": "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
-                    "id": 475557,
-                    "adult": false,
-                    "backdrop_path": "/n6bUvigpRFqSwmPp1m2YADdbRBc.jpg",
-                    "original_language": "en",
-                    "original_title": "Joker",
-                    "genre_ids": [
-                        80,
-                        18,
-                        53
-                    ],
-                    "title": "Joker",
-                    "vote_average": 8.6,
-                    "overview": "During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.",
-                    "release_date": "2019-10-04"
-                }
-            ]
-        }
-        """.data(using: .utf8)!
+        let bundle = Bundle(for: NetworkManagerTest.self)
+        let url = bundle.url(forResource: "MovieList", withExtension: "json")!
+        let json = try! Data(contentsOf: url)
         
         //When
-        movie = try! api?.decodeJSON(type: ResponseList<Movie>.self, data: json)
+        movie = try! sut?.decodeJSON(type: ResponseList<Movie>.self, data: json)
         
         //Then
         XCTAssert(movie != nil)
         XCTAssertEqual(movie?.results[0].title, "Joker")
         XCTAssertEqual(movie?.results[0].backdropPath, "/n6bUvigpRFqSwmPp1m2YADdbRBc.jpg")
+    }
+    
+    func testNetworkCallSuccess() {
+        //Given
+        let promise = expectation(description: "Success!")
+        let url = "\(Constants.Web.BASE_URL)/\(Constants.Web.VERSION_API)/movie/550?api_key=\(Constants.Web.API_KEY)"
+        
+        //When
+        sut?.networkCall(url: URL(string: url)!, execute: { (result: Result<MovieDetail, NetworkError>) in
+            defer { promise.fulfill() }
+            switch result {
+            case .success:
+                XCTAssertTrue(true)
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            }
+        })
+        
+        //Then
+        wait(for: [promise], timeout: 3.0)
+    }
+    
+    func testNetworkCallErrorStatusCode() {
+        //Given
+        let promise = expectation(description: "Success!")
+        let url = "\(Constants.Web.BASE_URL)/\(Constants.Web.VERSION_API)/movie/550"
+        
+        //When
+        sut?.networkCall(url: URL(string: url)!, execute: { (result: Result<MovieDetail, NetworkError>) in
+            defer { promise.fulfill() }
+            switch result {
+            case .success:
+                XCTFail()
+            case .failure(let error):
+                XCTAssertEqual(error.errorDescription, "Api response error! Status code: 401")
+            }
+        })
+        
+        //Then
+        wait(for: [promise], timeout: 3.0)
+    }
+    
+    func testNetworkCallErrorDecodeJson() {
+        //Given
+        let promise = expectation(description: "Success!")
+        let url = "\(Constants.Web.BASE_URL)/\(Constants.Web.VERSION_API)/movie/550?api_key=\(Constants.Web.API_KEY)"
+        
+        //When
+        sut?.networkCall(url: URL(string: url)!, execute: { (result: Result<ResponseList<Movie>, NetworkError>) in
+            defer { promise.fulfill() }
+            switch result {
+            case .success:
+                XCTFail()
+            case .failure(let error):
+                XCTAssertEqual(error.errorDescription, "Invalid data, try again later...")
+            }
+        })
+        
+        //Then
+        wait(for: [promise], timeout: 3.0)
     }
 }

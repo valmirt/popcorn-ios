@@ -10,21 +10,28 @@ import Foundation
 import XCTest
 @testable import PopCorn
 
+enum FakeMovieNetworkRequest {
+    case list, detail, credit
+}
 
 class FakeMovieNetworkManager: NetworkManagerProtocol {
     private var typeReturn: Int = 0
     var errorCreateURL = false
     var errorLoad = false
+    var typeRequest: FakeMovieNetworkRequest = .list
     static let ID = 1
     
     func networkCall<T: Decodable>(url: URL, execute: @escaping (Result<T, NetworkError>) -> Void) {
         if errorLoad {
             execute(.failure(.defaultError))
         } else {
-            if url.absoluteString.contains("movie/\(FakeMovieNetworkManager.ID)") {
-                execute(.success(fakeDetail() as! T))
-            } else {
+            switch typeRequest {
+            case .list:
                 execute(.success(fakeList() as! T))
+            case .detail:
+                execute(.success(fakeDetail() as! T))
+            case .credit:
+                execute(.success(fakeCredit() as! T))
             }
         }
     }
@@ -38,6 +45,10 @@ class FakeMovieNetworkManager: NetworkManagerProtocol {
         component?.path = path
         component?.queryItems = queries
         return component?.url
+    }
+    
+    private func fakeCredit() -> Credit {
+        Credit(id: FakeMovieNetworkManager.ID, cast: [], crew: [])
     }
     
     private func fakeDetail() -> MovieDetail {

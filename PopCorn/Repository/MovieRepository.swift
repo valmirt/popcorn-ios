@@ -86,32 +86,32 @@ class MovieRepository: BaseRepository, MovieRepositoryProtocol {
 
 //MARK: - Movie Repository delegate
 protocol MovieRepositoryDelegate: class {
-    func movieRepository (_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int)
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateMovieList: [Movie], totalPages: Int)
     
-    func movieRepository (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail)
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateMovieDetail: MovieDetail)
     
-    func movieRepository (_ manager: MovieRepository, didUpdateCreditMovie: Credit)
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateCreditMovie: Credit)
     
-    func movieRepository (_ manager: MovieRepository, didUpdateError: Error)
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateError: Error)
     
-    func movieRepository (_ manager: MovieRepository, didUpdateSimilarMovies: [Movie], totalPages: Int)
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateSimilarMovies: [Movie], totalPages: Int)
 }
 
 //MARK: - Default delegate Implementations
 extension MovieRepositoryDelegate {
-    func movieRepository (_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateMovieList: [Movie], totalPages: Int) {
         //this is an empty implementation to allow this method to be optional
     }
     
-    func movieRepository (_ manager: MovieRepository, didUpdateSimilarMovies: [Movie], totalPages: Int) {
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateSimilarMovies: [Movie], totalPages: Int) {
         //this is an empty implementation to allow this method to be optional
     }
     
-    func movieRepository (_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateMovieDetail: MovieDetail) {
         //this is an empty implementation to allow this method to be optional
     }
     
-    func movieRepository (_ manager: MovieRepository, didUpdateCreditMovie: Credit) {
+    func movieRepository (_ manager: MovieRepositoryProtocol, didUpdateCreditMovie: Credit) {
         //this is an empty implementation to allow this method to be optional
     }
 }

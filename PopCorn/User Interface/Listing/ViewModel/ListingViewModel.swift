@@ -16,12 +16,12 @@ protocol ListingViewModelDelegate: class {
 final class ListingViewModel {
     
     //MARK: - Properties
-    var typeMedia: TypeContent
-    var filter: FilterContent
-    lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
-    lazy var tvRepo: TVShowRepositoryProtocol = TVShowRepository()
-    lazy var movies: [Movie] = []
-    lazy var tv: [TVShow] = []
+    private var typeMedia: TypeContent
+    private var filter: FilterContent
+    private var movieRepo: MovieRepositoryProtocol
+    private var tvRepo: TVShowRepositoryProtocol
+    private lazy var movies: [Movie] = []
+    private lazy var tv: [TVShow] = []
     private var page = Constants.General.FIRST
     private var reloadData = false
     weak var delegate: ListingViewModelDelegate?
@@ -43,9 +43,11 @@ final class ListingViewModel {
         typeMedia == .movie
     }
     
-    init(typeMedia: TypeContent, filter: FilterContent) {
+    init(typeMedia: TypeContent, filter: FilterContent, _ movieApi: MovieRepositoryProtocol = MovieRepository(), _ tvApi: TVShowRepositoryProtocol = TVShowRepository()) {
         self.typeMedia = typeMedia
         self.filter = filter
+        self.movieRepo = movieApi
+        self.tvRepo = tvApi
     }
     
     //MARK: - Methods
@@ -104,7 +106,7 @@ final class ListingViewModel {
 //MARK: - Movie repository delegate
 extension ListingViewModel: MovieRepositoryDelegate {
     
-    func movieRepository(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateMovieList: [Movie], totalPages: Int) {
         if page < totalPages {
             if reloadData {
                 movies.removeAll()
@@ -116,7 +118,7 @@ extension ListingViewModel: MovieRepositoryDelegate {
         }
     }
 
-    func movieRepository(_ manager: MovieRepository, didUpdateError: Error) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateError: Error) {
         delegate?.onListenerError(with: didUpdateError.localizedDescription)
     }
 }

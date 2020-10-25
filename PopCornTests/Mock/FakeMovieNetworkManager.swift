@@ -27,11 +27,11 @@ class FakeMovieNetworkManager: NetworkManagerProtocol {
         } else {
             switch typeRequest {
             case .list:
-                execute(.success(fakeList() as! T))
+                execute(.success(FakeMovieNetworkManager.fakeList() as! T))
             case .detail:
-                execute(.success(fakeDetail() as! T))
+                execute(.success(FakeMovieNetworkManager.fakeDetail() as! T))
             case .credit:
-                execute(.success(fakeCredit() as! T))
+                execute(.success(FakeMovieNetworkManager.fakeCredit() as! T))
             }
         }
     }
@@ -47,11 +47,11 @@ class FakeMovieNetworkManager: NetworkManagerProtocol {
         return component?.url
     }
     
-    private func fakeCredit() -> Credit {
+    static func fakeCredit() -> Credit {
         Credit(id: FakeMovieNetworkManager.ID, cast: [], crew: [])
     }
     
-    private func fakeDetail() -> MovieDetail {
+    static func fakeDetail() -> MovieDetail {
         let result = MovieDetail(
             id: FakeMovieNetworkManager.ID,
             genres: [],
@@ -72,7 +72,7 @@ class FakeMovieNetworkManager: NetworkManagerProtocol {
         return result
     }
     
-    private func fakeList() -> ResponseList<Movie> {
+    static func fakeList() -> ResponseList<Movie> {
         let result: [Movie] = [
             Movie(
                 backdropPath: nil,

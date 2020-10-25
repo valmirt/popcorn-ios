@@ -114,23 +114,23 @@ class MovieRepositoryTest: XCTestCase, MovieRepositoryDelegate {
         )
     }
     
-    func movieRepository(_ manager: MovieRepository, didUpdateMovieList: [Movie], totalPages: Int) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateMovieList: [Movie], totalPages: Int) {
         result = didUpdateMovieList
     }
     
-    func movieRepository(_ manager: MovieRepository, didUpdateError: Error) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateError: Error) {
         error = didUpdateError
     }
     
-    func movieRepository(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateMovieDetail: MovieDetail) {
         detail = didUpdateMovieDetail
     }
     
-    func movieRepository(_ manager: MovieRepository, didUpdateCreditMovie: Credit) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateCreditMovie: Credit) {
         credit = didUpdateCreditMovie
     }
     
-    func movieRepository(_ manager: MovieRepository, didUpdateSimilarMovies: [Movie], totalPages: Int) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateSimilarMovies: [Movie], totalPages: Int) {
         result = didUpdateSimilarMovies
     }
 }

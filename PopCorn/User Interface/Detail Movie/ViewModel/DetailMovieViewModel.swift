@@ -111,21 +111,21 @@ final class DetailMovieViewModel {
 
 //MARK: - Movie Repository delegate
 extension DetailMovieViewModel: MovieRepositoryDelegate {
-    func movieRepository(_ manager: MovieRepository, didUpdateError: Error) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateError: Error) {
         delegate?.onListenerError(with: didUpdateError.localizedDescription)
     }
     
-    func movieRepository(_ manager: MovieRepository, didUpdateMovieDetail: MovieDetail) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateMovieDetail: MovieDetail) {
         movie = didUpdateMovieDetail
         delegate?.onListenerDetailMovie()
     }
     
-    func movieRepository(_ manager: MovieRepository, didUpdateCreditMovie: Credit) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateCreditMovie: Credit) {
         credit = didUpdateCreditMovie
         delegate?.onListenerCredit()
     }
     
-    func movieRepository(_ manager: MovieRepository, didUpdateSimilarMovies: [Movie], totalPages: Int) {
+    func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateSimilarMovies: [Movie], totalPages: Int) {
         if page < totalPages {
             similarMovies.append(contentsOf: didUpdateSimilarMovies)
             delegate?.onListenerSimilarMovies()

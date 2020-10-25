@@ -26,9 +26,9 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
         } else {
             switch typeRequest {
             case .list:
-                execute(.success(fakeList() as! T))
+                execute(.success(FakeTVShowNetworkManager.fakeList() as! T))
             case .detail:
-                execute(.success(fakeDetail() as! T))
+                execute(.success(FakeTVShowNetworkManager.fakeDetail() as! T))
             }
         }
     }
@@ -44,7 +44,7 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
         return component?.url
     }
     
-    func fakeDetail() -> TVShowDetail {
+    static func fakeDetail() -> TVShowDetail {
         TVShowDetail(
             id: FakeTVShowNetworkManager.ID,
             createdBy: nil,
@@ -70,7 +70,7 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
         )
     }
         
-    func fakeList() -> ResponseList<TVShow> {
+    static func fakeList() -> ResponseList<TVShow> {
         ResponseList(
             page: 1,
             totalResults: 3,

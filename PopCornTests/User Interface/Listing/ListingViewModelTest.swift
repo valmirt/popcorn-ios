@@ -48,7 +48,7 @@ class ListingViewModelTest: XCTestCase {
     
     func testSuccessMoviesCount() {
         //Given
-        sut = ListingViewModel(typeMedia: .movie, filter: .popular, FakeMovieRepository())
+        sut = ListingViewModel(typeMedia: .tvShow, filter: .popular, FakeMovieRepository(), FakeTVShowRepository())
         
         //When
         sut?.loadData()
@@ -56,6 +56,20 @@ class ListingViewModelTest: XCTestCase {
         
         //Then
         XCTAssertEqual(result, 3)
+    }
+    
+    func testErrorMoviesCount() {
+        //Given
+        let fakeTVRepository = FakeTVShowRepository()
+        fakeTVRepository.errorLoad = true
+        sut = ListingViewModel(typeMedia: .tvShow, filter: .popular, FakeMovieRepository(), fakeTVRepository)
+        
+        //When
+        sut?.loadData()
+        let result = self.sut?.count
+        
+        //Then
+        XCTAssertEqual(result, 0)
     }
     
     func testMediaViewModelContent() {

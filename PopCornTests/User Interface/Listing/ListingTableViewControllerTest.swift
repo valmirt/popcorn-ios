@@ -31,7 +31,7 @@ class ListingTableViewControllerTest: XCTestCase {
     
     func testListingScreenTitle() {
         //Given
-        sut?.viewModel = ListingViewModel(typeMedia: .movie, filter: .topRated, FakeMovieRepository())
+        sut?.viewModel = ListingViewModel(typeMedia: .tvShow, filter: .topRated, FakeMovieRepository(), FakeTVShowRepository())
         
         //When
         let _ = sut?.view

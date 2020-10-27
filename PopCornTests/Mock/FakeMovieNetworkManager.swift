@@ -104,7 +104,7 @@ class FakeMovieNetworkManager: NetworkManagerProtocol {
         ]
         
         let response = ResponseList<Movie>(
-            page: 0,
+            page: 1,
             totalResults: 3,
             totalPages: 1,
             results: result

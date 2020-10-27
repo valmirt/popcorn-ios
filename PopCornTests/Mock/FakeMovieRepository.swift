@@ -18,7 +18,7 @@ class FakeMovieRepository: MovieRepositoryProtocol {
             delegate?.movieRepository(self, didUpdateError: NetworkError.defaultError)
         } else {
             let fakeResult = FakeMovieNetworkManager.fakeList()
-            delegate?.movieRepository(self, didUpdateMovieList: fakeResult.results, totalPages: fakeResult.page)
+            delegate?.movieRepository(self, didUpdateMovieList: fakeResult.results, totalPages: fakeResult.totalPages)
         }
     }
     
@@ -45,7 +45,7 @@ class FakeMovieRepository: MovieRepositoryProtocol {
             delegate?.movieRepository(self, didUpdateError: NetworkError.defaultError)
         } else {
             let fakeResult = FakeMovieNetworkManager.fakeList()
-            delegate?.movieRepository(self, didUpdateSimilarMovies: fakeResult.results, totalPages: fakeResult.page)
+            delegate?.movieRepository(self, didUpdateSimilarMovies: fakeResult.results, totalPages: fakeResult.totalPages)
         }
     }
     

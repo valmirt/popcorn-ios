@@ -46,17 +46,27 @@ class ListingViewModelTest: XCTestCase {
         XCTAssertTrue(result ?? false)
     }
     
-    func testSuccessCount() {
+    func testSuccessMoviesCount() {
+        //Given
+        sut = ListingViewModel(typeMedia: .movie, filter: .popular, FakeMovieRepository())
+        
+        //When
+        sut?.loadData()
+        let result = self.sut?.count
+        
+        //Then
+        XCTAssertEqual(result, 3)
+    }
+    
+    func testMediaViewModelContent() {
         //Given
         sut = ListingViewModel(typeMedia: .movie, filter: .popular, FakeMovieRepository())
         sut?.loadData()
         
         //When
-        let result = sut?.count
+        let viewModel = sut?.getMediaViewModel(at: IndexPath(row: 0, section: 0))
         
         //Then
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            XCTAssertEqual(result, 3)
-        }
+        XCTAssertEqual(viewModel?.title, "Fake Movie 1")
     }
 }

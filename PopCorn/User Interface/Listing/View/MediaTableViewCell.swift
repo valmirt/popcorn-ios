@@ -22,7 +22,7 @@ final class MediaTableViewCell: UITableViewCell {
     func configure(with viewModel: MediaViewModel?) {
         titleLabel?.text = viewModel?.title
         releaseLabel?.text = viewModel?.releaseDate
-        popularLabel?.text = viewModel?.popular
+        popularLabel?.text = viewModel?.popularity
         rateLabel?.text = viewModel?.rate
         
         viewModel?.getImage(onComplete: { (image) in

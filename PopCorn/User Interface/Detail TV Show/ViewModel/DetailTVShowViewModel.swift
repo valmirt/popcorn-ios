@@ -78,11 +78,11 @@ final class DetailTVShowViewModel {
 
 // MARK: - TV show delegate
 extension DetailTVShowViewModel: TVShowRepositoryDelegate {
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateError: Error) {
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateError: Error) {
         delegate?.onListenerError(with: didUpdateError.localizedDescription)
     }
     
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail) {
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateTVShowDetail: TVShowDetail) {
         tvShow = didUpdateTVShowDetail
         delegate?.onListenerTVShowDetail()
     }

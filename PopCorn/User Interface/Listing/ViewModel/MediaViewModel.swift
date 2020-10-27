@@ -9,14 +9,16 @@
 import UIKit
 
 final class MediaViewModel {
-    lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
-    lazy var tvRepo: TVShowRepositoryProtocol = TVShowRepository()
-    var movie: Movie?
-    var tvShow: TVShow?
+    private var movieRepo: MovieRepositoryProtocol
+    private var tvRepo: TVShowRepositoryProtocol
+    private var movie: Movie?
+    private var tvShow: TVShow?
     
-    init(movie: Movie? = nil, tvShow: TVShow? = nil) {
+    init(movie: Movie? = nil, tvShow: TVShow? = nil, _ movieRepo: MovieRepositoryProtocol = MovieRepository(), _ tvRepo: TVShowRepositoryProtocol = TVShowRepository()) {
         self.movie = movie
         self.tvShow = tvShow
+        self.movieRepo = movieRepo
+        self.tvRepo = tvRepo
     }
     
     var title: String {
@@ -27,7 +29,7 @@ final class MediaViewModel {
         String(movie?.releaseDate.prefix(4) ?? tvShow?.firstAirDate.prefix(4) ?? "")
     }
     
-    var popular: String {
+    var popularity: String {
         String(format: "%.1f", movie?.popularity ?? tvShow?.popularity ?? 0)
     }
     

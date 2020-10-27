@@ -43,11 +43,11 @@ final class ListingViewModel {
         typeMedia == .movie
     }
     
-    init(typeMedia: TypeContent, filter: FilterContent, _ movieApi: MovieRepositoryProtocol = MovieRepository(), _ tvApi: TVShowRepositoryProtocol = TVShowRepository()) {
+    init(typeMedia: TypeContent, filter: FilterContent, _ movieRepo: MovieRepositoryProtocol = MovieRepository(), _ tvRepo: TVShowRepositoryProtocol = TVShowRepository()) {
         self.typeMedia = typeMedia
         self.filter = filter
-        self.movieRepo = movieApi
-        self.tvRepo = tvApi
+        self.movieRepo = movieRepo
+        self.tvRepo = tvRepo
     }
     
     //MARK: - Methods
@@ -64,16 +64,21 @@ final class ListingViewModel {
         }
     }
     
-    private func getPath() -> String {
-        return "/\(Constants.Web.VERSION_API)/\(typeMedia.rawValue)/\(filter.rawValue.api)"
-    }
-    
     func getDetailMovieViewModel(at indexPath: IndexPath) -> DetailMovieViewModel {
         DetailMovieViewModel(idMovie: movies[indexPath.row].id)
     }
     
     func getDetailTVShowViewModel(at indexPath: IndexPath) -> DetailTVShowViewModel {
         DetailTVShowViewModel(idTV: tv[indexPath.row].id)
+    }
+    
+    func getMediaViewModel(at indexPath: IndexPath) -> MediaViewModel {
+        switch typeMedia {
+        case .movie:
+            return MediaViewModel(movie: movies[indexPath.row])
+        default:
+            return MediaViewModel(tvShow: tv[indexPath.row])
+        }
     }
     
     func getMorePage(index: Int) {
@@ -93,13 +98,8 @@ final class ListingViewModel {
         }
     }
     
-    func getMediaViewModel(at indexPath: IndexPath) -> MediaViewModel {
-        switch typeMedia {
-        case .movie:
-            return MediaViewModel(movie: movies[indexPath.row])
-        default:
-            return MediaViewModel(tvShow: tv[indexPath.row])
-        }
+    private func getPath() -> String {
+        return "/\(Constants.Web.VERSION_API)/\(typeMedia.rawValue)/\(filter.rawValue.api)"
     }
 }
 
@@ -107,7 +107,7 @@ final class ListingViewModel {
 extension ListingViewModel: MovieRepositoryDelegate {
     
     func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateMovieList: [Movie], totalPages: Int) {
-        if page < totalPages {
+        if page <= totalPages {
             if reloadData {
                 movies.removeAll()
                 reloadData = false
@@ -126,8 +126,8 @@ extension ListingViewModel: MovieRepositoryDelegate {
 //MARK: - TV show repository delegate
 extension ListingViewModel: TVShowRepositoryDelegate {
     
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {
-        if page < totalPages {
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateTVShowList: [TVShow], totalPages: Int) {
+        if page <= totalPages {
             if reloadData {
                 tv.removeAll()
                 reloadData = false
@@ -138,7 +138,7 @@ extension ListingViewModel: TVShowRepositoryDelegate {
         }
     }
     
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateError: Error) {
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateError: Error) {
         delegate?.onListenerError(with: didUpdateError.localizedDescription)
     }
 }

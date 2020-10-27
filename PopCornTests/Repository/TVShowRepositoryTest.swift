@@ -62,15 +62,15 @@ class TVShowRepositoryTest: XCTestCase, TVShowRepositoryDelegate {
         XCTAssertEqual(tv?.name, "Fake TV Show")
     }
     
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateError: Error) {
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateError: Error) {
         error = didUpdateError
     }
     
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateTVShowList: [TVShow], totalPages: Int) {
         result = didUpdateTVShowList
     }
     
-    func tvShowRepository(_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail) {
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateTVShowDetail: TVShowDetail) {
         detail = didUpdateTVShowDetail
     }
 }

@@ -49,20 +49,20 @@ class TVShowRepository: BaseRepository, TVShowRepositoryProtocol {
 
 //MARK: - Movie Repository delegate
 protocol TVShowRepositoryDelegate: class {
-    func tvShowRepository (_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int)
+    func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateTVShowList: [TVShow], totalPages: Int)
     
-    func tvShowRepository (_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail)
+    func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateTVShowDetail: TVShowDetail)
     
-    func tvShowRepository (_ manager: TVShowRepository, didUpdateError: Error)
+    func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateError: Error)
 }
 
 //MARK: - Default delegate Implementations
 extension TVShowRepositoryDelegate {
-    func tvShowRepository (_ manager: TVShowRepository, didUpdateTVShowList: [TVShow], totalPages: Int) {
+    func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateTVShowList: [TVShow], totalPages: Int) {
         //this is an empty implementation to allow this method to be optional
     }
     
-    func tvShowRepository (_ manager: TVShowRepository, didUpdateTVShowDetail: TVShowDetail) {
+    func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateTVShowDetail: TVShowDetail) {
         //this is an empty implementation to allow this method to be optional
     }
 }

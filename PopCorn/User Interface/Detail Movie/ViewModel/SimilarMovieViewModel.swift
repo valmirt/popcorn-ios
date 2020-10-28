@@ -10,20 +10,19 @@ import UIKit
 
 final class SimilarMovieViewModel {
     // MARK: - Properties
-    private lazy var movieRepository: MovieRepositoryProtocol = MovieRepository()
+    private let movieRepository: MovieRepositoryProtocol
     private let movie: Movie
     
-    init(movie: Movie) {
+    init(movie: Movie, _ repository: MovieRepositoryProtocol = MovieRepository()) {
         self.movie = movie
+        self.movieRepository = repository
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
-        if let path = movie.posterPath {
-            let base = Constants.Web.BASE_URL_IMAGE
-            let completePath = "\(Constants.Web.IMAGE_W185)\(path)"
-            movieRepository.updateImage(baseURL: base, path: completePath) { image in
-                onComplete(image)
-            }
+        let base = Constants.Web.BASE_URL_IMAGE
+        let completePath = "\(Constants.Web.IMAGE_W185)\(movie.posterPath ?? "")"
+        movieRepository.updateImage(baseURL: base, path: completePath) { image in
+            onComplete(image)
         }
     }
 }

@@ -10,15 +10,16 @@ import UIKit
 
 final class CreditViewModel {
     // MARK: - Properties
-    private lazy var movieRepository: MovieRepositoryProtocol = MovieRepository()
+    private let movieRepository: MovieRepositoryProtocol
     private var cast: Cast?
     private var crew: Crew?
     private var creator: Creator?
     
-    init(cast: Cast? = nil, crew: Crew? = nil, creator: Creator? = nil) {
+    init(cast: Cast? = nil, crew: Crew? = nil, creator: Creator? = nil, repository: MovieRepositoryProtocol = MovieRepository()) {
         self.cast = cast
         self.crew = crew
         self.creator = creator
+        self.movieRepository = repository
     }
     
     var name: String {

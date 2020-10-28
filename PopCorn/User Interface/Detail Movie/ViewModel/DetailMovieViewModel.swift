@@ -19,7 +19,7 @@ final class DetailMovieViewModel {
     //MARK: - Properties
     private var id: Int
     private var page = Constants.General.FIRST
-    private lazy var movieRepo: MovieRepositoryProtocol = MovieRepository()
+    private var movieRepo: MovieRepositoryProtocol
     private var credit: Credit?
     private var similarMovies: [Movie] = []
     private var movie: MovieDetail?
@@ -57,8 +57,9 @@ final class DetailMovieViewModel {
         movie?.companiesFormatted ?? ""
     }
     
-    init(idMovie: Int) {
+    init(idMovie: Int, _ repository: MovieRepositoryProtocol = MovieRepository()) {
         id = idMovie
+        self.movieRepo = repository
     }
     
     //MARK: - Methods
@@ -126,7 +127,7 @@ extension DetailMovieViewModel: MovieRepositoryDelegate {
     }
     
     func movieRepository(_ manager: MovieRepositoryProtocol, didUpdateSimilarMovies: [Movie], totalPages: Int) {
-        if page < totalPages {
+        if page <= totalPages {
             similarMovies.append(contentsOf: didUpdateSimilarMovies)
             delegate?.onListenerSimilarMovies()
         }

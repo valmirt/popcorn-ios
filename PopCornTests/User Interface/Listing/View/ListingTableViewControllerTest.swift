@@ -48,12 +48,12 @@ class ListingTableViewControllerTest: XCTestCase {
         let _ = sut?.view
         
         //Then
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             promise.fulfill()
             let cell = self.sut?.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MediaTableViewCell
             XCTAssertEqual(cell.titleLabel?.text!, "Fake Movie 1")
         }
-        wait(for: [promise], timeout: 1.0)
+        wait(for: [promise], timeout: 2.0)
     }
     
     func testHiddenLoadingError() {
@@ -65,10 +65,10 @@ class ListingTableViewControllerTest: XCTestCase {
         let _ = sut?.view
         
         //Then
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             promise.fulfill()
             XCTAssertFalse(self.sut?.loadingIndicator.isAnimating ?? true)
         }
-        wait(for: [promise], timeout: 1.0)
+        wait(for: [promise], timeout: 2.0)
     }
 }

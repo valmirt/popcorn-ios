@@ -22,23 +22,31 @@ class SeasonViewModelTest: XCTestCase {
     }
     
     override func tearDown() {
+        repository = nil
+        sut = nil
         super.tearDown()
     }
     
     func testCorrectData() {
         //Given
+        let expected = FakeTVShowNetworkManager.fakeDetail().seasons?[0]
         
         //When
         
         //Then
+        XCTAssertEqual(sut?.title, expected?.name)
+        XCTAssertEqual(sut?.overview, expected?.overview)
     }
     
     func testErrorData() {
         //Given
+        sut = SeasonViewModel(season: nil, repository!)
         
         //When
         
         //Then
+        XCTAssertEqual(sut?.title, "")
+        XCTAssertEqual(sut?.overview, "")
     }
     
     func testGetImage() {

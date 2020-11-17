@@ -47,10 +47,18 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
     static func fakeDetail() -> TVShowDetail {
         TVShowDetail(
             id: FakeTVShowNetworkManager.ID,
-            createdBy: nil,
+            createdBy: [
+                Creator(
+                    id: 1,
+                    name: "Vince Giligan",
+                    profilePath: nil
+                )
+            ],
             episodeRunTime: nil,
             firstAirDate: "2020-04-04",
-            genres: [],
+            genres: [
+                Genre(name: "Sci-Fi")
+            ],
             inProduction: false,
             lastAirDate: "2020-04-04",
             name: "Fake TV Show",
@@ -63,7 +71,17 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
             popularity: 10.0,
             posterPath: nil,
             productionCompanies: [],
-            seasons: [],
+            seasons: [
+                Season(
+                    airDate: "",
+                    episodeCount: 25,
+                    id: 1,
+                    name: "Fake Season 1",
+                    overview: "",
+                    posterPath: nil,
+                    seasonNumber: 1
+                )
+            ],
             status: "released",
             type: nil,
             voteAverage: 100

@@ -16,6 +16,8 @@
 		5924E510234A8697007A3D93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5924E50E234A8697007A3D93 /* LaunchScreen.storyboard */; };
 		5924E520234A8E6B007A3D93 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924E51F234A8E6B007A3D93 /* Movie.swift */; };
 		5928D14C2369013B00305383 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5928D14B2369013B00305383 /* NetworkManagerTest.swift */; };
+		598F9E2D25635CBF001308EF /* DetailTVShowViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */; };
+		598F9E3525636AB3001308EF /* SeasonViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */; };
 		599E10382371076700B08C09 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E10372371076700B08C09 /* TVShow.swift */; };
 		59A8BDB024F2C99600D3C85C /* TypeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A8BDAF24F2C99600D3C85C /* TypeContent.swift */; };
 		59A8BDB224F2CA4D00D3C85C /* FilterContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A8BDB124F2CA4D00D3C85C /* FilterContent.swift */; };
@@ -107,6 +109,8 @@
 		5924E511234A8697007A3D93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5924E51F234A8E6B007A3D93 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		5928D14B2369013B00305383 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
+		598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTVShowViewModelTest.swift; sourceTree = "<group>"; };
+		598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewModelTest.swift; sourceTree = "<group>"; };
 		599E10372371076700B08C09 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
 		59A8BDAF24F2C99600D3C85C /* TypeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeContent.swift; sourceTree = "<group>"; };
 		59A8BDB124F2CA4D00D3C85C /* FilterContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterContent.swift; sourceTree = "<group>"; };
@@ -292,6 +296,31 @@
 			path = Remote;
 			sourceTree = "<group>";
 		};
+		598F9E2925635C16001308EF /* Detail TV Show */ = {
+			isa = PBXGroup;
+			children = (
+				598F9E2B25635C84001308EF /* View */,
+				598F9E2A25635C52001308EF /* ViewModel */,
+			);
+			path = "Detail TV Show";
+			sourceTree = "<group>";
+		};
+		598F9E2A25635C52001308EF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */,
+				598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		598F9E2B25635C84001308EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		59B0236923627737007C7367 /* PopCornTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +402,7 @@
 		C34ACF44254607A700A5691F /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				598F9E2925635C16001308EF /* Detail TV Show */,
 				C3BE3E0A2548E1F8007B823E /* Detail Movie */,
 				C34ACF4525460B2D00A5691F /* Listing */,
 			);
@@ -834,10 +864,12 @@
 				C3BE3DF72547B267007B823E /* MediaViewModelTest.swift in Sources */,
 				59B023992363E6CE007C7367 /* FakeMovieNetworkManager.swift in Sources */,
 				59B0239B2363EBF2007C7367 /* MovieRepositoryTest.swift in Sources */,
+				598F9E3525636AB3001308EF /* SeasonViewModelTest.swift in Sources */,
 				C3BE3DFB2547B304007B823E /* FakeTVShowRepository.swift in Sources */,
 				C34ACF3F2546005400A5691F /* FakeTVShowNetworkManager.swift in Sources */,
 				C34ACF4725460B4A00A5691F /* ListingViewModelTest.swift in Sources */,
 				C37459EF2548F2B200FB853C /* DetailMovieViewControllerTest.swift in Sources */,
+				598F9E2D25635CBF001308EF /* DetailTVShowViewModelTest.swift in Sources */,
 				C3BE3E132548EAD7007B823E /* CreditViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

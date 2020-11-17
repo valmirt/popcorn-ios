@@ -17,7 +17,7 @@ final class DetailTVShowViewModel {
     
     //MARK: - Properties
     private var id: Int
-    private lazy var tvRepository: TVShowRepositoryProtocol = TVShowRepository()
+    private var tvRepository: TVShowRepositoryProtocol
     private var tvShow: TVShowDetail?
     weak var delegate: DetailTVShowViewModelDelegate?
     
@@ -49,8 +49,9 @@ final class DetailTVShowViewModel {
         "Episodes: \(tvShow?.numberOfEpisodes ?? 0)"
     }
     
-    init(idTV: Int) {
+    init(idTV: Int, _ repository: TVShowRepositoryProtocol = TVShowRepository()) {
         id = idTV
+        tvRepository = repository
     }
     
     //MARK: - Methods

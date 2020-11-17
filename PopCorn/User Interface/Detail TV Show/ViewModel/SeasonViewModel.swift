@@ -9,7 +9,7 @@
 import UIKit
 
 final class SeasonViewModel {
-    private lazy var tvRepository: TVShowRepositoryProtocol = TVShowRepository()
+    private var tvRepository: TVShowRepositoryProtocol
     private let season: Season?
     
     var title: String {
@@ -19,8 +19,9 @@ final class SeasonViewModel {
         season?.overview ?? ""
     }
     
-    init(season: Season?) {
+    init(season: Season?, _ repository: TVShowRepositoryProtocol = TVShowRepository()) {
         self.season = season
+        tvRepository = repository
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {

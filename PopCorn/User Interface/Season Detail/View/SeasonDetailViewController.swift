@@ -8,20 +8,48 @@
 
 import UIKit
 
-final class SeasonDetailViewController: UIViewController {
+final class SeasonDetailViewController: UIViewController, HasCodeView {
+    typealias CustomView = SeasonDetailView
     
     // MARK: - Properties
-    
-    // MARK: - IBOutlets
+    var coordinator: SeasonDetailCoordinator?
+    var viewModel: SeasonDetailViewModel?
     
     // MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+    }
+    
+    deinit {
+        coordinator?.didFinish(child: nil)
+        print("SeasonViewController free")
     }
     
     // MARK: - Methods
+    private func setupView() {
+        view = SeasonDetailView()
+        viewModel?.delegate = self
+        viewModel?.loadData()
+    }
     
-    // MARK: - IBActions
+    private func fillData() {
+        //TODO
+    }
+}
+
+//MARK: - Season Detail ViewModel Delegate
+extension SeasonDetailViewController: SeasonDetailViewModelDelegate {
+    func onListenerError(with message: String) {
+        DispatchQueue.main.async {
+            //TODO
+        }
+    }
     
+    func onListenerSeasonDetail() {
+        DispatchQueue.main.async {
+            self.fillData()
+        }
+    }
 }
 

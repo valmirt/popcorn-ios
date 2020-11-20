@@ -9,10 +9,10 @@
 import UIKit
 
 final class MediaViewModel {
-    private var movieRepo: MovieRepositoryProtocol
-    private var tvRepo: TVShowRepositoryProtocol
-    private var movie: Movie?
-    private var tvShow: TVShow?
+    private let movieRepo: MovieRepositoryProtocol
+    private let tvRepo: TVShowRepositoryProtocol
+    private let movie: Movie?
+    private let tvShow: TVShow?
     
     init(movie: Movie? = nil, tvShow: TVShow? = nil, _ movieRepo: MovieRepositoryProtocol = MovieRepository(), _ tvRepo: TVShowRepositoryProtocol = TVShowRepository()) {
         self.movie = movie
@@ -38,10 +38,10 @@ final class MediaViewModel {
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
-        let base = Constants.Web.BASE_URL_IMAGE
+        let base = Web.BASE_URL_IMAGE
         if let movie = movie {
             if let backdrop = movie.backdropPath {
-                let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
+                let path = "\(Web.IMAGE_W780)\(backdrop)"
                 movieRepo.updateImage(baseURL: base, path: path) { image in
                     onComplete(image)
                 }
@@ -51,7 +51,7 @@ final class MediaViewModel {
         }
         if let tvShow = tvShow {
             if let backdrop = tvShow.backdropPath {
-                let path = "\(Constants.Web.IMAGE_W780)\(backdrop)"
+                let path = "\(Web.IMAGE_W780)\(backdrop)"
                 tvRepo.updateImage(baseURL: base, path: path) { image in
                     onComplete(image)
                 }

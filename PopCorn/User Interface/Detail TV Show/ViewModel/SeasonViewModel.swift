@@ -9,7 +9,7 @@
 import UIKit
 
 final class SeasonViewModel {
-    private var tvRepository: TVShowRepositoryProtocol
+    private let tvRepository: TVShowRepositoryProtocol
     private let season: Season?
     
     var title: String {
@@ -25,8 +25,8 @@ final class SeasonViewModel {
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        let path = "\(Constants.Web.IMAGE_W342)\(season?.posterPath ?? "")"
+        let base = Web.BASE_URL_IMAGE
+        let path = "\(Web.IMAGE_W342)\(season?.posterPath ?? "")"
         tvRepository.updateImage(baseURL: base, path: path) { image in
             onComplete(image)
         }

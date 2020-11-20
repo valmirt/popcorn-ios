@@ -17,8 +17,8 @@ protocol DetailMovieViewModelDelegate: class {
 
 final class DetailMovieViewModel {
     //MARK: - Properties
-    private var id: Int
-    private var page = Constants.General.FIRST
+    private let id: Int
+    private var page = General.FIRST
     private var movieRepo: MovieRepositoryProtocol
     private var credit: Credit?
     private var similarMovies: [Movie] = []
@@ -73,7 +73,7 @@ final class DetailMovieViewModel {
     
     func getMorePages(at indexPath: IndexPath) {
         let count = similarMovies.count
-        if indexPath.item == count - Constants.General.OFFSET {
+        if indexPath.item == count - General.OFFSET {
             page += 1
             movieRepo.updateSimilarMovies(with: id, page)
             print(page)
@@ -81,8 +81,8 @@ final class DetailMovieViewModel {
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        let path = "\(Constants.Web.IMAGE_W342)\(movie?.posterPath ?? "")"
+        let base = Web.BASE_URL_IMAGE
+        let path = "\(Web.IMAGE_W342)\(movie?.posterPath ?? "")"
         movieRepo.updateImage(baseURL: base, path: path) { image in
             onComplete(image)
         }

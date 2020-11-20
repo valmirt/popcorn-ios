@@ -14,5 +14,4 @@ extension UIStoryboard {
     static let search = UIStoryboard(name: "Search", bundle: nil)
     static let detailMovie = UIStoryboard(name: "DetailMovie", bundle: nil)
     static let detailTVShow = UIStoryboard(name: "DetailTVShow", bundle: nil)
-    static let seasonDetail = UIStoryboard(name: "SeasonDetail", bundle: nil)
 }

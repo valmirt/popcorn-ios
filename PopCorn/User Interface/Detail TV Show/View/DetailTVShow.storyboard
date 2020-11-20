@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gra-bm-afa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gra-bm-afa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -138,11 +138,11 @@
                                                     <constraint firstAttribute="height" constant="350" id="GaF-0F-GcO"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="seasonCell" rowHeight="115" id="jZb-yh-bAA" customClass="SeasonTableViewCell" customModule="PopCorn" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="seasonCell" rowHeight="115" id="jZb-yh-bAA" customClass="SeasonTableViewCell" customModule="PopCorn" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="398" height="115"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jZb-yh-bAA" id="q1h-A7-OOV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="354" height="115"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="398" height="115"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="oTp-8G-fha" customClass="CircleImageView" customModule="PopCorn" customModuleProvider="target">
@@ -159,13 +159,13 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8e-k0-mKw">
-                                                                    <rect key="frame" x="92" y="13" width="246" height="24"/>
+                                                                    <rect key="frame" x="92" y="13" width="278" height="24"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Overviw" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwA-YW-dNt">
-                                                                    <rect key="frame" x="92" y="41" width="246" height="16"/>
+                                                                    <rect key="frame" x="92" y="41" width="278" height="16"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -329,20 +329,11 @@
                         <outlet property="lbTitle" destination="moP-Ef-x1b" id="ukI-Qj-Ioa"/>
                         <outlet property="loadingSpinner" destination="6jH-32-SOf" id="U9D-Yg-4OA"/>
                         <outlet property="tvSeasons" destination="PMt-HK-DcK" id="2nm-TN-BIk"/>
-                        <segue destination="ze1-eZ-H1E" kind="showDetail" identifier="goToSeason" id="4QD-24-MiV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T28-WH-iga" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2693.5999999999999" y="-924.38423645320199"/>
-        </scene>
-        <!--SeasonDetailViewController-->
-        <scene sceneID="xbd-1I-bBH">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="SeasonDetailViewController" storyboardName="SeasonDetail" referencedIdentifier="SeasonDetailViewController" id="ze1-eZ-H1E" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rs0-i2-kmc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3426" y="-925"/>
         </scene>
     </scenes>
     <designables>

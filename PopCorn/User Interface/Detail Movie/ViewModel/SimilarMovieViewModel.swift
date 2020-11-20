@@ -19,8 +19,8 @@ final class SimilarMovieViewModel {
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        let completePath = "\(Constants.Web.IMAGE_W185)\(movie.posterPath ?? "")"
+        let base = Web.BASE_URL_IMAGE
+        let completePath = "\(Web.IMAGE_W185)\(movie.posterPath ?? "")"
         movieRepository.updateImage(baseURL: base, path: completePath) { image in
             onComplete(image)
         }

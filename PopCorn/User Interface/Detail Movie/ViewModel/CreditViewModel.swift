@@ -11,9 +11,9 @@ import UIKit
 final class CreditViewModel {
     // MARK: - Properties
     private let movieRepository: MovieRepositoryProtocol
-    private var cast: Cast?
-    private var crew: Crew?
-    private var creator: Creator?
+    private let cast: Cast?
+    private let crew: Crew?
+    private let creator: Creator?
     
     init(cast: Cast? = nil, crew: Crew? = nil, creator: Creator? = nil, repository: MovieRepositoryProtocol = MovieRepository()) {
         self.cast = cast
@@ -31,8 +31,8 @@ final class CreditViewModel {
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        let completePath = "\(Constants.Web.IMAGE_W185)\(cast?.profilePath ?? crew?.profilePath ?? creator?.profilePath ?? "")"
+        let base = Web.BASE_URL_IMAGE
+        let completePath = "\(Web.IMAGE_W185)\(cast?.profilePath ?? crew?.profilePath ?? creator?.profilePath ?? "")"
         movieRepository.updateImage(baseURL: base, path: completePath) { image in
             onComplete(image)
         }

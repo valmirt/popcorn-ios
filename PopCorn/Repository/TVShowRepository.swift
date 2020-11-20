@@ -13,7 +13,7 @@ class TVShowRepository: BaseRepository, TVShowRepositoryProtocol {
     
     func updateTVShowList(_ page: Int, path: String) {
         let queries = [
-            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY),
+            URLQueryItem(name: "api_key", value: Web.API_KEY),
             URLQueryItem(name: "page", value: String(page))
         ]
         
@@ -31,10 +31,10 @@ class TVShowRepository: BaseRepository, TVShowRepositoryProtocol {
     
     func detailTVShow(with id: Int) {
         let queries = [
-            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
+            URLQueryItem(name: "api_key", value: Web.API_KEY)
         ]
         
-        load("/\(Constants.Web.VERSION_API)/tv/\(id)", queries, TVShowDetail.self) { [weak self] result in
+        load("/\(Web.VERSION_API)/tv/\(id)", queries, TVShowDetail.self) { [weak self] result in
             guard let self = self else { return }
             
             switch result {

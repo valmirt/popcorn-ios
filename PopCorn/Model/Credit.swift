@@ -13,20 +13,3 @@ struct Credit: Decodable {
     var cast: [Cast]
     var crew: [Crew]
 }
-
-struct Cast: Decodable {
-    var castId: Int
-    var character: String
-    var creditId: String
-    var id: Int
-    var name: String
-    var profilePath: String?
-}
-
-struct Crew: Decodable {
-    var creditId: String
-    var id: Int
-    var job: String
-    var name: String
-    var profilePath: String?
-}

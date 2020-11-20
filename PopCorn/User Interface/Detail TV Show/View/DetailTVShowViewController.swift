@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DetailTVShowPresenter {
-    //TODO
+    func showSeasonDetail(with viewModel: SeasonDetailViewModel?)
 }
 
 typealias DetailTVShowPresenterCoordinator = DetailTVShowPresenter & Coordinator
@@ -113,6 +113,11 @@ extension DetailTVShowViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tvSeasons.dequeueReusableCell(withIdentifier: "seasonCell", for: indexPath) as! SeasonTableViewCell
         cell.configure(with: viewModel?.getSeasonViewModel(at: indexPath))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        coordinator?.showSeasonDetail(with: viewModel?.getSeasonDetailViewModel(at: indexPath))
+        tableView.cellForRow(at: indexPath)?.isSelected = false
     }
 }
 

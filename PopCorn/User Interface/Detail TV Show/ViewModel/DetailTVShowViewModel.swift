@@ -16,7 +16,7 @@ protocol DetailTVShowViewModelDelegate: class {
 final class DetailTVShowViewModel {
     
     //MARK: - Properties
-    private var id: Int
+    private let id: Int
     private var tvRepository: TVShowRepositoryProtocol
     private var tvShow: TVShowDetail?
     weak var delegate: DetailTVShowViewModelDelegate?
@@ -61,8 +61,8 @@ final class DetailTVShowViewModel {
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
-        let base = Constants.Web.BASE_URL_IMAGE
-        let path = "\(Constants.Web.IMAGE_W342)\(tvShow?.posterPath ?? "")"
+        let base = Web.BASE_URL_IMAGE
+        let path = "\(Web.IMAGE_W342)\(tvShow?.posterPath ?? "")"
         tvRepository.updateImage(baseURL: base, path: path) { image in
             onComplete(image)
         }
@@ -74,6 +74,10 @@ final class DetailTVShowViewModel {
     
     func getSeasonViewModel(at indexPath: IndexPath) -> SeasonViewModel {
         SeasonViewModel(season: tvShow?.seasons?[indexPath.row])
+    }
+    
+    func getSeasonDetailViewModel(at indexPath: IndexPath) -> SeasonDetailViewModel {
+        SeasonDetailViewModel(id: tvShow?.seasons?[indexPath.row].id ?? 0)
     }
 }
 

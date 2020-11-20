@@ -12,12 +12,21 @@ final class SeasonDetailCoordinator: Coordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var parentCoordinator: Coordinator?
+    var viewModel: SeasonDetailViewModel?
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, viewModel: SeasonDetailViewModel?) {
         self.navigationController = navigationController
+        self.viewModel = viewModel
     }
     
     func start() {
-        
+        let seasonVC = SeasonDetailViewController()
+        seasonVC.coordinator = self
+        seasonVC.viewModel = viewModel
+        navigationController.pushViewController(seasonVC, animated: true)
+    }
+    
+    deinit {
+        print("SeasonDetailCoordinator free")
     }
 }

@@ -36,7 +36,7 @@ class BaseRepository: BaseRepositoryProtocol {
         _ ofType: T.Type,
         _ handler: @escaping (Result<T, NetworkError>) -> Void
     ) {
-        guard let url = api.createURL(baseURL: Constants.Web.BASE_URL, path: path, queries: queries) else {
+        guard let url = api.createURL(baseURL: Web.BASE_URL, path: path, queries: queries) else {
             handler(.failure(.invalidURL))
             return
         }

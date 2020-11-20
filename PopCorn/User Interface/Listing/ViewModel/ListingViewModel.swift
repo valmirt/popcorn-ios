@@ -16,13 +16,13 @@ protocol ListingViewModelDelegate: class {
 final class ListingViewModel {
     
     //MARK: - Properties
-    private var typeMedia: TypeContent
-    private var filter: FilterContent
+    private let typeMedia: TypeContent
+    private let filter: FilterContent
     private var movieRepo: MovieRepositoryProtocol
     private var tvRepo: TVShowRepositoryProtocol
     private lazy var movies: [Movie] = []
     private lazy var tv: [TVShow] = []
-    private var page = Constants.General.FIRST
+    private var page = General.FIRST
     private var reloadData = false
     weak var delegate: ListingViewModelDelegate?
     
@@ -52,7 +52,7 @@ final class ListingViewModel {
     
     //MARK: - Methods
     func loadData() {
-        page = Constants.General.FIRST
+        page = General.FIRST
         reloadData = true
         switch typeMedia {
         case .movie:
@@ -85,13 +85,13 @@ final class ListingViewModel {
         switch typeMedia {
         case .movie:
             let count = movies.count
-            if index == count - Constants.General.OFFSET {
+            if index == count - General.OFFSET {
                 page += 1
                 movieRepo.updateMovieList(page, path: getPath())
             }
         case .tvShow:
             let count = tv.count
-            if index == count - Constants.General.OFFSET {
+            if index == count - General.OFFSET {
                 page += 1
                 tvRepo.updateTVShowList(page, path: getPath())
             }
@@ -99,7 +99,7 @@ final class ListingViewModel {
     }
     
     private func getPath() -> String {
-        return "/\(Constants.Web.VERSION_API)/\(typeMedia.rawValue)/\(filter.rawValue.api)"
+        return "/\(Web.VERSION_API)/\(typeMedia.rawValue)/\(filter.rawValue.api)"
     }
 }
 

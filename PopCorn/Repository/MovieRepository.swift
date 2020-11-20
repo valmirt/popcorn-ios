@@ -14,7 +14,7 @@ class MovieRepository: BaseRepository, MovieRepositoryProtocol {
     
     func updateMovieList(_ page: Int = 1, path: String) {
         let queries = [
-            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY),
+            URLQueryItem(name: "api_key", value: Web.API_KEY),
             URLQueryItem(name: "page", value: String(page))
         ]
         
@@ -32,10 +32,10 @@ class MovieRepository: BaseRepository, MovieRepositoryProtocol {
     
     func detailMovie(with id: Int) {
         let queries = [
-            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
+            URLQueryItem(name: "api_key", value: Web.API_KEY)
         ]
         
-        load("/\(Constants.Web.VERSION_API)/movie/\(id)", queries, MovieDetail.self) { [weak self] (result) in
+        load("/\(Web.VERSION_API)/movie/\(id)", queries, MovieDetail.self) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
@@ -49,10 +49,10 @@ class MovieRepository: BaseRepository, MovieRepositoryProtocol {
     
     func creditMovie(with id: Int) {
         let queries = [
-            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY)
+            URLQueryItem(name: "api_key", value: Web.API_KEY)
         ]
         
-        load("/\(Constants.Web.VERSION_API)/movie/\(id)/credits", queries, Credit.self) { [weak self] result in
+        load("/\(Web.VERSION_API)/movie/\(id)/credits", queries, Credit.self) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -66,11 +66,11 @@ class MovieRepository: BaseRepository, MovieRepositoryProtocol {
     
     func updateSimilarMovies(with id: Int, _ page: Int) {
         let queries = [
-            URLQueryItem(name: "api_key", value: Constants.Web.API_KEY),
+            URLQueryItem(name: "api_key", value: Web.API_KEY),
             URLQueryItem(name: "page", value: String(page))
         ]
         
-        load("/\(Constants.Web.VERSION_API)/movie/\(id)/similar", queries, ResponseList<Movie>.self) { [weak self] result in
+        load("/\(Web.VERSION_API)/movie/\(id)/similar", queries, ResponseList<Movie>.self) { [weak self] result in
             guard let self = self else { return }
             
             switch result {

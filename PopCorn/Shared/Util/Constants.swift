@@ -25,6 +25,7 @@ enum General {
 }
 
 enum Dimens {
+    static let minimum: CGFloat = 4
     static let small: CGFloat = 6
     static let little: CGFloat = 8
     static let medium: CGFloat = 16

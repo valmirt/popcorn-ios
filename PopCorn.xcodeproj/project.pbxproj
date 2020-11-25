@@ -24,6 +24,8 @@
 		59353C2E25672E5000216F21 /* SeasonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59353C2D25672E5000216F21 /* SeasonDetail.swift */; };
 		59353C322567326D00216F21 /* Crew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59353C312567326D00216F21 /* Crew.swift */; };
 		59353C36256732B400216F21 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59353C35256732B400216F21 /* Cast.swift */; };
+		5937CB79256DC5C000CA6AFA /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5937CB78256DC5C000CA6AFA /* EpisodeTableViewCell.swift */; };
+		5937CB85256DFC4700CA6AFA /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5937CB84256DFC4700CA6AFA /* EpisodeViewModel.swift */; };
 		598F9E2D25635CBF001308EF /* DetailTVShowViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */; };
 		598F9E3525636AB3001308EF /* SeasonViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */; };
 		599E10382371076700B08C09 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E10372371076700B08C09 /* TVShow.swift */; };
@@ -124,6 +126,8 @@
 		59353C2D25672E5000216F21 /* SeasonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonDetail.swift; sourceTree = "<group>"; };
 		59353C312567326D00216F21 /* Crew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crew.swift; sourceTree = "<group>"; };
 		59353C35256732B400216F21 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		5937CB78256DC5C000CA6AFA /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		5937CB84256DFC4700CA6AFA /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTVShowViewModelTest.swift; sourceTree = "<group>"; };
 		598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewModelTest.swift; sourceTree = "<group>"; };
 		599E10372371076700B08C09 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
@@ -459,6 +463,7 @@
 			isa = PBXGroup;
 			children = (
 				C3A173B0253FF1DE00C6AF85 /* SeasonDetailViewModel.swift */,
+				5937CB84256DFC4700CA6AFA /* EpisodeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -468,6 +473,7 @@
 			children = (
 				C36729F62534F5940061BEDE /* SeasonDetailViewController.swift */,
 				59353C292566C3FD00216F21 /* SeasonDetailView.swift */,
+				5937CB78256DC5C000CA6AFA /* EpisodeTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -824,12 +830,14 @@
 				59B02373236277DB007C7367 /* Constants.swift in Sources */,
 				59A8BDB024F2C99600D3C85C /* TypeContent.swift in Sources */,
 				C326FBED253FB3D60052AF7E /* SearchViewModel.swift in Sources */,
+				5937CB79256DC5C000CA6AFA /* EpisodeTableViewCell.swift in Sources */,
 				59A8BDB224F2CA4D00D3C85C /* FilterContent.swift in Sources */,
 				C326FBAD253E4F9F0052AF7E /* CreditViewModel.swift in Sources */,
 				591DAB322374E9B800FF0F48 /* DetailMovieViewController.swift in Sources */,
 				59B0238F2363C678007C7367 /* NetworkManager.swift in Sources */,
 				59B023932363D559007C7367 /* NetworkError.swift in Sources */,
 				59353C322567326D00216F21 /* Crew.swift in Sources */,
+				5937CB85256DFC4700CA6AFA /* EpisodeViewModel.swift in Sources */,
 				C330FF57253FC65800DED1B0 /* ListingCoordinator.swift in Sources */,
 				591DAB342374E9D400FF0F48 /* DetailTVShowViewController.swift in Sources */,
 				C326FBB7253E61FD0052AF7E /* SeasonViewModel.swift in Sources */,

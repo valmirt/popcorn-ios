@@ -9,8 +9,7 @@
 import UIKit
 
 final class SeasonDetailView: UIView, CodeView {
-    
-    //MARK: - Properties
+    static let cellIdentifier = "episodeCell"
     
     //MARK: - View Components
     @ViewCodeComponent
@@ -66,12 +65,38 @@ final class SeasonDetailView: UIView, CodeView {
     }()
     
     @ViewCodeComponent
-    var episodesLabel: UILabel = {
+    private var episodesLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = .label
         label.font = .preferredFont(forTextStyle: .subheadline)
         label.text = "Episodes:"
         return label
+    }()
+    
+    @ViewCodeComponent
+    var episodesTableView: UITableView = {
+        let tableView = UITableView(frame: .zero)
+        tableView.allowsSelection = false
+        tableView.register(EpisodeTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        return tableView
+    }()
+    
+    @ViewCodeComponent
+    var loadingContainer: UIView = {
+        let view = UIView(frame: .zero)
+        view.isOpaque = true
+        view.isHidden = true
+        view.backgroundColor = UIColor.systemBackground
+        return view
+    }()
+    
+    @ViewCodeComponent
+    var loadingSpinner: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(frame: .zero)
+        indicator.style = .medium
+        indicator.isHidden = true
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
     
     //MARK: - Super Methods
@@ -93,6 +118,9 @@ final class SeasonDetailView: UIView, CodeView {
         contentView.addSubview(overviewLabel)
         contentView.addSubview(overviewTextView)
         contentView.addSubview(episodesLabel)
+        contentView.addSubview(episodesTableView)
+        contentView.addSubview(loadingContainer)
+        loadingContainer.addSubview(loadingSpinner)
     }
     
     func setupConstraints() {
@@ -101,13 +129,15 @@ final class SeasonDetailView: UIView, CodeView {
         airDateConstraints()
         seasonNumberConstraints()
         overviewConstraints()
-        episodesLabelConstraints()
+        episodesConstraints()
+        loadingConstraints()
     }
     
     func setupExtraConfigurations() {
         backgroundColor = UIColor.systemBackground
     }
     
+    //MARK: - Constraint Methods
     private func scrollViewConstraints() {
         scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -150,9 +180,28 @@ final class SeasonDetailView: UIView, CodeView {
         overviewTextView.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
     
-    private func episodesLabelConstraints() {
+    private func episodesConstraints() {
+        //Label
         episodesLabel.topAnchor.constraint(equalTo: overviewTextView.bottomAnchor, constant: Dimens.medium).isActive = true
         episodesLabel.leadingAnchor.constraint(equalTo: overviewTextView.leadingAnchor).isActive = true
         episodesLabel.trailingAnchor.constraint(equalTo: overviewTextView.trailingAnchor).isActive = true
+        
+        //TableView
+        episodesTableView.topAnchor.constraint(equalTo: episodesLabel.bottomAnchor, constant: Dimens.little).isActive = true
+        episodesTableView.leadingAnchor.constraint(equalTo: episodesLabel.leadingAnchor).isActive = true
+        episodesTableView.trailingAnchor.constraint(equalTo: episodesLabel.trailingAnchor).isActive = true
+        episodesTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Dimens.medium).isActive = true
+    }
+    
+    private func loadingConstraints() {
+        //View
+        loadingContainer.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        loadingContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        loadingContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        loadingContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        
+        //Indicator
+        loadingSpinner.centerXAnchor.constraint(equalTo: loadingContainer.centerXAnchor).isActive = true
+        loadingSpinner.topAnchor.constraint(equalTo: loadingContainer.topAnchor, constant: 90).isActive = true
     }
 }

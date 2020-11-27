@@ -33,7 +33,10 @@ final class SeasonDetailCoordinator: Coordinator {
 
 extension SeasonDetailCoordinator: SeasonDetailPresenter {
     func showEpisodeDetail(with viewModel: EpisodeDetailViewModel?) {
-        //TODO
+        let coordinator = EpisodeDetailCoordinator(navigationController: navigationController, viewModel: viewModel)
+        coordinator.parentCoordinator = self
+        add(childCoordinator: coordinator)
+        coordinator.start()
     }
     
     func exitThisScreen() {

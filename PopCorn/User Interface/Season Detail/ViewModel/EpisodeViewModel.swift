@@ -26,7 +26,7 @@ final class EpisodeViewModel {
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
         let base = Web.BASE_URL_IMAGE
-        let path = "\(Web.IMAGE_W342)\(episode?.stillPath ?? "")"
+        let path = "\(Web.IMAGE_W185)\(episode?.stillPath ?? "")"
         repository.updateImage(baseURL: base, path: path) { image in
             onComplete(image)
         }

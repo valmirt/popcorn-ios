@@ -36,7 +36,7 @@ class EpisodeTableViewCell: UITableViewCell, CodeView {
     private var overviewLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = .label
-        label.numberOfLines = 0
+        label.numberOfLines = 3
         label.lineBreakMode = .byTruncatingTail
         label.font = .preferredFont(forTextStyle: .footnote)
         return label
@@ -83,7 +83,7 @@ class EpisodeTableViewCell: UITableViewCell, CodeView {
         titleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: Dimens.little).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -Dimens.little).isActive = true
         
-        overviewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Dimens.minimum).isActive = true
+        overviewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Dimens.little).isActive = true
         overviewLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         overviewLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
         overviewLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -Dimens.minimum).isActive = true

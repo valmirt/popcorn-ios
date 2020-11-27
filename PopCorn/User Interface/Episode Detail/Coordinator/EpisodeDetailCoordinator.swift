@@ -21,7 +21,10 @@ final class EpisodeDetailCoordinator: Coordinator {
     }
     
     func start() {
-        
+        let episodeVC = EpisodeDetailViewController()
+        episodeVC.coordinator = self
+        episodeVC.viewModel = viewModel
+        navigationController.present(episodeVC, animated: true, completion: nil)
     }
     
     deinit {

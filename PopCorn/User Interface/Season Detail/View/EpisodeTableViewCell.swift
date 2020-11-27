@@ -9,13 +9,12 @@
 import UIKit
 
 class EpisodeTableViewCell: UITableViewCell, CodeView {
-    
     //MARK: - View Components
     @ViewCodeComponent
     private var posterImageView: CircleImageView = {
         let imageView = CircleImageView(frame: .zero)
         imageView.image = UIImage(systemName: "photo")
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.cornerRadius = 4
         imageView.tintColor = UIColor.opaqueSeparator
         imageView.clipsToBounds = true
@@ -48,12 +47,26 @@ class EpisodeTableViewCell: UITableViewCell, CodeView {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
+        super.init(coder: aDecoder)
     }
     
     //MARK: - Methods
+    func configure(with viewModel: EpisodeViewModel?) {
+        titleLabel.text = viewModel?.title
+        overviewLabel.text = viewModel?.overview
+        viewModel?.getImage { image in
+            if image != nil {
+                self.posterImageView.contentMode = .scaleAspectFill
+                self.posterImageView.image = image
+            } else {
+                self.posterImageView.contentMode = .scaleToFill
+                self.posterImageView.image = UIImage(systemName: "photo")
+            }
+        }
+    }
+    
     func setupComponents() {
         addSubview(posterImageView)
         addSubview(titleLabel)

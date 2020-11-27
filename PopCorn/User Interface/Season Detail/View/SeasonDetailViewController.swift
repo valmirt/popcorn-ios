@@ -37,7 +37,11 @@ final class SeasonDetailViewController: UIViewController, HasCodeView {
     }
     
     private func fillData() {
-        //TODO
+        title = viewModel?.title
+        customView?.overviewTextView.text = viewModel?.overview
+        customView?.airDateLabel.text = viewModel?.airDate
+        customView?.seasonNumberLabel.text = viewModel?.numberSeason
+        customView?.episodesTableView.reloadData()
     }
     
     private func performLoading(status: Bool) {
@@ -49,20 +53,35 @@ final class SeasonDetailViewController: UIViewController, HasCodeView {
             customView?.loadingSpinner.stopAnimating()
         }
     }
+    
+    private func errorAlert(message: String?) {
+        let alert = UIAlertController(
+            title: "Error!",
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
+            self.navigationController?.popViewController(animated: true)
+        })
+        
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 //MARK: - UITableView data source
 extension SeasonDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.countEpisodes ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = customView?.episodesTableView.dequeueReusableCell(withIdentifier: SeasonDetailView.cellIdentifier, for: indexPath) as? EpisodeTableViewCell else {
+        guard let cell = customView?.episodesTableView.dequeueReusableCell(
+            withIdentifier: SeasonDetailView.cellIdentifier, for: indexPath
+        ) as? EpisodeTableViewCell else {
             return UITableViewCell()
         }
         
-        //TODO
+        cell.configure(with: viewModel?.getEpisodeViewModel(at: indexPath))
         
         return cell
     }
@@ -78,15 +97,16 @@ extension SeasonDetailViewController: UITableViewDataSource, UITableViewDelegate
 
 //MARK: - Season Detail ViewModel Delegate
 extension SeasonDetailViewController: SeasonDetailViewModelDelegate {
-    func onListenerError(with message: String) {
+    func onListenerError(with errorMessage: String) {
         DispatchQueue.main.async {
-            //TODO
+            self.errorAlert(message: errorMessage)
         }
     }
     
     func onListenerSeasonDetail() {
         DispatchQueue.main.async {
             self.fillData()
+            self.performLoading(status: false)
         }
     }
 }

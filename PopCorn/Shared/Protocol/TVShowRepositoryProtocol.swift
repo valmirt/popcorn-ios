@@ -11,7 +11,9 @@ import Foundation
 protocol TVShowRepositoryProtocol: BaseRepositoryProtocol {
     var delegate: TVShowRepositoryDelegate? { get set }
     
-    func updateTVShowList (_ page: Int, path: String)
+    func updateTVShowList(_ page: Int, path: String)
     
-    func detailTVShow (with id: Int)
+    func detailTVShow(with id: Int)
+    
+    func detailSeason(with id: Int, and seasonNumber: Int)
 }

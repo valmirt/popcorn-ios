@@ -52,12 +52,7 @@ final class ListingTableViewController: UITableViewController {
     }
     
     private func errorAlert(message: String?) {
-        let alert = UIAlertController(
-            title: "Error!",
-            message: message,
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        let alert = ErrorAlertUtil.errorAlert(message: message)
         present(alert, animated: true, completion: nil)
     }
     

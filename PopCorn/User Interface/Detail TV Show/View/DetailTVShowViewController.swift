@@ -10,6 +10,8 @@ import UIKit
 
 protocol DetailTVShowPresenter {
     func showSeasonDetail(with viewModel: SeasonDetailViewModel?)
+    
+    func exitThisScreen()
 }
 
 typealias DetailTVShowPresenterCoordinator = DetailTVShowPresenter & Coordinator
@@ -49,15 +51,7 @@ final class DetailTVShowViewController: UIViewController {
     }
     
     private func errorAlert(message: String?) {
-        let alert = UIAlertController(
-            title: "Error!",
-            message: message,
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
-            self.navigationController?.popViewController(animated: true)
-        })
-        
+        let alert = ErrorAlertUtil.errorAlert(message: message) { self.coordinator?.exitThisScreen() }
         present(alert, animated: true, completion: nil)
     }
     
@@ -126,7 +120,6 @@ extension DetailTVShowViewController: DetailTVShowViewModelDelegate {
     func onListenerError(with errorMessage: String) {
         DispatchQueue.main.async {
             self.errorAlert(message: errorMessage)
-            self.performLoading(status: false)
         }
     }
     
@@ -139,4 +132,3 @@ extension DetailTVShowViewController: DetailTVShowViewModelDelegate {
         }
     }
 }
-

@@ -30,3 +30,13 @@ final class SeasonDetailCoordinator: Coordinator {
         print("SeasonDetailCoordinator free")
     }
 }
+
+extension SeasonDetailCoordinator: SeasonDetailPresenter {
+    func showEpisodeDetail(with viewModel: EpisodeDetailViewModel?) {
+        //TODO
+    }
+    
+    func exitThisScreen() {
+        navigationController.popViewController(animated: true)
+    }
+}

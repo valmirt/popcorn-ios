@@ -54,6 +54,10 @@ final class SeasonDetailViewModel {
     func getEpisodeViewModel(at indexPath: IndexPath) -> EpisodeViewModel {
         EpisodeViewModel(episode: seasonDetail?.episodes[indexPath.row])
     }
+    
+    func getEpisodeDetailViewModel(at indexPath: IndexPath) -> EpisodeDetailViewModel {
+        EpisodeDetailViewModel(episode: seasonDetail?.episodes[indexPath.row])
+    }
 }
 
 //MARK: - TV show repository delegate

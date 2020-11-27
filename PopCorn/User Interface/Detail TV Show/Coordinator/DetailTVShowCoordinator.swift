@@ -38,4 +38,8 @@ extension DetailTVShowCoordinator: DetailTVShowPresenter {
         add(childCoordinator: coordinator)
         coordinator.start()
     }
+    
+    func exitThisScreen() {
+        navigationController.popViewController(animated: true)
+    }
 }

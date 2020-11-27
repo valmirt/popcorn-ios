@@ -10,6 +10,8 @@ import UIKit
 
 protocol DetailMoviePresenter {
     func showDetailMovie(with viewModel: DetailMovieViewModel?)
+    
+    func exitThisScreen()
 }
 
 typealias DetailMoviePresenterCoordinator = DetailMoviePresenter & Coordinator
@@ -64,15 +66,7 @@ final class DetailMovieViewController: UIViewController {
     }
     
     private func errorAlert(message: String?) {
-        let alert = UIAlertController(
-            title: "Error!",
-            message: message,
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
-            self.navigationController?.popViewController(animated: true)
-        })
-        
+        let alert = ErrorAlertUtil.errorAlert(message: message) { self.coordinator?.exitThisScreen() }
         present(alert, animated: true, completion: nil)
     }
     

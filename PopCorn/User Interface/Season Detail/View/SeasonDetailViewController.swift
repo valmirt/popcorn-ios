@@ -8,11 +8,19 @@
 
 import UIKit
 
+protocol SeasonDetailPresenter {
+    func showEpisodeDetail(with viewModel: EpisodeDetailViewModel?)
+    
+    func exitThisScreen()
+}
+
+typealias SeasonDetailPresenterCoordinator = SeasonDetailPresenter & Coordinator
+
 final class SeasonDetailViewController: UIViewController, HasCodeView {
     typealias CustomView = SeasonDetailView
     
     // MARK: - Properties
-    var coordinator: SeasonDetailCoordinator?
+    var coordinator: SeasonDetailPresenterCoordinator?
     var viewModel: SeasonDetailViewModel?
     
     // MARK: - Super Methods
@@ -55,15 +63,7 @@ final class SeasonDetailViewController: UIViewController, HasCodeView {
     }
     
     private func errorAlert(message: String?) {
-        let alert = UIAlertController(
-            title: "Error!",
-            message: message,
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in
-            self.navigationController?.popViewController(animated: true)
-        })
-        
+        let alert = ErrorAlertUtil.errorAlert(message: message) { self.coordinator?.exitThisScreen() }
         present(alert, animated: true, completion: nil)
     }
 }
@@ -91,7 +91,7 @@ extension SeasonDetailViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        //TODO
+        coordinator?.showEpisodeDetail(with: viewModel?.getEpisodeDetailViewModel(at: indexPath))
     }
 }
 

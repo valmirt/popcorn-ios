@@ -562,7 +562,7 @@
 		C3B01F8C253B77A90026BAF7 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				C3B01FA5253B82130026BAF7 /* Listing */,
+				C3B01FA5253B82130026BAF7 /* Listing Home */,
 				C3B01FAA253B82690026BAF7 /* Detail Movie */,
 				C3B01FA9253B82590026BAF7 /* Detail TV Show */,
 				C3A173A8253FF18800C6AF85 /* Season Detail */,
@@ -573,14 +573,14 @@
 			path = "User Interface";
 			sourceTree = "<group>";
 		};
-		C3B01FA5253B82130026BAF7 /* Listing */ = {
+		C3B01FA5253B82130026BAF7 /* Listing Home */ = {
 			isa = PBXGroup;
 			children = (
 				C3B01FA8253B823E0026BAF7 /* Coordinator */,
 				C3B01FA7253B82360026BAF7 /* View */,
 				C3B01FA6253B822C0026BAF7 /* ViewModel */,
 			);
-			path = Listing;
+			path = "Listing Home";
 			sourceTree = "<group>";
 		};
 		C3B01FA6253B822C0026BAF7 /* ViewModel */ = {

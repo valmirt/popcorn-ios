@@ -23,7 +23,7 @@ final class CrewAndGuestCollectionViewCell: UICollectionViewCell, CodeView {
     @ViewCodeComponent
     private var labelChar: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .light)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.lineBreakMode = .byTruncatingTail

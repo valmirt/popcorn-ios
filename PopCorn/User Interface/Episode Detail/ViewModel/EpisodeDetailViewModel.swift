@@ -27,6 +27,10 @@ final class EpisodeDetailViewModel {
     var overview: String {
         episode?.overview ?? "..."
     }
+    var creditCount: Int {
+        guard let episode = episode else { return 0 }
+        return episode.guestStars.count + episode.crew.count
+    }
     
     init(episode: Episode?,_ repository: TVShowRepositoryProtocol = TVShowRepository()) {
         self.episode = episode
@@ -38,6 +42,17 @@ final class EpisodeDetailViewModel {
         let path = "\(Web.IMAGE_W500)\(episode?.stillPath ?? "")"
         repository.updateImage(baseURL: base, path: path) { image in
             onComplete(image)
+        }
+    }
+    
+    func getCreditCellViewModel(at indexPath: IndexPath) -> CreditViewModel {
+        guard let episode = episode else { return CreditViewModel() }
+        let credit = Credit(id: 0, cast: episode.guestStars, crew: episode.crew)
+        if indexPath.item < credit.cast.count {
+            return CreditViewModel(cast: credit.cast[indexPath.item])
+        } else {
+            let index = indexPath.item - credit.cast.count
+            return CreditViewModel(crew: credit.crew[index])
         }
     }
 }

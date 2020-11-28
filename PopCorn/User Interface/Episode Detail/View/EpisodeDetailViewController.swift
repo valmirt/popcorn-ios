@@ -29,13 +29,30 @@ final class EpisodeDetailViewController: UIViewController, HasCodeView {
     // MARK: - Methods
     private func setupView() {
         view = EpisodeDetailView()
+        customView?.creditCollectionView.delegate = self
+        customView?.creditCollectionView.dataSource = self
         customView?.titleLabel.text = viewModel?.title
         customView?.airDateLabel.text = viewModel?.airDate
         customView?.seasonNumberLabel.text = viewModel?.seasonNumber
         customView?.episodeNumberLabel.text = viewModel?.episodeNumber
+        customView?.overviewTextView.text = viewModel?.overview
         
         viewModel?.getImage(onComplete: { image in
             self.customView?.backdropImage.image = image ?? UIImage(systemName: "photo")
         })
     }
 }
+
+//MARK: - CollectionView datasouce and delegate
+extension EpisodeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        viewModel?.creditCount ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = customView?.creditCollectionView.dequeueReusableCell(withReuseIdentifier: EpisodeDetailView.cellIdentifier, for: indexPath) as! CrewAndGuestCollectionViewCell
+        cell.configure(with: viewModel?.getCreditCellViewModel(at: indexPath))
+        return cell
+    }
+}
+

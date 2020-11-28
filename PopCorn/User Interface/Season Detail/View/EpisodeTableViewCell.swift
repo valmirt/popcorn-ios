@@ -18,7 +18,6 @@ class EpisodeTableViewCell: UITableViewCell, CodeView {
         imageView.cornerRadius = 4
         imageView.tintColor = UIColor.opaqueSeparator
         imageView.clipsToBounds = true
-        
         return imageView
     }()
     

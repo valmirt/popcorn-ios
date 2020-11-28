@@ -9,6 +9,7 @@
 import UIKit
 
 final class EpisodeDetailView: UIView, CodeView {
+    static let cellIdentifier = "creditCell"
     
     //MARK: - View Components
     @ViewCodeComponent
@@ -49,7 +50,7 @@ final class EpisodeDetailView: UIView, CodeView {
         var label = UILabel(frame: .zero)
         label.textColor = UIColor.white
         label.text = "Title"
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .title2)
         label.numberOfLines = 3
         label.lineBreakMode = .byTruncatingTail
         return label
@@ -60,7 +61,7 @@ final class EpisodeDetailView: UIView, CodeView {
         var label = UILabel(frame: .zero)
         label.textColor = UIColor.white
         label.text = "Season number: "
-        label.font = .preferredFont(forTextStyle: .footnote)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         return label
@@ -71,7 +72,7 @@ final class EpisodeDetailView: UIView, CodeView {
         var label = UILabel(frame: .zero)
         label.textColor = UIColor.white
         label.text = "Episode number: "
-        label.font = .preferredFont(forTextStyle: .footnote)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         return label
@@ -83,17 +84,63 @@ final class EpisodeDetailView: UIView, CodeView {
         label.textColor = UIColor.white
         label.text = "Air Date: "
         label.setContentCompressionResistancePriority(UILayoutPriority(751), for: .horizontal)
-        label.font = .preferredFont(forTextStyle: .footnote)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
     @ViewCodeComponent
-    private var overviewAndLists: UIView = {
+    private var containerOverviewAndCrew: UIView = {
         let content = UIView(frame: .zero)
         content.backgroundColor = UIColor(named: "BackgroundModal")
         return content
+    }()
+    
+    @ViewCodeComponent
+    private var overviewLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "Overview: "
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
+        return label
+    }()
+    
+    @ViewCodeComponent
+    var overviewTextView: UITextView = {
+        let textview = UITextView(frame: .zero)
+        textview.isEditable = false
+        textview.textColor = .label
+        textview.backgroundColor = UIColor.secondarySystemBackground
+        textview.font = UIFont.systemFont(ofSize: 14)
+        textview.text = "..."
+        return textview
+    }()
+    
+    @ViewCodeComponent
+    private var crewLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "Casting & Crew: "
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
+        return label
+    }()
+    
+    @ViewCodeComponent
+    var creditCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.estimatedItemSize = .zero
+        layout.itemSize = CGSize(width: 120, height: 145)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CrewAndGuestCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.isPrefetchingEnabled = true
+        collectionView.backgroundColor = UIColor(named: "BackgroundModal")
+        return collectionView
     }()
     
     //MARK: - Super Methods
@@ -116,7 +163,11 @@ final class EpisodeDetailView: UIView, CodeView {
         contentView.addSubview(seasonNumberLabel)
         contentView.addSubview(episodeNumberLabel)
         contentView.addSubview(airDateLabel)
-        contentView.addSubview(overviewAndLists)
+        contentView.addSubview(containerOverviewAndCrew)
+        containerOverviewAndCrew.addSubview(overviewLabel)
+        containerOverviewAndCrew.addSubview(overviewTextView)
+        containerOverviewAndCrew.addSubview(crewLabel)
+        containerOverviewAndCrew.addSubview(creditCollectionView)
     }
     
     func setupConstraints() {
@@ -124,7 +175,9 @@ final class EpisodeDetailView: UIView, CodeView {
         contentViewConstraints()
         backdropImageConstraints()
         infoConstraints()
-        overviewAndListConstraints()
+        containerOverviewAndCrewConstraints()
+        overviewConstraints()
+        creditConstraints()
     }
     
     func setupExtraConfigurations() {
@@ -185,11 +238,37 @@ final class EpisodeDetailView: UIView, CodeView {
         episodeNumberLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
     }
     
-    private func overviewAndListConstraints() {
-        overviewAndLists.topAnchor.constraint(equalTo: episodeNumberLabel.bottomAnchor, constant: Dimens.medium).isActive = true
-        overviewAndLists.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        overviewAndLists.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        overviewAndLists.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        overviewAndLists.heightAnchor.constraint(equalToConstant: 500).isActive = true
+    private func containerOverviewAndCrewConstraints() {
+        containerOverviewAndCrew.topAnchor.constraint(equalTo: episodeNumberLabel.bottomAnchor, constant: Dimens.medium).isActive = true
+        containerOverviewAndCrew.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        containerOverviewAndCrew.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        containerOverviewAndCrew.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    }
+    
+    private func overviewConstraints() {
+        //Label
+        overviewLabel.topAnchor.constraint(equalTo: containerOverviewAndCrew.topAnchor, constant: Dimens.medium).isActive = true
+        overviewLabel.leadingAnchor.constraint(equalTo: containerOverviewAndCrew.leadingAnchor, constant: Dimens.medium).isActive = true
+        overviewLabel.trailingAnchor.constraint(equalTo: containerOverviewAndCrew.trailingAnchor, constant: -Dimens.medium).isActive = true
+        
+        //TextView
+        overviewTextView.topAnchor.constraint(equalTo: overviewLabel.bottomAnchor, constant: Dimens.little).isActive = true
+        overviewTextView.leadingAnchor.constraint(equalTo: overviewLabel.leadingAnchor).isActive = true
+        overviewTextView.trailingAnchor.constraint(equalTo: overviewLabel.trailingAnchor).isActive = true
+        overviewTextView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
+    private func creditConstraints() {
+        //Label
+        crewLabel.topAnchor.constraint(equalTo: overviewTextView.bottomAnchor, constant: Dimens.medium).isActive = true
+        crewLabel.leadingAnchor.constraint(equalTo: overviewLabel.leadingAnchor).isActive = true
+        crewLabel.trailingAnchor.constraint(equalTo: overviewLabel.trailingAnchor).isActive = true
+        
+        //CreditList
+        creditCollectionView.topAnchor.constraint(equalTo: crewLabel.bottomAnchor, constant: Dimens.little).isActive = true
+        creditCollectionView.leadingAnchor.constraint(equalTo: crewLabel.leadingAnchor).isActive = true
+        creditCollectionView.trailingAnchor.constraint(equalTo: crewLabel.trailingAnchor).isActive = true
+        creditCollectionView.bottomAnchor.constraint(equalTo: containerOverviewAndCrew.bottomAnchor, constant: -Dimens.big).isActive = true
+        creditCollectionView.heightAnchor.constraint(equalToConstant: 156).isActive = true
     }
 }

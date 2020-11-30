@@ -10,7 +10,6 @@ import UIKit
 
 protocol SeasonDetailPresenter {
     func showEpisodeDetail(with viewModel: EpisodeDetailViewModel?)
-    
     func exitThisScreen()
 }
 

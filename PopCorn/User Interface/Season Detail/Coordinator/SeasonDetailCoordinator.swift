@@ -23,6 +23,9 @@ final class SeasonDetailCoordinator: Coordinator {
         let seasonVC = SeasonDetailViewController()
         seasonVC.coordinator = self
         seasonVC.viewModel = viewModel
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationController.navigationBar.topItem?.backBarButtonItem = backItem
         navigationController.pushViewController(seasonVC, animated: true)
     }
     

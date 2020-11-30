@@ -10,7 +10,7 @@ import UIKit
 
 protocol DetailTVShowPresenter {
     func showSeasonDetail(with viewModel: SeasonDetailViewModel?)
-    
+    func showDetailPeople(with viewModel: PeopleViewModel?)
     func exitThisScreen()
 }
 
@@ -94,6 +94,10 @@ extension DetailTVShowViewController: UICollectionViewDataSource, UICollectionVi
         let cell = cvCreators.dequeueReusableCell(withReuseIdentifier: "creatorCell", for: indexPath) as! CreditCollectionViewCell
         cell.configure(with: viewModel?.getCreditViewModel(at: indexPath))
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coordinator?.showDetailPeople(with: viewModel?.getPeopleViewModel(at: indexPath))
     }
 }
 

@@ -82,6 +82,10 @@ final class DetailTVShowViewModel {
             seasonNumber: tvShow?.seasons?[indexPath.row].seasonNumber ?? 0
         )
     }
+    
+    func getPeopleViewModel(at indexPath: IndexPath) -> PeopleViewModel {
+        PeopleViewModel(id: tvShow?.createdBy?[indexPath.item].id ?? 0)
+    }
 }
 
 // MARK: - TV show delegate

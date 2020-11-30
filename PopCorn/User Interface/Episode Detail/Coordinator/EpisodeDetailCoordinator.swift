@@ -31,3 +31,13 @@ final class EpisodeDetailCoordinator: Coordinator {
         print("EpisodeDetailCoordinator free")
     }
 }
+
+extension EpisodeDetailCoordinator: EpisodeDetailPresenter {
+    func showDetailPeople(with viewModel: PeopleViewModel?) {
+        navigationController.dismiss(animated: true, completion: nil)
+        let coordinator = PeopleCoordinator(navigationController: navigationController, viewModel: viewModel)
+        coordinator.parentCoordinator = self
+        add(childCoordinator: coordinator)
+        coordinator.start()
+    }
+}

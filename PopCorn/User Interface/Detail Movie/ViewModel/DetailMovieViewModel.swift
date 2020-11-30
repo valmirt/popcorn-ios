@@ -108,6 +108,19 @@ final class DetailMovieViewModel {
     func getDetailViewModel(at indexPath: IndexPath) -> DetailMovieViewModel {
         DetailMovieViewModel(idMovie: similarMovies[indexPath.item].id)
     }
+    
+    func getPeopleViewModel(at indexPath: IndexPath) -> PeopleViewModel {
+        var idPeople = 0
+        if let credit = credit {
+            if indexPath.item < credit.cast.count {
+                idPeople = credit.cast[indexPath.item].id
+            } else {
+                let index = indexPath.item - credit.cast.count
+                idPeople = credit.crew[index].id
+            }
+        }
+        return PeopleViewModel(id: idPeople)
+    }
 }
 
 //MARK: - Movie Repository delegate

@@ -10,7 +10,7 @@ import UIKit
 
 protocol DetailMoviePresenter {
     func showDetailMovie(with viewModel: DetailMovieViewModel?)
-    
+    func showDetailPeople(with viewModel: PeopleViewModel?)
     func exitThisScreen()
 }
 
@@ -119,11 +119,15 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.cvSimilarMovies {
             coordinator?.showDetailMovie(with: viewModel?.getDetailViewModel(at: indexPath))
+        } else {
+            coordinator?.showDetailPeople(with: viewModel?.getPeopleViewModel(at: indexPath))
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        viewModel?.getMorePages(at: indexPath)
+        if collectionView == self.cvSimilarMovies {
+            viewModel?.getMorePages(at: indexPath)
+        }
     }
 }
 

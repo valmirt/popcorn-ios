@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol EpisodeDetailPresenter {
+    func showDetailPeople(with viewModel: PeopleViewModel?)
+}
+
+typealias EpisodePresenterCoordinator = EpisodeDetailPresenter & Coordinator
+
 final class EpisodeDetailViewController: UIViewController, HasCodeView {
     typealias CustomView = EpisodeDetailView
     
     // MARK: - Properties
-    var coordinator: EpisodeDetailCoordinator?
+    var coordinator: EpisodePresenterCoordinator?
     var viewModel: EpisodeDetailViewModel?
     
     // MARK: - Super Methods
@@ -53,6 +59,10 @@ extension EpisodeDetailViewController: UICollectionViewDelegate, UICollectionVie
         let cell = customView?.creditCollectionView.dequeueReusableCell(withReuseIdentifier: EpisodeDetailView.cellIdentifier, for: indexPath) as! CrewAndGuestCollectionViewCell
         cell.configure(with: viewModel?.getCreditCellViewModel(at: indexPath))
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coordinator?.showDetailPeople(with: viewModel?.getPeopleViewModel(at: indexPath))
     }
 }
 

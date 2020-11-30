@@ -40,6 +40,13 @@ extension DetailMovieCoordinator: DetailMoviePresenter {
         coordinator.start()
     }
     
+    func showDetailPeople(with viewModel: PeopleViewModel?) {
+        let coordinator = PeopleCoordinator(navigationController: navigationController, viewModel: viewModel)
+        coordinator.parentCoordinator = self
+        add(childCoordinator: coordinator)
+        coordinator.start()
+    }
+    
     func exitThisScreen() {
         navigationController.popViewController(animated: true)
     }

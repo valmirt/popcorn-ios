@@ -55,4 +55,15 @@ final class EpisodeDetailViewModel {
             return CreditViewModel(crew: credit.crew[index])
         }
     }
+    
+    func getPeopleViewModel(at indexPath: IndexPath) -> PeopleViewModel {
+        guard let episode = episode else { return PeopleViewModel(id: 0) }
+        let credit = Credit(id: 0, cast: episode.guestStars, crew: episode.crew)
+        if indexPath.item < credit.cast.count {
+            return PeopleViewModel(id: credit.cast[indexPath.item].id)
+        } else {
+            let index = indexPath.item - credit.cast.count
+            return PeopleViewModel(id: credit.crew[index].id)
+        }
+    }
 }

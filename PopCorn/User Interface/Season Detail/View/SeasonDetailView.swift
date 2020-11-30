@@ -82,23 +82,12 @@ final class SeasonDetailView: UIView, CodeView {
     }()
     
     @ViewCodeComponent
-    var loadingContainer: UIView = {
-        let view = UIView(frame: .zero)
-        view.isOpaque = true
-        view.isHidden = true
-        view.backgroundColor = UIColor.systemBackground
+    var loadingView: LoadingView = {
+        let view = LoadingView()
         return view
     }()
     
-    @ViewCodeComponent
-    var loadingSpinner: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(frame: .zero)
-        indicator.style = .medium
-        indicator.isHidden = true
-        indicator.hidesWhenStopped = true
-        return indicator
-    }()
-    
+
     //MARK: - Super Methods
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -119,8 +108,7 @@ final class SeasonDetailView: UIView, CodeView {
         contentView.addSubview(overviewTextView)
         contentView.addSubview(episodesLabel)
         contentView.addSubview(episodesTableView)
-        contentView.addSubview(loadingContainer)
-        loadingContainer.addSubview(loadingSpinner)
+        contentView.addSubview(loadingView)
     }
     
     func setupConstraints() {
@@ -194,14 +182,9 @@ final class SeasonDetailView: UIView, CodeView {
     }
     
     private func loadingConstraints() {
-        //View
-        loadingContainer.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        loadingContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        loadingContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        loadingContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        
-        //Indicator
-        loadingSpinner.centerXAnchor.constraint(equalTo: loadingContainer.centerXAnchor).isActive = true
-        loadingSpinner.topAnchor.constraint(equalTo: loadingContainer.topAnchor, constant: 90).isActive = true
+        loadingView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        loadingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        loadingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        loadingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
 }

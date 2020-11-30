@@ -53,11 +53,11 @@ final class SeasonDetailViewController: UIViewController, HasCodeView {
     
     private func performLoading(status: Bool) {
         if status {
-            customView?.loadingContainer.isHidden = false
-            customView?.loadingSpinner.startAnimating()
+            customView?.loadingView.isHidden = false
+            customView?.loadingView.loadingSpinner.startAnimating()
         } else {
-            customView?.loadingContainer.isHidden = true
-            customView?.loadingSpinner.stopAnimating()
+            customView?.loadingView.isHidden = true
+            customView?.loadingView.loadingSpinner.stopAnimating()
         }
     }
     

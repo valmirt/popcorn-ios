@@ -38,6 +38,7 @@ final class CrewAndGuestCollectionViewCell: UICollectionViewCell, CodeView {
         imageView.cornerRadius = 32
         imageView.image = UIImage(systemName: "person.fill")
         imageView.contentMode = .scaleAspectFill
+        imageView.tintColor = UIColor.opaqueSeparator
         imageView.clipsToBounds = true
         return imageView
     }()

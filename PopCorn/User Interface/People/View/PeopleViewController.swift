@@ -28,12 +28,17 @@ final class PeopleViewController: UIViewController, HasCodeView {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = PeopleView()
+        setupView()
     }
     
     // MARK: - Methods
     private func showError(with message: String) {
         let alert = ErrorAlertUtil.errorAlert(message: message) { self.coordinator?.exitThisScreen() }
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func setupView() {
+        title = "Person"
     }
     
     deinit {

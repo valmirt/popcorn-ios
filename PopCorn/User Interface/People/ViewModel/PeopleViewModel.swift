@@ -17,7 +17,8 @@ final class PeopleViewModel {
     //MARK: - Properties
     private let id: Int
     private var repository: PeopleRepositoryProtocol
-    weak var delegate: PeopleRepositoryDelegate?
+    private var people: People?
+    weak var delegate: PeopleViewModelDelegate?
     
     init(id: Int, _ repository: PeopleRepositoryProtocol = PeopleRepository()) {
         self.id = id
@@ -26,11 +27,19 @@ final class PeopleViewModel {
     
     //MARK: - Methods
     func loadData() {
-        //TOOD
+        repository.delegate = self
+        //TODO
     }
 }
 
 //MARK: - People repository delegate
 extension PeopleViewModel: PeopleRepositoryDelegate {
+    func peopleRepository(_ manager: PeopleRepositoryProtocol, didUpdateError: Error) {
+        delegate?.onListenerError(with: didUpdateError.localizedDescription)
+    }
     
+    func peopleRepository(_ manager: PeopleRepositoryProtocol, didUpdatePeople: People) {
+        people = didUpdatePeople
+        delegate?.onListenerPeople()
+    }
 }

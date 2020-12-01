@@ -14,7 +14,6 @@ protocol SeasonDetailViewModelDelegate: AnyObject {
 }
 
 final class SeasonDetailViewModel {
-    
     //MARK: - Properties
     private let id: Int
     private let seasonNumber: Int

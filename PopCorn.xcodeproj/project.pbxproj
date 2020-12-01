@@ -38,6 +38,7 @@
 		594C1FDD257567DB009FE746 /* PeopleRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FDC257567DB009FE746 /* PeopleRepositoryProtocol.swift */; };
 		594C1FE125756857009FE746 /* PeopleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FE025756857009FE746 /* PeopleRepository.swift */; };
 		594C1FE525759EB6009FE746 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FE425759EB6009FE746 /* LoadingView.swift */; };
+		594C1FE92575A1B0009FE746 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FE82575A1B0009FE746 /* People.swift */; };
 		59898BE42571408500626104 /* ErrorAlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59898BE32571408500626104 /* ErrorAlertUtil.swift */; };
 		598F9E2D25635CBF001308EF /* DetailTVShowViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */; };
 		598F9E3525636AB3001308EF /* SeasonViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */; };
@@ -153,6 +154,7 @@
 		594C1FDC257567DB009FE746 /* PeopleRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleRepositoryProtocol.swift; sourceTree = "<group>"; };
 		594C1FE025756857009FE746 /* PeopleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleRepository.swift; sourceTree = "<group>"; };
 		594C1FE425759EB6009FE746 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		594C1FE82575A1B0009FE746 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		59898BE32571408500626104 /* ErrorAlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertUtil.swift; sourceTree = "<group>"; };
 		598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTVShowViewModelTest.swift; sourceTree = "<group>"; };
 		598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewModelTest.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				59353C2D25672E5000216F21 /* SeasonDetail.swift */,
 				59353C312567326D00216F21 /* Crew.swift */,
 				59353C35256732B400216F21 /* Cast.swift */,
+				594C1FE82575A1B0009FE746 /* People.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -602,10 +605,10 @@
 			children = (
 				59B0238123628C31007C7367 /* MovieRepositoryProtocol.swift */,
 				59B02387236291EB007C7367 /* TVShowRepositoryProtocol.swift */,
+				594C1FDC257567DB009FE746 /* PeopleRepositoryProtocol.swift */,
 				C326FBE0253FB0970052AF7E /* Coordinator.swift */,
 				59353C1D2566BE0000216F21 /* HasCodeView.swift */,
 				59353C212566BE6F00216F21 /* CodeView.swift */,
-				594C1FDC257567DB009FE746 /* PeopleRepositoryProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				C373CA7225215F3900208E4C /* MovieDetailExtensions.swift in Sources */,
 				594C1FCD25756347009FE746 /* PeopleCoordinator.swift in Sources */,
 				59353C222566BE6F00216F21 /* CodeView.swift in Sources */,
+				594C1FE92575A1B0009FE746 /* People.swift in Sources */,
 				59D30C26236B93D7002D3A41 /* ImageService.swift in Sources */,
 				591DAB362378B47500FF0F48 /* MovieDetail.swift in Sources */,
 				C3B01FDD253B88A60026BAF7 /* ListingViewModel.swift in Sources */,

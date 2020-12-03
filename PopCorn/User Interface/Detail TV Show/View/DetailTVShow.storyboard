@@ -50,7 +50,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qGg-bP-2Qt">
-                                                <rect key="frame" x="0.0" y="340" width="414" height="115"/>
+                                                <rect key="frame" x="0.0" y="336" width="414" height="115"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="115" id="QMH-Bg-Ue6"/>
@@ -69,8 +69,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="112"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KCM-5N-yni" customClass="CircleImageView" customModule="PopCorn" customModuleProvider="target">
-                                                                    <rect key="frame" x="28" y="5" width="64" height="61.5"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KCM-5N-yni" customClass="CircleImageView" customModule="PopCorn" customModuleProvider="target">
+                                                                    <rect key="frame" x="28" y="5.5" width="64" height="61"/>
                                                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="64" id="bfw-6Q-cGs"/>
@@ -126,13 +126,13 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seasons:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIA-CV-9tp">
-                                                <rect key="frame" x="8" y="467" width="398" height="18"/>
+                                                <rect key="frame" x="8" y="463" width="398" height="18"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PMt-HK-DcK">
-                                                <rect key="frame" x="8" y="497" width="398" height="350"/>
+                                                <rect key="frame" x="8" y="493" width="398" height="350"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="350" id="GaF-0F-GcO"/>
@@ -285,7 +285,7 @@
                                             <constraint firstAttribute="bottom" secondItem="sbp-6C-Rcx" secondAttribute="bottom" id="mJn-n4-aM3"/>
                                             <constraint firstItem="H4F-iR-F43" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="LtD-VW-gxK" secondAttribute="bottom" id="oM8-Rq-gc1"/>
                                             <constraint firstItem="1BO-EA-TUu" firstAttribute="top" secondItem="DNU-lF-Mf4" secondAttribute="bottom" constant="12" id="sJD-Bl-yga"/>
-                                            <constraint firstItem="qGg-bP-2Qt" firstAttribute="top" secondItem="UQY-cd-XMv" secondAttribute="bottom" constant="12" id="sR4-pJ-dQQ"/>
+                                            <constraint firstItem="qGg-bP-2Qt" firstAttribute="top" secondItem="UQY-cd-XMv" secondAttribute="bottom" constant="8" id="sR4-pJ-dQQ"/>
                                             <constraint firstItem="tIA-CV-9tp" firstAttribute="leading" secondItem="Aom-VK-gzb" secondAttribute="leading" constant="8" id="t19-uq-Ho7"/>
                                             <constraint firstItem="vOw-C8-oNt" firstAttribute="trailing" secondItem="moP-Ef-x1b" secondAttribute="trailing" id="to2-kd-Mqa"/>
                                             <constraint firstAttribute="trailing" secondItem="tIA-CV-9tp" secondAttribute="trailing" constant="8" id="wzB-Cc-byP"/>
@@ -338,13 +338,14 @@
     </scenes>
     <designables>
         <designable name="KCM-5N-yni">
-            <size key="intrinsicContentSize" width="24" height="20"/>
+            <size key="intrinsicContentSize" width="18" height="20"/>
         </designable>
         <designable name="oTp-8G-fha">
             <size key="intrinsicContentSize" width="24" height="20"/>
         </designable>
     </designables>
     <resources>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <namedColor name="Main">
             <color red="1" green="0.76470588235294112" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

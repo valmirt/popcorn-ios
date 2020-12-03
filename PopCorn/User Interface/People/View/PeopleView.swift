@@ -9,6 +9,7 @@
 import UIKit
 
 final class PeopleView: UIView, CodeView {
+    static let cellIdentifier = "filmographyCell"
     
     //MARK: - View Components
     @ViewCodeComponent
@@ -138,6 +139,21 @@ final class PeopleView: UIView, CodeView {
     }()
     
     @ViewCodeComponent
+    var filmographyCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.estimatedItemSize = .zero
+        layout.itemSize = CGSize(width: 140, height: 200)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(FilmographyCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.isPrefetchingEnabled = true
+        collectionView.backgroundColor = UIColor.systemBackground
+        return collectionView
+    }()
+    
+    @ViewCodeComponent
     var loadingView: LoadingView = {
         let view = LoadingView()
         return view
@@ -167,7 +183,8 @@ final class PeopleView: UIView, CodeView {
         contentView.addSubview(biographyLabel)
         contentView.addSubview(biographyTextView)
         contentView.addSubview(filmographyLabel)
-//        contentView.addSubview(loadingView)
+        contentView.addSubview(filmographyCollectionView)
+        contentView.addSubview(loadingView)
     }
     
     func setupConstraints() {
@@ -175,7 +192,7 @@ final class PeopleView: UIView, CodeView {
         infoProfileConstraints()
         biographyConstraints()
         filmographyConstraints()
-//        loadingConstraints()
+        loadingConstraints()
     }
     
     func setupExtraConfigurations() {
@@ -198,7 +215,6 @@ final class PeopleView: UIView, CodeView {
         let contentViewHeightConstraint = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         contentViewHeightConstraint.priority = .defaultLow
         contentViewHeightConstraint.isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: 800).isActive = true
     }
     
     private func infoProfileConstraints() {
@@ -259,6 +275,11 @@ final class PeopleView: UIView, CodeView {
         filmographyLabel.trailingAnchor.constraint(equalTo: biographyTextView.trailingAnchor).isActive = true
         
         //List
+        filmographyCollectionView.topAnchor.constraint(equalTo: filmographyLabel.bottomAnchor, constant: Dimens.little).isActive = true
+        filmographyCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        filmographyCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        filmographyCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Dimens.big).isActive = true
+        filmographyCollectionView.heightAnchor.constraint(equalToConstant: 210).isActive = true
     }
     
     private func loadingConstraints() {

@@ -24,15 +24,12 @@ final class MediaViewModel {
     var title: String {
         movie?.title ?? tvShow?.name ?? ""
     }
-    
     var releaseDate: String {
         String(movie?.releaseDate.prefix(4) ?? tvShow?.firstAirDate.prefix(4) ?? "")
     }
-    
     var popularity: String {
         String(format: "%.1f", movie?.popularity ?? tvShow?.popularity ?? 0)
     }
-    
     var rate: String {
         String(format: "%.1f", movie?.voteAverage ?? tvShow?.voteAverage ?? 0)
     }

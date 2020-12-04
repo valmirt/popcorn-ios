@@ -40,6 +40,8 @@
 		594C1FE525759EB6009FE746 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FE425759EB6009FE746 /* LoadingView.swift */; };
 		594C1FE92575A1B0009FE746 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FE82575A1B0009FE746 /* People.swift */; };
 		594C1FF32579A8D2009FE746 /* FilmographyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FF22579A8D2009FE746 /* FilmographyCollectionViewCell.swift */; };
+		594C1FF92579B57C009FE746 /* FilmographyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FF82579B57C009FE746 /* FilmographyViewModel.swift */; };
+		594C1FFD2579B9F5009FE746 /* Filmography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594C1FFC2579B9F5009FE746 /* Filmography.swift */; };
 		59898BE42571408500626104 /* ErrorAlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59898BE32571408500626104 /* ErrorAlertUtil.swift */; };
 		598F9E2D25635CBF001308EF /* DetailTVShowViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */; };
 		598F9E3525636AB3001308EF /* SeasonViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */; };
@@ -157,6 +159,8 @@
 		594C1FE425759EB6009FE746 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		594C1FE82575A1B0009FE746 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		594C1FF22579A8D2009FE746 /* FilmographyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmographyCollectionViewCell.swift; sourceTree = "<group>"; };
+		594C1FF82579B57C009FE746 /* FilmographyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmographyViewModel.swift; sourceTree = "<group>"; };
+		594C1FFC2579B9F5009FE746 /* Filmography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filmography.swift; sourceTree = "<group>"; };
 		59898BE32571408500626104 /* ErrorAlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertUtil.swift; sourceTree = "<group>"; };
 		598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTVShowViewModelTest.swift; sourceTree = "<group>"; };
 		598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewModelTest.swift; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 				59353C312567326D00216F21 /* Crew.swift */,
 				59353C35256732B400216F21 /* Cast.swift */,
 				594C1FE82575A1B0009FE746 /* People.swift */,
+				594C1FFC2579B9F5009FE746 /* Filmography.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				594C1FD825756709009FE746 /* PeopleViewModel.swift */,
+				594C1FF82579B57C009FE746 /* FilmographyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -962,6 +968,7 @@
 				5924E504234A8695007A3D93 /* AppDelegate.swift in Sources */,
 				594C1FF32579A8D2009FE746 /* FilmographyCollectionViewCell.swift in Sources */,
 				5924E520234A8E6B007A3D93 /* Movie.swift in Sources */,
+				594C1FF92579B57C009FE746 /* FilmographyViewModel.swift in Sources */,
 				C330FF63253FE31600DED1B0 /* HomeTabBar.swift in Sources */,
 				C330FF35253FB9E700DED1B0 /* UIViewControllerExtension.swift in Sources */,
 				59BE12A8236BA93B00E27427 /* ListingTableViewController.swift in Sources */,
@@ -975,6 +982,7 @@
 				C3E76C27253BD567000BA0DA /* MediaViewModel.swift in Sources */,
 				C330FF31253FB86100DED1B0 /* UIStoryboardExtension.swift in Sources */,
 				594C1FD5257565BB009FE746 /* PeopleViewController.swift in Sources */,
+				594C1FFD2579B9F5009FE746 /* Filmography.swift in Sources */,
 				59353C2E25672E5000216F21 /* SeasonDetail.swift in Sources */,
 				599E10382371076700B08C09 /* TVShow.swift in Sources */,
 				C3E76C1D253BD264000BA0DA /* DetailMovieViewModel.swift in Sources */,

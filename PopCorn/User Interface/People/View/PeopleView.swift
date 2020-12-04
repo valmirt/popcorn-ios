@@ -219,7 +219,7 @@ final class PeopleView: UIView, CodeView {
     
     private func infoProfileConstraints() {
         //Image Profile
-        imageProfile.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Dimens.large).isActive = true
+        imageProfile.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Dimens.medium).isActive = true
         imageProfile.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         imageProfile.heightAnchor.constraint(equalToConstant: 128).isActive = true
         imageProfile.widthAnchor.constraint(equalToConstant: 128).isActive = true
@@ -276,9 +276,9 @@ final class PeopleView: UIView, CodeView {
         
         //List
         filmographyCollectionView.topAnchor.constraint(equalTo: filmographyLabel.bottomAnchor, constant: Dimens.little).isActive = true
-        filmographyCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        filmographyCollectionView.leadingAnchor.constraint(equalTo: filmographyLabel.leadingAnchor).isActive = true
         filmographyCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        filmographyCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Dimens.big).isActive = true
+        filmographyCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Dimens.medium).isActive = true
         filmographyCollectionView.heightAnchor.constraint(equalToConstant: 210).isActive = true
     }
     

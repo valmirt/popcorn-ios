@@ -12,4 +12,6 @@ protocol PeopleRepositoryProtocol: BaseRepositoryProtocol {
     var delegate: PeopleRepositoryDelegate? { get set }
     
     func detailPeople(with id: Int)
+    
+    func combinedFilmography(with id: Int)
 }

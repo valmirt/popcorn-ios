@@ -10,7 +10,7 @@ import UIKit
 
 enum Web {
     static let BASE_URL = "https://api.themoviedb.org"
-    static let BASE_URL_IMAGE = "http://image.tmdb.org"
+    static let BASE_URL_IMAGE = "https://image.tmdb.org"
     static let IMAGE_W45 = "/t/p/w45"
     static let IMAGE_W185 = "/t/p/w185"
     static let IMAGE_W300 = "/t/p/w300"

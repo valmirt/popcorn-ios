@@ -36,14 +36,20 @@ final class PeopleCoordinator: Coordinator {
 
 extension PeopleCoordinator: PeoplePresenter {
     func showDetailMovie(with viewModel: DetailMovieViewModel?) {
-        
+        let coordinator = DetailMovieCoordinator(navigationController: navigationController, viewModel: viewModel)
+        coordinator.parentCoordinator = self
+        add(childCoordinator: coordinator)
+        coordinator.start()
     }
     
     func showDetailTVShow(with viewModel: DetailTVShowViewModel?) {
-        
+        let coordinator = DetailTVShowCoordinator(navigationController: navigationController, viewModel: viewModel)
+        coordinator.parentCoordinator = self
+        add(childCoordinator: coordinator)
+        coordinator.start()
     }
     
     func exitThisScreen() {
-        
+        navigationController.popViewController(animated: true)
     }
 }

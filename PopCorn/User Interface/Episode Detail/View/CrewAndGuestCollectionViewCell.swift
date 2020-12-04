@@ -61,12 +61,8 @@ final class CrewAndGuestCollectionViewCell: UICollectionViewCell, CodeView {
             labelChar.isHidden = true
         }
         labelChar.text = viewModel?.charOrJob
-        viewModel?.getImage(onComplete: { (image) in
-            if let image = image {
-                self.ivProfilePicture.image = image
-            } else {
-                self.ivProfilePicture.image = UIImage(systemName: "person.fill")
-            }
+        viewModel?.getImage(onComplete: { image in
+            self.ivProfilePicture.image = image ?? UIImage(systemName: "person.fill")
         })
     }
     

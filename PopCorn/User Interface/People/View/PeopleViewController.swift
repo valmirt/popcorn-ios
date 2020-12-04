@@ -28,6 +28,7 @@ final class PeopleViewController: UIViewController, HasCodeView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        navigationItem.largeTitleDisplayMode = .automatic
     }
     
     // MARK: - Methods

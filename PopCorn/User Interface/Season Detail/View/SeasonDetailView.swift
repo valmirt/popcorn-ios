@@ -113,7 +113,6 @@ final class SeasonDetailView: UIView, CodeView {
     
     func setupConstraints() {
         scrollViewConstraints()
-        contentViewConstraints()
         airDateConstraints()
         seasonNumberConstraints()
         overviewConstraints()
@@ -129,18 +128,15 @@ final class SeasonDetailView: UIView, CodeView {
     private func scrollViewConstraints() {
         scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        scrollView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    }
-    
-    private func contentViewConstraints() {
+        scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        //ContainerScrollView
         contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        contentView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        let contentViewHeightConstraint = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
-        contentViewHeightConstraint.priority = .defaultLow
-        contentViewHeightConstraint.isActive = true
     }
     
     private func airDateConstraints() {
@@ -179,6 +175,7 @@ final class SeasonDetailView: UIView, CodeView {
         episodesTableView.leadingAnchor.constraint(equalTo: episodesLabel.leadingAnchor).isActive = true
         episodesTableView.trailingAnchor.constraint(equalTo: episodesLabel.trailingAnchor).isActive = true
         episodesTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Dimens.medium).isActive = true
+        episodesTableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     }
     
     private func loadingConstraints() {

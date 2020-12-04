@@ -40,4 +40,8 @@ extension EpisodeDetailCoordinator: EpisodeDetailPresenter {
         add(childCoordinator: coordinator)
         coordinator.start()
     }
+    
+    func exitThisScreen() {
+        navigationController.dismiss(animated: true, completion: nil)
+    }
 }

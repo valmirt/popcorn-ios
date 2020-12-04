@@ -8,9 +8,17 @@
 
 import UIKit
 
+protocol EpisodeDetailViewModelDelegate: AnyObject {
+    func onListenerError(with errorMessage: String)
+    func onListenerCredit()
+}
+
 final class EpisodeDetailViewModel {
     private let episode: Episode?
+    private var episodeCredit: Credit?
+    private let id: Int
     private var repository: TVShowRepositoryProtocol
+    weak var delegate: EpisodeDetailViewModelDelegate?
     
     var title: String {
         episode?.name ?? "Title..."
@@ -28,13 +36,19 @@ final class EpisodeDetailViewModel {
         episode?.overview ?? "..."
     }
     var creditCount: Int {
-        guard let episode = episode else { return 0 }
-        return episode.guestStars.count + episode.crew.count
+        guard let episodeCredit = episodeCredit else { return 0 }
+        return episodeCredit.cast.count + (episodeCredit.guestStars?.count ?? 0) + episodeCredit.crew.count
     }
     
-    init(episode: Episode?,_ repository: TVShowRepositoryProtocol = TVShowRepository()) {
+    init(idTVShow: Int, episode: Episode?,_ repository: TVShowRepositoryProtocol = TVShowRepository()) {
+        self.id = idTVShow
         self.episode = episode
         self.repository = repository
+    }
+    
+    func loadData() {
+        repository.delegate = self
+        repository.episodeCredit(with: id, and: episode?.seasonNumber ?? 0, and: episode?.episodeNumber ?? 0)
     }
     
     func getImage(onComplete: @escaping (UIImage?) -> Void) {
@@ -46,24 +60,44 @@ final class EpisodeDetailViewModel {
     }
     
     func getCreditCellViewModel(at indexPath: IndexPath) -> CreditViewModel {
-        guard let episode = episode else { return CreditViewModel() }
-        let credit = Credit(id: 0, cast: episode.guestStars, crew: episode.crew)
-        if indexPath.item < credit.cast.count {
-            return CreditViewModel(cast: credit.cast[indexPath.item])
+        guard let episodeCredit = episodeCredit else { return CreditViewModel() }
+        if indexPath.item < episodeCredit.cast.count {
+            return CreditViewModel(cast: episodeCredit.cast[indexPath.item])
         } else {
-            let index = indexPath.item - credit.cast.count
-            return CreditViewModel(crew: credit.crew[index])
+            let indexOne = indexPath.item - episodeCredit.cast.count
+            if indexOne < (episodeCredit.guestStars?.count ?? 0) {
+                return CreditViewModel(guestStar: episodeCredit.guestStars![indexOne])
+            } else {
+                let indexTwo = indexOne - (episodeCredit.guestStars?.count ?? 0)
+                return CreditViewModel(crew: episodeCredit.crew[indexTwo])
+            }
         }
     }
     
     func getPeopleViewModel(at indexPath: IndexPath) -> PeopleViewModel {
-        guard let episode = episode else { return PeopleViewModel(id: 0) }
-        let credit = Credit(id: 0, cast: episode.guestStars, crew: episode.crew)
-        if indexPath.item < credit.cast.count {
-            return PeopleViewModel(id: credit.cast[indexPath.item].id)
+        guard let episodeCredit = episodeCredit else { return PeopleViewModel(id: 0) }
+        if indexPath.item < episodeCredit.cast.count {
+            return PeopleViewModel(id: episodeCredit.cast[indexPath.item].id)
         } else {
-            let index = indexPath.item - credit.cast.count
-            return PeopleViewModel(id: credit.crew[index].id)
+            let indexOne = indexPath.item - episodeCredit.cast.count
+            if indexOne < (episodeCredit.guestStars?.count ?? 0) {
+                return PeopleViewModel(id: episodeCredit.guestStars![indexOne].id)
+            } else {
+                let indexTwo = indexOne - (episodeCredit.guestStars?.count ?? 0)
+                return PeopleViewModel(id: episodeCredit.crew[indexTwo].id)
+            }
         }
+    }
+}
+
+//MARK: - TV Show repository delegate
+extension EpisodeDetailViewModel: TVShowRepositoryDelegate {
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateError: Error) {
+        delegate?.onListenerError(with: didUpdateError.localizedDescription)
+    }
+    
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateEpisodeCredit: Credit) {
+        episodeCredit = didUpdateEpisodeCredit
+        delegate?.onListenerCredit()
     }
 }

@@ -143,6 +143,12 @@ final class EpisodeDetailView: UIView, CodeView {
         return collectionView
     }()
     
+    @ViewCodeComponent
+    var loadingView: LoadingView = {
+        let view = LoadingView()
+        return view
+    }()
+    
     //MARK: - Super Methods
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -168,6 +174,7 @@ final class EpisodeDetailView: UIView, CodeView {
         containerOverviewAndCrew.addSubview(overviewTextView)
         containerOverviewAndCrew.addSubview(crewLabel)
         containerOverviewAndCrew.addSubview(creditCollectionView)
+        contentView.addSubview(loadingView)
     }
     
     func setupConstraints() {
@@ -177,6 +184,7 @@ final class EpisodeDetailView: UIView, CodeView {
         containerOverviewAndCrewConstraints()
         overviewConstraints()
         creditConstraints()
+        loadingConstraints()
     }
     
     func setupExtraConfigurations() {
@@ -266,5 +274,12 @@ final class EpisodeDetailView: UIView, CodeView {
         creditCollectionView.trailingAnchor.constraint(equalTo: crewLabel.trailingAnchor).isActive = true
         creditCollectionView.bottomAnchor.constraint(equalTo: containerOverviewAndCrew.bottomAnchor, constant: -Dimens.big).isActive = true
         creditCollectionView.heightAnchor.constraint(equalToConstant: 156).isActive = true
+    }
+    
+    private func loadingConstraints() {
+        loadingView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        loadingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        loadingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        loadingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
 }

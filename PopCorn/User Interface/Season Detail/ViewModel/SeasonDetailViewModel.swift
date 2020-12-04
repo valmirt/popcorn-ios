@@ -55,7 +55,7 @@ final class SeasonDetailViewModel {
     }
     
     func getEpisodeDetailViewModel(at indexPath: IndexPath) -> EpisodeDetailViewModel {
-        EpisodeDetailViewModel(episode: seasonDetail?.episodes[indexPath.row])
+        EpisodeDetailViewModel(idTVShow: id, episode: seasonDetail?.episodes[indexPath.row])
     }
 }
 

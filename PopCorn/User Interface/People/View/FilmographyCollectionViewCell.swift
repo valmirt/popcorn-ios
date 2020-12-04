@@ -18,7 +18,7 @@ final class FilmographyCollectionViewCell: UICollectionViewCell, CodeView {
         imageView.image = UIImage(systemName: "photo")
         imageView.clipsToBounds = true
         imageView.tintColor = UIColor.opaqueSeparator
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     

@@ -30,6 +30,11 @@ final class PeopleViewController: UIViewController, HasCodeView {
         setupView()
     }
     
+    deinit {
+        coordinator?.didFinish(child: nil)
+        print("PeopleViewController free")
+    }
+    
     // MARK: - Methods
     private func showError(with message: String) {
         let alert = ErrorAlertUtil.errorAlert(message: message) { self.coordinator?.exitThisScreen() }
@@ -73,11 +78,6 @@ final class PeopleViewController: UIViewController, HasCodeView {
             customView?.loadingView.isHidden = true
             customView?.loadingView.loadingSpinner.stopAnimating()
         }
-    }
-    
-    deinit {
-        coordinator?.didFinish(child: nil)
-        print("PeopleViewController free")
     }
 }
 

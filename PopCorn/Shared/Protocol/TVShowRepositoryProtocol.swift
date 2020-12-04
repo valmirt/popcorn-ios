@@ -16,4 +16,6 @@ protocol TVShowRepositoryProtocol: BaseRepositoryProtocol {
     func detailTVShow(with id: Int)
     
     func detailSeason(with id: Int, and seasonNumber: Int)
+    
+    func episodeCredit(with id: Int, and seasonNumber: Int, and episodeNumber: Int)
 }

@@ -10,7 +10,6 @@ import UIKit
 @testable import PopCorn
 
 class FakeTVShowRepository: TVShowRepositoryProtocol {
-    
     var errorLoad = false
     weak var delegate: TVShowRepositoryDelegate?
     
@@ -33,6 +32,15 @@ class FakeTVShowRepository: TVShowRepositoryProtocol {
     }
     
     func detailSeason(with id: Int, and seasonNumber: Int) {
+        if errorLoad {
+            delegate?.tvShowRepository(self, didUpdateError: NetworkError.defaultError)
+        } else {
+//            let fakeResult = FakeTVShowNetworkManager.fakeDetail()
+//            delegate?.tvShowRepository(self, didUpdateSeasonDetail: <#T##SeasonDetail#>)
+        }
+    }
+    
+    func episodeCredit(with id: Int, and seasonNumber: Int, and episodeNumber: Int) {
         if errorLoad {
             delegate?.tvShowRepository(self, didUpdateError: NetworkError.defaultError)
         } else {

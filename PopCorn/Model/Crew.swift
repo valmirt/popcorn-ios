@@ -9,7 +9,6 @@
 import Foundation
 
 struct Crew: Decodable {
-    var creditId: String
     var id: Int
     var job: String
     var name: String

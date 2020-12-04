@@ -10,6 +10,7 @@ import UIKit
 
 protocol EpisodeDetailPresenter {
     func showDetailPeople(with viewModel: PeopleViewModel?)
+    func exitThisScreen()
 }
 
 typealias EpisodePresenterCoordinator = EpisodeDetailPresenter & Coordinator
@@ -25,6 +26,7 @@ final class EpisodeDetailViewController: UIViewController, HasCodeView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        fillData()
     }
     
     deinit {
@@ -35,6 +37,12 @@ final class EpisodeDetailViewController: UIViewController, HasCodeView {
     // MARK: - Methods
     private func setupView() {
         view = EpisodeDetailView()
+        viewModel?.delegate = self
+        viewModel?.loadData()
+        performLoading(status: true)
+    }
+    
+    private func fillData() {
         customView?.creditCollectionView.delegate = self
         customView?.creditCollectionView.dataSource = self
         customView?.titleLabel.text = viewModel?.title
@@ -42,10 +50,28 @@ final class EpisodeDetailViewController: UIViewController, HasCodeView {
         customView?.seasonNumberLabel.text = viewModel?.seasonNumber
         customView?.episodeNumberLabel.text = viewModel?.episodeNumber
         customView?.overviewTextView.text = viewModel?.overview
-        
         viewModel?.getImage(onComplete: { image in
             self.customView?.backdropImage.image = image ?? UIImage(systemName: "photo")
         })
+    }
+    
+    private func creditListReload() {
+        customView?.creditCollectionView.reloadData()
+    }
+    
+    private func performLoading(status: Bool) {
+        if status {
+            customView?.loadingView.isHidden = false
+            customView?.loadingView.loadingSpinner.startAnimating()
+        } else {
+            customView?.loadingView.isHidden = true
+            customView?.loadingView.loadingSpinner.stopAnimating()
+        }
+    }
+    
+    private func showError(with message: String) {
+        let alert = ErrorAlertUtil.errorAlert(message: message) { self.coordinator?.exitThisScreen() }
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -64,5 +90,22 @@ extension EpisodeDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         coordinator?.showDetailPeople(with: viewModel?.getPeopleViewModel(at: indexPath))
     }
+}
+
+//MARK: - EpisodeDetail delegate
+extension EpisodeDetailViewController: EpisodeDetailViewModelDelegate {
+    func onListenerError(with errorMessage: String) {
+        DispatchQueue.main.async {
+            self.showError(with: errorMessage)
+        }
+    }
+    
+    func onListenerCredit() {
+        DispatchQueue.main.async {
+            self.creditListReload()
+            self.performLoading(status: false)
+        }
+    }
+    
 }
 

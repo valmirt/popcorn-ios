@@ -62,6 +62,23 @@ class TVShowRepository: BaseRepository, TVShowRepositoryProtocol {
             }
         }
     }
+    
+    func episodeCredit(with id: Int, and seasonNumber: Int, and episodeNumber: Int) {
+        let queries = [
+            URLQueryItem(name: "api_key", value: Web.API_KEY)
+        ]
+        
+        load("/\(Web.VERSION_API)/tv/\(id)/season/\(seasonNumber)/episode/\(episodeNumber)/credits", queries, Credit.self) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.delegate?.tvShowRepository(self, didUpdateEpisodeCredit: data)
+            case .failure(let error):
+                self.delegate?.tvShowRepository(self, didUpdateError: error)
+            }
+        }
+    }
 }
 
 //MARK: - Movie Repository delegate
@@ -71,6 +88,8 @@ protocol TVShowRepositoryDelegate: class {
     func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateTVShowDetail: TVShowDetail)
     
     func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateSeasonDetail: SeasonDetail)
+    
+    func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateEpisodeCredit: Credit)
     
     func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateError: Error)
 }
@@ -82,6 +101,10 @@ extension TVShowRepositoryDelegate {
     }
     
     func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateTVShowDetail: TVShowDetail) {
+        //this is an empty implementation to allow this method to be optional
+    }
+    
+    func tvShowRepository (_ manager: TVShowRepositoryProtocol, didUpdateEpisodeCredit: Credit) {
         //this is an empty implementation to allow this method to be optional
     }
     

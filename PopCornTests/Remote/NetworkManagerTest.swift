@@ -66,7 +66,7 @@ class NetworkManagerTest: XCTestCase {
     func testNetworkCallSuccess() {
         //Given
         let promise = expectation(description: "Success!")
-        let url = "\(Constants.Web.BASE_URL)/\(Constants.Web.VERSION_API)/movie/550?api_key=\(Constants.Web.API_KEY)"
+        let url = "\(Web.BASE_URL)/\(Web.VERSION_API)/movie/550?api_key=\(Web.API_KEY)"
         
         //When
         sut?.networkCall(url: URL(string: url)!, execute: { (result: Result<MovieDetail, NetworkError>) in
@@ -86,7 +86,7 @@ class NetworkManagerTest: XCTestCase {
     func testNetworkCallErrorStatusCode() {
         //Given
         let promise = expectation(description: "Success!")
-        let url = "\(Constants.Web.BASE_URL)/\(Constants.Web.VERSION_API)/movie/550"
+        let url = "\(Web.BASE_URL)/\(Web.VERSION_API)/movie/550"
         
         //When
         sut?.networkCall(url: URL(string: url)!, execute: { (result: Result<MovieDetail, NetworkError>) in
@@ -106,7 +106,7 @@ class NetworkManagerTest: XCTestCase {
     func testNetworkCallErrorDecodeJson() {
         //Given
         let promise = expectation(description: "Success!")
-        let url = "\(Constants.Web.BASE_URL)/\(Constants.Web.VERSION_API)/movie/550?api_key=\(Constants.Web.API_KEY)"
+        let url = "\(Web.BASE_URL)/\(Web.VERSION_API)/movie/550?api_key=\(Web.API_KEY)"
         
         //When
         sut?.networkCall(url: URL(string: url)!, execute: { (result: Result<ResponseList<Movie>, NetworkError>) in

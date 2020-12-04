@@ -10,6 +10,7 @@ import UIKit
 @testable import PopCorn
 
 class FakeTVShowRepository: TVShowRepositoryProtocol {
+    
     var errorLoad = false
     weak var delegate: TVShowRepositoryDelegate?
     
@@ -28,6 +29,15 @@ class FakeTVShowRepository: TVShowRepositoryProtocol {
         } else {
             let fakeResult = FakeTVShowNetworkManager.fakeDetail()
             delegate?.tvShowRepository(self, didUpdateTVShowDetail: fakeResult)
+        }
+    }
+    
+    func detailSeason(with id: Int, and seasonNumber: Int) {
+        if errorLoad {
+            delegate?.tvShowRepository(self, didUpdateError: NetworkError.defaultError)
+        } else {
+//            let fakeResult = FakeTVShowNetworkManager.fakeDetail()
+//            delegate?.tvShowRepository(self, didUpdateSeasonDetail: <#T##SeasonDetail#>)
         }
     }
     

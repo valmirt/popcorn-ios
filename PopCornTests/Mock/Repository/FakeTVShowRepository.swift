@@ -35,8 +35,8 @@ class FakeTVShowRepository: TVShowRepositoryProtocol {
         if errorLoad {
             delegate?.tvShowRepository(self, didUpdateError: NetworkError.defaultError)
         } else {
-//            let fakeResult = FakeTVShowNetworkManager.fakeDetail()
-//            delegate?.tvShowRepository(self, didUpdateSeasonDetail: <#T##SeasonDetail#>)
+            let fakeResult = FakeTVShowNetworkManager.fakeSeasonDetail()
+            delegate?.tvShowRepository(self, didUpdateSeasonDetail: fakeResult)
         }
     }
     
@@ -44,8 +44,8 @@ class FakeTVShowRepository: TVShowRepositoryProtocol {
         if errorLoad {
             delegate?.tvShowRepository(self, didUpdateError: NetworkError.defaultError)
         } else {
-//            let fakeResult = FakeTVShowNetworkManager.fakeDetail()
-//            delegate?.tvShowRepository(self, didUpdateSeasonDetail: <#T##SeasonDetail#>)
+            let fakeResult = FakeTVShowNetworkManager.fakeCredit()
+            delegate?.tvShowRepository(self, didUpdateEpisodeCredit: fakeResult)
         }
     }
     

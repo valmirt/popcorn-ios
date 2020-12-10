@@ -45,6 +45,8 @@
 		59898BE42571408500626104 /* ErrorAlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59898BE32571408500626104 /* ErrorAlertUtil.swift */; };
 		598F9E2D25635CBF001308EF /* DetailTVShowViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */; };
 		598F9E3525636AB3001308EF /* SeasonViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */; };
+		5997140D2582E5D600DA9051 /* FakePeopleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5997140C2582E5D600DA9051 /* FakePeopleRepository.swift */; };
+		599714112582E74C00DA9051 /* FakePeopleNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599714102582E74C00DA9051 /* FakePeopleNetworkManager.swift */; };
 		599E10382371076700B08C09 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E10372371076700B08C09 /* TVShow.swift */; };
 		59A8BDB024F2C99600D3C85C /* TypeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A8BDAF24F2C99600D3C85C /* TypeContent.swift */; };
 		59A8BDB224F2CA4D00D3C85C /* FilterContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A8BDB124F2CA4D00D3C85C /* FilterContent.swift */; };
@@ -164,6 +166,8 @@
 		59898BE32571408500626104 /* ErrorAlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertUtil.swift; sourceTree = "<group>"; };
 		598F9E2C25635CBF001308EF /* DetailTVShowViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTVShowViewModelTest.swift; sourceTree = "<group>"; };
 		598F9E3425636AB3001308EF /* SeasonViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewModelTest.swift; sourceTree = "<group>"; };
+		5997140C2582E5D600DA9051 /* FakePeopleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePeopleRepository.swift; sourceTree = "<group>"; };
+		599714102582E74C00DA9051 /* FakePeopleNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePeopleNetworkManager.swift; sourceTree = "<group>"; };
 		599E10372371076700B08C09 /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
 		59A8BDAF24F2C99600D3C85C /* TypeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeContent.swift; sourceTree = "<group>"; };
 		59A8BDB124F2CA4D00D3C85C /* FilterContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterContent.swift; sourceTree = "<group>"; };
@@ -455,6 +459,26 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		599714182582E76C00DA9051 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				599714102582E74C00DA9051 /* FakePeopleNetworkManager.swift */,
+				C34ACF3E2546005400A5691F /* FakeTVShowNetworkManager.swift */,
+				59B023982363E6CE007C7367 /* FakeMovieNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		599714192582E77700DA9051 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				C34ACF4C25460F1500A5691F /* FakeMovieRepository.swift */,
+				C3BE3DFA2547B304007B823E /* FakeTVShowRepository.swift */,
+				5997140C2582E5D600DA9051 /* FakePeopleRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		59B0236923627737007C7367 /* PopCornTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,10 +504,8 @@
 		59B023952363E62E007C7367 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				C34ACF4C25460F1500A5691F /* FakeMovieRepository.swift */,
-				C3BE3DFA2547B304007B823E /* FakeTVShowRepository.swift */,
-				59B023982363E6CE007C7367 /* FakeMovieNetworkManager.swift */,
-				C34ACF3E2546005400A5691F /* FakeTVShowNetworkManager.swift */,
+				599714192582E77700DA9051 /* Repository */,
+				599714182582E76C00DA9051 /* Network */,
 				C34ACF342545E79200A5691F /* MovieList.json */,
 			);
 			path = Mock;
@@ -1033,12 +1055,14 @@
 				59B023992363E6CE007C7367 /* FakeMovieNetworkManager.swift in Sources */,
 				59B0239B2363EBF2007C7367 /* MovieRepositoryTest.swift in Sources */,
 				598F9E3525636AB3001308EF /* SeasonViewModelTest.swift in Sources */,
+				599714112582E74C00DA9051 /* FakePeopleNetworkManager.swift in Sources */,
 				C3BE3DFB2547B304007B823E /* FakeTVShowRepository.swift in Sources */,
 				C34ACF3F2546005400A5691F /* FakeTVShowNetworkManager.swift in Sources */,
 				C34ACF4725460B4A00A5691F /* ListingViewModelTest.swift in Sources */,
 				C37459EF2548F2B200FB853C /* DetailMovieViewControllerTest.swift in Sources */,
 				598F9E2D25635CBF001308EF /* DetailTVShowViewModelTest.swift in Sources */,
 				C3BE3E132548EAD7007B823E /* CreditViewModelTest.swift in Sources */,
+				5997140D2582E5D600DA9051 /* FakePeopleRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

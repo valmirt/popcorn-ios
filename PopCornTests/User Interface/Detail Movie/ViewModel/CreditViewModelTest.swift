@@ -27,9 +27,7 @@ class CreditViewModelTest: XCTestCase {
     func testCastData() {
         //Given
         let cast = Cast(
-            castId: 1,
             character: "Gandalf",
-            creditId: "1",
             id: 1,
             name: "Ian McKellen",
             profilePath: nil
@@ -48,7 +46,6 @@ class CreditViewModelTest: XCTestCase {
     func testCrewData() {
         //Given
         let crew = Crew(
-            creditId: "1",
             id: 1,
             job: "Director",
             name: "Quentin Tarantino",

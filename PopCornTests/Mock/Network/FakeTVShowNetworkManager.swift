@@ -44,6 +44,34 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
         return component?.url
     }
     
+    static func fakeCredit() -> Credit {
+        Credit(id: 1, cast: [], crew: [], guestStars: [])
+    }
+    
+    static func fakeSeasonDetail() -> SeasonDetail {
+        SeasonDetail(
+            airDate: nil,
+            episodes: [
+                Episode(
+                    airDate: "",
+                    episodeNumber: 1,
+                    crew: [],
+                    guestStars: [],
+                    id: 1,
+                    name: "Fake Episode",
+                    overview: "...",
+                    seasonNumber: 1,
+                    stillPath: nil
+                )
+            ],
+            id: 1,
+            name: "Fake Season",
+            overview: "...",
+            posterPath: nil,
+            seasonNumber: 1
+        )
+    }
+    
     static func fakeDetail() -> TVShowDetail {
         TVShowDetail(
             id: FakeTVShowNetworkManager.ID,

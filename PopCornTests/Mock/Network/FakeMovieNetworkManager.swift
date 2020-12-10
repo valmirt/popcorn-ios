@@ -48,7 +48,7 @@ class FakeMovieNetworkManager: NetworkManagerProtocol {
     }
     
     static func fakeCredit() -> Credit {
-        Credit(id: FakeMovieNetworkManager.ID, cast: [], crew: [])
+        Credit(id: FakeMovieNetworkManager.ID, cast: [], crew: [], guestStars: nil)
     }
     
     static func fakeDetail() -> MovieDetail {

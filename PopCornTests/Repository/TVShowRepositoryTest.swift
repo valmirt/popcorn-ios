@@ -13,6 +13,8 @@ class TVShowRepositoryTest: XCTestCase, TVShowRepositoryDelegate {
     let fakeAPI = FakeTVShowNetworkManager()
     var result: [TVShow]?
     var detail: TVShowDetail?
+    var credit: Credit?
+    var season: SeasonDetail?
     var error: Error?
     
     //System Under Test
@@ -26,13 +28,15 @@ class TVShowRepositoryTest: XCTestCase, TVShowRepositoryDelegate {
     
     override func tearDown() {
         sut = nil
+        error = nil
+        result = nil
+        credit = nil
+        season = nil
         super.tearDown()
     }
     
     func testPositiveTVShowListRequest() {
         //Gven
-        error = nil
-        result = nil
         fakeAPI.typeRequest = .list
        
         //When
@@ -47,8 +51,6 @@ class TVShowRepositoryTest: XCTestCase, TVShowRepositoryDelegate {
     
     func testPositiveDetailRequest() {
         //Given
-        error = nil
-        detail = nil
         fakeAPI.typeRequest = .detail
         
         //When
@@ -62,6 +64,34 @@ class TVShowRepositoryTest: XCTestCase, TVShowRepositoryDelegate {
         XCTAssertEqual(tv?.name, "Fake TV Show")
     }
     
+    func testPositiveCreditRequest() {
+        //Given
+        fakeAPI.typeRequest = .credit
+        
+        //When
+        sut?.episodeCredit(with: FakeTVShowNetworkManager.ID, and: FakeTVShowNetworkManager.ID, and: FakeTVShowNetworkManager.ID)
+        let creditResult = credit
+        
+        //Then
+        XCTAssertNil(error)
+        XCTAssertNotNil(creditResult)
+        XCTAssertEqual(creditResult?.id, FakeMovieNetworkManager.ID)
+    }
+    
+    func testPositiveSeasonDetailRequest() {
+        //Given
+        fakeAPI.typeRequest = .season
+        
+        //When
+        sut?.detailSeason(with: FakeTVShowNetworkManager.ID, and: FakeTVShowNetworkManager.ID)
+        let seasonResult = season
+        
+        //Then
+        XCTAssertNil(error)
+        XCTAssertNotNil(seasonResult)
+        XCTAssertEqual(seasonResult?.id, FakeMovieNetworkManager.ID)
+    }
+    
     func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateError: Error) {
         error = didUpdateError
     }
@@ -72,5 +102,13 @@ class TVShowRepositoryTest: XCTestCase, TVShowRepositoryDelegate {
     
     func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateTVShowDetail: TVShowDetail) {
         detail = didUpdateTVShowDetail
+    }
+    
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateEpisodeCredit: Credit) {
+        credit = didUpdateEpisodeCredit
+    }
+    
+    func tvShowRepository(_ manager: TVShowRepositoryProtocol, didUpdateSeasonDetail: SeasonDetail) {
+        season = didUpdateSeasonDetail
     }
 }

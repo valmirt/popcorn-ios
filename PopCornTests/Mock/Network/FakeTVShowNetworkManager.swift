@@ -10,7 +10,7 @@ import Foundation
 @testable import PopCorn
 
 enum FakeTVShowNetworkRequest {
-    case list, detail
+    case list, detail, credit, season
 }
 
 class FakeTVShowNetworkManager: NetworkManagerProtocol {
@@ -29,6 +29,10 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
                 execute(.success(FakeTVShowNetworkManager.fakeList() as! T))
             case .detail:
                 execute(.success(FakeTVShowNetworkManager.fakeDetail() as! T))
+            case .credit:
+                execute(.success(FakeTVShowNetworkManager.fakeCredit() as! T))
+            case .season:
+                execute(.success(FakeTVShowNetworkManager.fakeSeasonDetail() as! T))
             }
         }
     }
@@ -45,7 +49,7 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
     }
     
     static func fakeCredit() -> Credit {
-        Credit(id: 1, cast: [], crew: [], guestStars: [])
+        Credit(id: FakeTVShowNetworkManager.ID, cast: [], crew: [], guestStars: [])
     }
     
     static func fakeSeasonDetail() -> SeasonDetail {
@@ -64,7 +68,7 @@ class FakeTVShowNetworkManager: NetworkManagerProtocol {
                     stillPath: nil
                 )
             ],
-            id: 1,
+            id: FakeTVShowNetworkManager.ID,
             name: "Fake Season",
             overview: "...",
             posterPath: nil,

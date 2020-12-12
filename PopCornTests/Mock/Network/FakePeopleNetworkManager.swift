@@ -28,7 +28,7 @@ final class FakePeopleNetworkManager: NetworkManagerProtocol {
             case .people:
                 execute(.success(FakePeopleNetworkManager.fakeDetailPeople() as! T))
             case .filmography:
-                execute(.success(FakePeopleNetworkManager.fakeDetailPeople() as! T))
+                execute(.success(FakePeopleNetworkManager.fakeFilmography() as! T))
             }
         }
     }

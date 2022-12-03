@@ -17,7 +17,7 @@ enum Web {
     static let IMAGE_W342 = "/t/p/w342"
     static let IMAGE_W500 = "/t/p/w500"
     static let IMAGE_W780 = "/t/p/w780"
-    static let API_KEY = "ebf3f29bcec9455240223a565fb2a81d"
+    static let API_KEY = ""
     static let VERSION_API = "3"
 }
 
